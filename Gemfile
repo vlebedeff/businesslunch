@@ -42,6 +42,7 @@ group :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'shoulda'
+  gem 'selenium-webdriver'
 end
 
 group :production do

@@ -3,8 +3,10 @@ class Ability
 
   def initialize(user)
     user ||= User.new
+    cannot :all, :all
+
     if user.new_record?
-      cannot :all, :all
+      cannot :index, :dashboard
     else
       can :index, :dashboard
     end
