@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: '123'
+
+development:
+  <<: *default
+  database: business_lunch_development
+
+test:
+  <<: *default
+  database: business_lunch_test
+
+production:
+  <<: *default
+  database: business_lunch_development
