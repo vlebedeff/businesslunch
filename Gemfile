@@ -29,6 +29,7 @@ group :development do
   gem 'spring'
   gem "erb2haml"
   gem "html2haml"
+  gem 'letter_opener'
 end
 
 group :development, :test do

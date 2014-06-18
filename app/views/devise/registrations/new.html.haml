@@ -1,0 +1,11 @@
+.row.devise
+  .main
+    %h3
+      Please Sign Up, or
+      = link_to 'Sign In', new_user_session_path
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form' }) do |f|
+      = f.input :email, required: true, autofocus: true
+      = f.input :password, required: true
+      = f.input :password_confirmation, required: true
+      = f.button :submit, "Sign Up", class: 'btn btn-primary'
+

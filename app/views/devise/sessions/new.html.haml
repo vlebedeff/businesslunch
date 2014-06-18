@@ -1,0 +1,24 @@
+.row.devise
+  .main
+    %h3
+      Please Sign In, or
+      = link_to 'Sign Up', new_user_registration_path
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f|
+      .form-group
+        = f.label :email, autofocus: true
+        = f.input_field :email, class: 'form-control'
+      .form-group
+        - if devise_mapping.recoverable?
+          = link_to 'Forgot password?', new_user_password_path, class: 'pull-right'
+        = f.label :password
+        = f.input_field :password, class: 'form-control'
+      - if devise_mapping.rememberable?
+        .checkbox.pull-right
+          %label
+            = f.input_field :remember_me, as: :boolean
+            Remember me
+      = f.button :submit, "Sign In", class: 'btn btn-primary'
+
+      .clearfix
+      .form-group
+        = link_to "Didn't receive confirmation instructions?", new_user_confirmation_path

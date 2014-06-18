@@ -1,0 +1,11 @@
+.row.devise
+  .main
+    %h3 Resend confirmation
+    = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+      = f.full_error :confirmation_token
+      .pull-right
+        = link_to 'Sign In', new_user_session_path
+        or
+        = link_to 'Sign Up', new_user_registration_path
+      = f.input :email, required: true, autofocus: true
+      = f.button :submit, "Resend confirmation instructions", class: 'btn btn-primary btn-block'
