@@ -19,3 +19,14 @@ group :development do
   gem 'spring'
 end
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'ffaker'
+end
+
+group :test do
+  gem 'database_cleaner'
+  gem 'capybara'
+end
+
