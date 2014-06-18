@@ -1,9 +1,29 @@
 !!!
-%html
+%html{lang: 'en'}
   %head
     = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
     = display_meta_tags site: 'Business Lunch', reverse: true
+    %meta{charset: 'utf-8'}
+    %meta{:'http-equiv' => 'X-UA-Compatible', content: 'IE=edge'}
+    %meta{name: 'viewport', content: 'width=devise-width, initial-scale=1'}
   %body
-    = yield
+    .navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
+      .container
+        .navbar-header
+          %button.navbar-toggle{type: 'button', data: {toggle: 'collapse', target: '.navbar-collapse'}}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to 'Business Lunch', root_path, class: 'navbar-brand'
+
+    .container
+      = yield
+
+    #footer
+      .container
+        %p.text-muted
+          &copy; YOPESO hungry workers
+
     = javascript_include_tag 'application'
