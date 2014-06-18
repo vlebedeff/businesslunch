@@ -14,6 +14,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'jquery-rails'
 gem 'haml'
+gem 'meta-tags', '~> 2.0.0'
 
 
 group :development do
