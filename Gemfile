@@ -13,10 +13,13 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 
 gem 'jquery-rails'
+gem 'haml'
 
 
 group :development do
   gem 'spring'
+  gem "erb2haml"
+  gem "html2haml"
 end
 
 group :development, :test do
@@ -28,5 +31,6 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'capybara'
+  gem 'shoulda'
 end
 
