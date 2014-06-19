@@ -5,14 +5,8 @@ feature 'Dashboard' do
     create :user_example_com
 
     sign_in_as 'user@example.com'
-    visit root_path
+    visit dashboard_path
 
     expect(page).to have_content 'Dashboard'
-  end
-
-  scenario 'unauthorized user redirecting to sign in page' do
-    visit root_path
-
-    expect(current_path).to eq new_user_session_path
   end
 end
