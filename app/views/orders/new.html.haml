@@ -1,3 +1,3 @@
 = simple_form_for @order, html: { class: 'form-horizontal' } do |f|
-  = f.association :menu_set, as: :radio_buttons
+  = f.association :menu_set, as: :radio_buttons, collection: ListPresenter.new(MenuSet.available).as_collection
   = f.button :submit
