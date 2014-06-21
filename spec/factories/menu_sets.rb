@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :menu_set do
-    name "1st menu set"
+    sequence(:name) { |n| "#{n}st menu set" }
     details ""
     available_on { Date.current }
   end

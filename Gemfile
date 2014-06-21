@@ -34,6 +34,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'rspec-activemodel-mocks'
   gem 'factory_girl_rails'
   gem 'ffaker'
 end

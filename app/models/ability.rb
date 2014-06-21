@@ -9,6 +9,10 @@ class Ability
       cannot :index, :dashboard
     else
       can :index, :dashboard
+      can :create, Order
+      can :read, Order do |order|
+        order.user_id == user.id
+      end
     end
   end
 end

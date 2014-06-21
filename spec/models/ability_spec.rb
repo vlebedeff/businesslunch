@@ -10,8 +10,13 @@ RSpec.describe Ability, type: :model do
 
   context 'when user is signed in' do
     let!(:user) { create :user }
+    let!(:my_order) { create :order, user: user }
+    let!(:order) { create :order }
     subject { Ability.new user }
 
     it { is_expected.to be_able_to :index, :dashboard }
+    it { is_expected.to be_able_to :create, Order }
+    it { is_expected.to be_able_to :read, my_order }
+    it { is_expected.not_to be_able_to :read, order }
   end
 end

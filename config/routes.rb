@@ -4,5 +4,5 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'dashboard#index'
 
-  resources :orders, only: [:index]
+  resources :orders, except: [:show]
 end
