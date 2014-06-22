@@ -1,3 +1,14 @@
 %h1= title 'Orders'
 
 = link_to 'Order Now!', new_order_path
+
+%section.orders
+  %ul
+    - @orders.each do |order|
+      %li{id: dom_id(order)}
+        .row
+          .description-container.col-md-6
+            = order.menu_set_name
+          .status-container.col-md-3
+          .date-container.col-md-3
+            = order.created_at.to_date

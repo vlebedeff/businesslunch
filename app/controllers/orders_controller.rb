@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   authorize_resource
 
   def index
-
+    @orders = current_user.orders.includes(:menu_set).order(:created_at)
   end
 
   def new

@@ -17,6 +17,7 @@ RSpec.describe OrdersController, type: :controller do
 
   describe 'GET #index' do
     before { get :index }
+    it { expect(user).to have_received :orders }
     it { is_expected.to respond_with :success }
     it { is_expected.to render_template :index }
   end
