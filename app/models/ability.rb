@@ -7,14 +7,18 @@ class Ability
 
     if user.new_record?
       cannot :index, :dashboard
-    elsif user.manager?
-      can :index, :dashboard
-    else
+    end
+
+    if user.persisted?
       cannot :index, :dashboard
       can :create, Order
       can :read, Order do |order|
         order.user_id == user.id
       end
+    end
+
+    if user.manager?
+      can :index, :dashboard
     end
   end
 end
