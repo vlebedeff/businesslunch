@@ -23,6 +23,7 @@ gem 'meta-tags', '~> 2.0.0'
 gem 'devise', '~> 3.2.4'
 gem 'simple_form', '~> 3.1.0.rc1'
 gem 'cancancan', '~> 1.8.2'
+gem 'bitmask_attributes', '~> 1.0.0'
 
 
 group :development do
@@ -37,6 +38,7 @@ group :development, :test do
   gem 'rspec-activemodel-mocks'
   gem 'factory_girl_rails'
   gem 'ffaker'
+  gem 'pry-rails'
 end
 
 group :test do

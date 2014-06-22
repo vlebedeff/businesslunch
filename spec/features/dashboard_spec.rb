@@ -2,9 +2,9 @@ require 'rails_helper'
 
 feature 'Dashboard' do
   scenario "be able to visit dashboard page" do
-    create :user_example_com
+    create :manager_example_com
 
-    sign_in_as 'user@example.com'
+    sign_in_as 'manager@example.com'
     visit dashboard_path
 
     expect(page).to have_content 'Dashboard'

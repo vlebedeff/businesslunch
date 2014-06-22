@@ -7,8 +7,10 @@ class Ability
 
     if user.new_record?
       cannot :index, :dashboard
-    else
+    elsif user.manager?
       can :index, :dashboard
+    else
+      cannot :index, :dashboard
       can :create, Order
       can :read, Order do |order|
         order.user_id == user.id

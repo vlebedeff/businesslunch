@@ -6,8 +6,16 @@ FactoryGirl.define do
     password 'password'
     confirmed_at { 1.minute.ago }
 
+    trait :manager do
+      roles [:manager]
+    end
+
     factory :user_example_com do
       email 'user@example.com'
+    end
+
+    factory :manager_example_com, traits: [:manager] do
+      email 'manager@example.com'
     end
   end
 end

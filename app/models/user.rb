@@ -4,5 +4,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  ROLES = [:manager, :admin]
+  bitmask :roles, as: ROLES
+
   has_many :orders, dependent: :destroy
+
+  ROLES.each do |role|
+    define_method "#{role}?" do
+      roles? role
+    end
+  end
 end
