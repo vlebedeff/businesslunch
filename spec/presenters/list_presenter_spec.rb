@@ -1,4 +1,4 @@
-require_relative '../../app/models/list_presenter'
+require_relative '../../app/presenters/list_presenter'
 
 RSpec.describe ListPresenter do
   let(:menu_set1) { double "MenuSet", id: 1, name: "1st menu set" }
