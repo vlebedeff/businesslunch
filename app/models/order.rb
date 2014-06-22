@@ -5,4 +5,5 @@ class Order < ActiveRecord::Base
   validates :user, :menu_set, presence: true
 
   delegate :name, to: :menu_set, prefix: true
+  delegate :email, to: :user, prefix: true
 end

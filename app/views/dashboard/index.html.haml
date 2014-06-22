@@ -1,2 +1,16 @@
 %h1= title 'Dashboard'
 
+- DictionaryPresenter.new(@orders).as_dictionary.each do |date, orders|
+
+  %section.orders
+    %header.orders-header
+      %h3= date
+    %ul
+      - orders.each do |order|
+        %li{id: dom_id(order)}
+          .row
+            .col-md-5
+              = order.user_email
+            .col-md-4
+              = order.menu_set_name
+            .col-md-3
