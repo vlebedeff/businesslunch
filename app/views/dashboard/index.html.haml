@@ -1,7 +1,12 @@
 %h1= title 'Dashboard'
 
-- DictionaryPresenter.new(@orders).as_dictionary.each do |date, orders|
+.counters
+  - @dashboard.current_counters.each do |title, orders_count|
+    .row
+      .col-md-2= title
+      .col-md-1= orders_count
 
+- DictionaryPresenter.new(@dashboard.orders).as_dictionary.each do |date, orders|
   %section.orders
     %header.orders-header
       %h3= date
