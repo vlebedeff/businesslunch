@@ -1,0 +1,40 @@
+
+ul {
+  list-style: none;
+}
+
+section.orders {
+  ul {
+    li {
+      height: 52px;
+      line-height: 52px;
+      border-bottom: 1px solid #e6e6e6;
+
+      .description-container {
+        padding-left: 30px;
+      }
+    }
+  }
+}
+
+.menu-sets {
+  margin-bottom: 20px;
+
+  .menu-set {
+    display: block;
+    padding: 10px 10px 30px 10px;
+
+    &:hover {
+      background: #fafafa;
+    }
+
+    .title-wrapper {
+      padding-left: 5px;
+    }
+
+    .description-wrapper {
+      padding-left: 22px;
+      font-weight: normal;
+    }
+  }
+}

@@ -1,3 +1,14 @@
 = simple_form_for @order, html: { class: 'form-horizontal' } do |f|
-  = f.association :menu_set, as: :radio_buttons, collection: ListPresenter.new(MenuSet.available).as_collection
-  = f.button :submit
+  .menu-sets
+    - ListPresenter.new(MenuSet.available).as_collection.each do |list|
+      %label.menu-set
+        %span.item-wrapper
+          = radio_button_tag "order[menu_set_id]", list.last, id: "order_menu_set_#{list.last}"
+        %span.title-wrapper
+          = list.first
+        .description-wrapper
+          = ""
+  .has-error
+    = f.error :menu_set
+
+  = f.button :submit, class: 'btn btn-primary'
