@@ -26,6 +26,7 @@
               = navbar_link_to 'Orders', orders_path
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
+              = navbar_link_to 'Edit profile', edit_user_registration_path
               = navbar_link_to 'Sign Out', destroy_user_session_path
             - else
               = navbar_link_to 'Sign In', new_user_session_path
