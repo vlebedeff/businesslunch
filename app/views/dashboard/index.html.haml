@@ -9,7 +9,7 @@
       .col-md-2= title
       .col-md-1= orders_count
 
-- DictionaryPresenter.new(@dashboard.orders).as_dictionary.each do |date, orders|
+- DictionaryPresenter.new(OrderPolicy.new, @dashboard.orders).as_dictionary.each do |date, orders|
   %section.orders
     %header.orders-header
       %h3= date

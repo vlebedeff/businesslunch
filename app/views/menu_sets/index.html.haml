@@ -1,5 +1,5 @@
 
-- DictionaryPresenter.new(@menu_sets).as_dictionary.each do |date, menu_sets|
+- DictionaryPresenter.new(MenuSetPolicy.new, @menu_sets).as_dictionary.each do |date, menu_sets|
   %section.orders
     %header.orders-header
       %h3= date

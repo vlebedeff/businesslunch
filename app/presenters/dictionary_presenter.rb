@@ -1,5 +1,6 @@
 class DictionaryPresenter
-  def initialize(collection)
+  def initialize(policy, collection)
+    @policy = policy
     @collection = collection
   end
 
@@ -7,7 +8,7 @@ class DictionaryPresenter
     dictionary = {}
 
     @collection.each do |item|
-      key = item.created_at.to_date.to_s
+      key = @policy.key_for(item)
       if dictionary.has_key? key
         dictionary[key] << item
       else
