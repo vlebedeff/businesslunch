@@ -1,5 +1,6 @@
 = simple_form_for @menu, url: menus_path do |f|
   = f.input :available_on, as: :date
   - @menu.menu_sets.each_with_index do |menu_set, index|
-    = text_field_tag "menu[menu_set][#{index}][name]", menu_set.name, id: :"menu_set_#{index}_name"
-  = f.button :submit
+    .form-group
+      = text_field_tag "menu[menu_set][#{index}][name]", menu_set.name, id: :"menu_set_#{index}_name", class: 'form-control'
+  = f.button :submit, class: 'btn btn-primary'
