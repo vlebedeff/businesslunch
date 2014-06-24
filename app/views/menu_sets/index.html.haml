@@ -1,0 +1,11 @@
+
+- DictionaryPresenter.new(@menu_sets).as_dictionary.each do |date, menu_sets|
+  %section.orders
+    %header.orders-header
+      %h3= date
+    %ul
+      - menu_sets.each do |menu_set|
+        %li{id: dom_id(menu_set)}
+          .row
+            .col-md-12
+              = menu_set.name

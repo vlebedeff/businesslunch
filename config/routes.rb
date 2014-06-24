@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   get '/dashboard' => 'dashboard#index'
 
   resources :orders, except: [:show]
+  resources :menus, only: [:new, :create]
+  resources :menu_sets, only: [:index]
 end

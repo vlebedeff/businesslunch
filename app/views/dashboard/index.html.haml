@@ -1,5 +1,8 @@
 %h1= title 'Dashboard'
 
+.row.actions
+  = link_to 'New Menu', new_menu_path, class: 'btn btn-success'
+
 .counters
   - @dashboard.current_counters.each do |title, orders_count|
     .row

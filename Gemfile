@@ -24,6 +24,7 @@ gem 'devise', '~> 3.2.4'
 gem 'simple_form', '~> 3.1.0.rc1'
 gem 'cancancan', '~> 1.8.2'
 gem 'bitmask_attributes', '~> 1.0.0'
+gem 'virtus', '~> 1.0.2'
 
 
 group :development do

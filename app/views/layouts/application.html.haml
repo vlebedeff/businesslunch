@@ -24,6 +24,8 @@
               = navbar_link_to 'Dashboard', dashboard_path
             - if can? :index, Order
               = navbar_link_to 'Orders', orders_path
+            - if can? :index, MenuSet
+              = navbar_link_to 'Menu Sets', menu_sets_path
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               = navbar_link_to 'Edit profile', edit_user_registration_path

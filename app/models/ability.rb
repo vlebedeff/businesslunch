@@ -19,6 +19,8 @@ class Ability
 
     if user.manager?
       can :index, :dashboard
+      can :new, :menus
+      can [:read, :manage], MenuSet
     end
   end
 end

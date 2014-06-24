@@ -25,5 +25,8 @@ RSpec.describe Ability, type: :model do
     let!(:user) { create :user, :manager }
 
     it { is_expected.to be_able_to :index, :dashboard }
+    it { is_expected.to be_able_to :new, :menus }
+    it { is_expected.to be_able_to :read, MenuSet }
+    it { is_expected.to be_able_to :manage, MenuSet }
   end
 end
