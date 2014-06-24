@@ -26,6 +26,7 @@ gem 'cancancan', '~> 1.8.2'
 gem 'bitmask_attributes', '~> 1.0.0'
 gem 'virtus', '~> 1.0.2'
 gem 'draper'
+gem 'aasm', '~> 3.2.1'
 
 
 group :development do

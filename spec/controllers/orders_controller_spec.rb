@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
-  let!(:user) { create :user }
-  let(:order) { mock_model Order, menu_set_name: '1st menu set' }
+  let!(:user) { create :user, :manager }
+  let(:order) { mock_model Order, id: 1, menu_set_name: '1st menu set' }
   let(:attrs) do
     {
       'menu_set_id' => '1'
@@ -62,5 +62,17 @@ RSpec.describe OrdersController, type: :controller do
       it { expect(order).to have_received :save }
       it { is_expected.to render_template :new }
     end
+  end
+
+  describe 'PATCH #pay' do
+    before do
+      allow(Order).to receive(:find).with('1').and_return order
+      allow(order).to receive(:pay!)
+      patch :pay, id: order.id
+    end
+
+    it { expect(Order).to have_received :find }
+    it { expect(order).to have_received :pay! }
+    it { is_expected.to redirect_to dashboard_path }
   end
 end

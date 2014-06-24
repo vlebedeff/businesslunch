@@ -10,8 +10,13 @@ feature 'Dashboard' do
     visit dashboard_path
 
     expect(page).to have_content 'Dashboard'
-    expect(page).to have_selector 'li', text: "#{order1.menu_set_name} Paid"
-    expect(page).to have_selector 'li', text: "#{order2.menu_set_name} Pending Payment"
-    expect(page).to have_content order2.menu_set_name
+    within 'li', text: order1.menu_set_name do
+      expect(page).to have_content 'Paid'
+      expect(page).not_to have_selector 'a', text: 'Pay'
+    end
+    within 'li', text: order2.menu_set_name do
+      expect(page).to have_content 'Pending Payment'
+      expect(page).to have_selector 'a', text: 'Pay'
+    end
   end
 end

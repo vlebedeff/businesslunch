@@ -18,9 +18,12 @@
       - orders.each do |order|
         %li{id: dom_id(order)}
           .row
-            .col-md-5
+            .col-md-4
               = order.user_email
             .col-md-4
               = order.menu_set_name
-            .col-md-3
+            .col-md-2
               = order.decorate.state
+            .col-md-2
+              - if order.pending?
+                = link_to 'Pay', pay_order_path(order), class: 'btn btn-success btn-sm', method: :patch

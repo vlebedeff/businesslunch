@@ -19,6 +19,11 @@ class OrdersController < ApplicationController
     end
   end
 
+  def pay
+    Order.find(params[:id]).pay!
+    redirect_to dashboard_path
+  end
+
   private
   def order_params
     params.require(:order).permit(:menu_set_id)

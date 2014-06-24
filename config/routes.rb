@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'dashboard#index'
 
-  resources :orders, except: [:show]
+  resources :orders, except: [:show] do
+    patch :pay, on: :member
+  end
   resources :menus, only: [:new, :create]
   resources :menu_sets, only: [:index]
 end

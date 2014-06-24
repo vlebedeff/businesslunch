@@ -28,5 +28,6 @@ RSpec.describe Ability, type: :model do
     it { is_expected.to be_able_to :new, :menus }
     it { is_expected.to be_able_to :read, MenuSet }
     it { is_expected.to be_able_to :manage, MenuSet }
+    it { is_expected.to be_able_to :pay, Order }
   end
 end

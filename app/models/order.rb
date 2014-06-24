@@ -1,4 +1,6 @@
 class Order < ActiveRecord::Base
+  include AASM
+
   belongs_to :user
   belongs_to :menu_set
 
@@ -11,4 +13,13 @@ class Order < ActiveRecord::Base
   scope :today, -> {
     where(created_at: DateTime.current.beginning_of_day..DateTime.current.end_of_day)
   }
+
+  aasm column: 'state' do
+    state :pending, initial: true
+    state :paid
+
+    event :pay do
+      transitions to: :paid
+    end
+  end
 end
