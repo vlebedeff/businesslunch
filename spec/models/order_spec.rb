@@ -15,6 +15,10 @@ RSpec.describe Order, type: :model do
       subject { create :order }
       it { is_expected.to validate_presence_of :user }
       it { is_expected.to validate_presence_of :menu_set }
+      it { is_expected.to validate_presence_of :state }
+      it do
+        is_expected.to ensure_inclusion_of(:state).in_array %w[pending paid]
+      end
     end
   end
 end

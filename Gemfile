@@ -25,6 +25,7 @@ gem 'simple_form', '~> 3.1.0.rc1'
 gem 'cancancan', '~> 1.8.2'
 gem 'bitmask_attributes', '~> 1.0.0'
 gem 'virtus', '~> 1.0.2'
+gem 'draper'
 
 
 group :development do
