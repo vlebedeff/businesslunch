@@ -1,4 +1,8 @@
 = simple_form_for @order, html: { class: 'form-horizontal' } do |f|
+  .form-controls
+    %h3
+      Order for
+      = Date.current
   .menu-sets
     - ListPresenter.new(MenuSet.available).as_collection.each do |list|
       %label.menu-set
