@@ -12,7 +12,13 @@
           = list.first
         .description-wrapper
           = ""
+    - unless MenuSet.available.exists?
+      %p There is no menu sets for today
   .has-error
     = f.error :menu_set
 
-  = f.button :submit, class: 'btn btn-primary'
+  - if MenuSet.available.exists?
+    = f.button :submit, class: 'btn btn-primary'
+  - else
+    = f.button :submit, class: 'btn btn-primary disabled', disable: true
+
