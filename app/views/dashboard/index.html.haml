@@ -1,29 +1,44 @@
 .row
   .col-md-12
-    %h1
+    %h3
+      %i.glyphicon.glyphicon-dashboard
       = title 'Dashboard'
-      = link_to 'New Menu', new_menu_path, class: 'btn btn-success'
 
-.counters
-  - @dashboard.current_counters.each do |title, orders_count|
-    .row
-      .col-md-2= title
-      .col-md-1= orders_count
+.row
+  .col-md-6
+    .panel.panel-default.counters
+      .panel-heading Orders today by count
+      .panel-body
+        - if @dashboard.current_counters.any?
+          - @dashboard.current_counters.each do |title, orders_count|
+            .row
+              .col-md-2= title
+              .col-md-1= orders_count
+        - else
+          There is no orders for today yet
+  .col-md-6
+    .panel.panel-default
+      .panel-heading Additional actions
+      .panel-body
+        = link_to 'New Menu', new_menu_path, class: 'btn btn-success'
 
-- DictionaryPresenter.new(OrderPolicy.new, @dashboard.orders).as_dictionary.each do |date, orders|
-  %section.orders
-    %header.orders-header
-      %h3= date
-    %ul
-      - orders.each do |order|
-        %li{id: dom_id(order)}
-          .row
-            .col-md-4
-              = order.user_email
-            .col-md-4
-              = order.menu_set_name
-            .col-md-2
-              = order.decorate.state
-            .col-md-2
-              - if order.pending?
-                = link_to 'Pay', pay_order_path(order), class: 'btn btn-success btn-sm', method: :patch
+.panel.panel-default
+  .panel-heading Orders
+  .panel-body
+    - DictionaryPresenter.new(OrderPolicy.new, @dashboard.orders).as_dictionary.each do |date, orders|
+      %section.orders
+        %header.orders-header
+          %h3= date
+        %ul
+          - orders.each do |order|
+            %li{id: dom_id(order)}
+              .row
+                .col-md-4
+                  = order.user_email
+                .col-md-4
+                  = order.menu_set_name
+                .col-md-2
+                  = order.decorate.state
+                .col-md-2
+                  - if order.pending?
+                    = link_to 'Pay', pay_order_path(order), class: 'btn btn-success btn-sm', method: :patch
