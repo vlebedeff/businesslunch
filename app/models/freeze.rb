@@ -3,7 +3,7 @@ class Freeze < ActiveRecord::Base
 
   scope :today, -> { where frozen_on: Date.current }
 
-  def self.frozen_now?
+  def self.frozen?
     today.exists?
   end
 

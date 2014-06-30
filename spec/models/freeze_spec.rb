@@ -15,8 +15,8 @@ RSpec.describe Freeze, type: :model do
     end
   end
 
-  describe '.frozen_now?' do
-    subject { Freeze.frozen_now? }
+  describe '.frozen?' do
+    subject { Freeze.frozen? }
 
     context 'when frozen_on for today exists' do
       let!(:freeze) { create :freeze }

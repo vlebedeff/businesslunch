@@ -2,7 +2,11 @@
   .col-md-12
     %h2
       = title 'Orders'
-      = link_to 'Order Now!', new_order_path, class: 'btn btn-success'
+      - unless Freeze.frozen?
+        = link_to 'Order Now!', new_order_path, class: 'btn btn-success'
+
+    - if Freeze.frozen?
+      .alert.alert-warning= t('orders.frozen')
 
 .panel.panel-default
   .panel-body

@@ -27,7 +27,7 @@ RSpec.describe OrdersController, type: :controller do
 
     context 'when orders is frozen' do
       before do
-        allow(Freeze).to receive(:frozen_now?).and_return true
+        allow(Freeze).to receive(:frozen?).and_return true
         get :new
       end
 
@@ -38,7 +38,7 @@ RSpec.describe OrdersController, type: :controller do
 
     context 'when orders is not frozen' do
       before do
-        allow(Freeze).to receive(:frozen_now?).and_return false
+        allow(Freeze).to receive(:frozen?).and_return false
         get :new
       end
 
