@@ -28,4 +28,17 @@ feature 'Ordering Menu Set' do
       expect(page).to have_content 'There is no menu sets for today'
     end
   end
+
+  context 'when orders are frozen for today' do
+    scenario 'cannot create at order' do
+      create :user_example_com
+      create :freeze
+
+      sign_in_as 'user@example.com'
+      visit new_order_path
+
+      expect(page).to have_content 'Orders are frozen for today. You are not be able to manage them.'
+      expect(current_path).to eq orders_path
+    end
+  end
 end

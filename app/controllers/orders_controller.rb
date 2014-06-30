@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   authorize_resource
+  before_action :check_if_not_frozen, only: [:new]
   before_action :find_order, only: [:pay, :destroy]
 
   def index
@@ -37,5 +38,11 @@ class OrdersController < ApplicationController
 
   def find_order
     @order = Order.find params[:id]
+  end
+
+  def check_if_not_frozen
+    if Freeze.frozen_now?
+      redirect_to orders_path, alert: t('orders.frozen')
+    end
   end
 end

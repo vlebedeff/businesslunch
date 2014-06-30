@@ -23,12 +23,29 @@ RSpec.describe OrdersController, type: :controller do
   describe 'GET #new' do
     before do
       allow(Order).to receive(:new)
-      get :new
     end
 
-    it { expect(Order).to have_received :new }
-    it { is_expected.to render_template :new }
-    it { is_expected.to respond_with :success }
+    context 'when orders is frozen' do
+      before do
+        allow(Freeze).to receive(:frozen_now?).and_return true
+        get :new
+      end
+
+      it { expect(Order).not_to have_received :new }
+      it { is_expected.to redirect_to orders_path }
+      it { is_expected.to set_the_flash[:alert] }
+    end
+
+    context 'when orders is not frozen' do
+      before do
+        allow(Freeze).to receive(:frozen_now?).and_return false
+        get :new
+      end
+
+      it { expect(Order).to have_received :new }
+      it { is_expected.to render_template :new }
+      it { is_expected.to respond_with :success }
+    end
   end
 
   describe 'POST #create' do

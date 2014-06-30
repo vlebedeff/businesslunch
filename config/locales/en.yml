@@ -1,2 +1,4 @@
 en:
   order_created: "You have ordered \"%{menu_set}\""
+  orders:
+    frozen: 'Orders are frozen for today. You are not be able to manage them.'
