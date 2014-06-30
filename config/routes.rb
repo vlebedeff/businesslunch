@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   resource :lunch do
     post :ready
   end
+
+  resource :freeze, only: [:create]
 end

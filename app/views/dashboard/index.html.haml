@@ -22,6 +22,8 @@
       .panel-body
         = link_to 'New Menu', new_menu_path, class: 'btn btn-success'
         = link_to 'Send notification', ready_lunch_path, class: 'btn btn-default', method: :post
+        - unless Freeze.frozen_now?
+          = link_to 'Freeze Orders', freeze_path, method: :post, class: 'btn btn-primary'
 
 .panel.panel-default
   .panel-heading Orders
