@@ -21,4 +21,14 @@ RSpec.describe Order, type: :model do
       end
     end
   end
+
+  describe 'after_create' do
+    let(:order) { build :order }
+    it "creates order with created_on date" do
+      expect {
+        order.save
+        order.reload
+      }.to change { order.created_on }
+    end
+  end
 end

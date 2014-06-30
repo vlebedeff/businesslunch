@@ -11,12 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624205010) do
+ActiveRecord::Schema.define(version: 20140630184916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
-  enable_extension "uuid-ossp"
 
   create_table "menu_sets", force: true do |t|
     t.string   "name",         null: false
@@ -32,8 +30,10 @@ ActiveRecord::Schema.define(version: 20140624205010) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "state",       default: "pending"
+    t.date     "created_on"
   end
 
+  add_index "orders", ["created_on"], name: "index_orders_on_created_on", using: :btree
   add_index "orders", ["menu_set_id"], name: "index_orders_on_menu_set_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
