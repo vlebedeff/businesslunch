@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   authorize_resource
+  before_action :find_order, only: [:pay, :destroy]
 
   def index
     @orders = current_user.orders.includes(:menu_set).order(:created_at)
@@ -20,12 +21,21 @@ class OrdersController < ApplicationController
   end
 
   def pay
-    Order.find(params[:id]).pay!
+    @order.pay!
+    redirect_to dashboard_path
+  end
+
+  def destroy
+    @order.destroy
     redirect_to dashboard_path
   end
 
   private
   def order_params
     params.require(:order).permit(:menu_set_id)
+  end
+
+  def find_order
+    @order = Order.find params[:id]
   end
 end

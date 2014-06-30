@@ -75,4 +75,16 @@ RSpec.describe OrdersController, type: :controller do
     it { expect(order).to have_received :pay! }
     it { is_expected.to redirect_to dashboard_path }
   end
+
+  describe 'DELETE #destroy' do
+    before do
+      allow(Order).to receive(:find).with('1').and_return order
+      allow(order).to receive(:destroy)
+      delete :destroy, id: order.id
+    end
+
+    it { expect(Order).to have_received :find }
+    it { expect(order).to have_received :destroy }
+    it { is_expected.to redirect_to dashboard_path }
+  end
 end

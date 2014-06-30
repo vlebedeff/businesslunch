@@ -21,7 +21,7 @@ class Ability
       can :index, :dashboard
       can :new, :menus
       can [:read, :manage], MenuSet
-      can :pay, Order
+      can [:pay, :destroy], Order
       can :ready, :lunch
     end
   end
