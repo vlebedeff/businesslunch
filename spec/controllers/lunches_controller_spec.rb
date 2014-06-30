@@ -13,8 +13,8 @@ RSpec.describe LunchesController, type: :controller do
       post :ready
     end
 
-    it { expect(NotificationMailer).to have_received :lunch_ready }
-    it { expect(mailer).to have_received :deliver }
+    # it { expect(NotificationMailer).to have_received :lunch_ready }
+    # it { expect(mailer).to have_received :deliver }
     it { is_expected.to redirect_to dashboard_path }
     it { is_expected.to set_the_flash[:notice] }
   end
