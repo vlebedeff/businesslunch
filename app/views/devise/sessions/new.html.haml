@@ -5,20 +5,20 @@
       = link_to 'Sign Up', new_user_registration_path
     = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f|
       .form-group
-        = f.label :email, autofocus: true
-        = f.input_field :email, class: 'form-control'
+        = f.label :email
+        = f.input_field :email, class: 'form-control', tabindex: 1, autofocus: true
       .form-group
         - if devise_mapping.recoverable?
-          = link_to 'Forgot password?', new_user_password_path, class: 'pull-right'
+          = link_to 'Forgot password?', new_user_password_path, class: 'pull-right', tabindex: 7
         = f.label :password
-        = f.input_field :password, class: 'form-control'
+        = f.input_field :password, class: 'form-control', tabindex: 2
       - if devise_mapping.rememberable?
         .checkbox.pull-right
           %label
-            = f.input_field :remember_me, as: :boolean
+            = f.input_field :remember_me, as: :boolean, tabindex: 4
             Remember me
-      = f.button :submit, "Sign In", class: 'btn btn-primary'
+      = f.button :submit, "Sign In", class: 'btn btn-primary', tabindex: 5
 
       .clearfix
       .form-group
-        = link_to "Didn't receive confirmation instructions?", new_user_confirmation_path
+        = link_to "Didn't receive confirmation instructions?", new_user_confirmation_path, tabindex: 6
