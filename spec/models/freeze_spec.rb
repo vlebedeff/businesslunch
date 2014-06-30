@@ -27,4 +27,20 @@ RSpec.describe Freeze, type: :model do
       it { is_expected.to be_falsey }
     end
   end
+
+  describe '.unfreeze' do
+    context 'when freeze exists' do
+      before { create :freeze }
+
+      it "removes today freeze" do
+        expect { Freeze.unfreeze }.to change(Freeze, :count).by -1
+      end
+    end
+
+    context 'when freeze do not exists' do
+      it "dont removes anything" do
+        expect { Freeze.unfreeze }.not_to change(Freeze, :count)
+      end
+    end
+  end
 end

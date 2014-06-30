@@ -14,5 +14,5 @@ Rails.application.routes.draw do
     post :ready
   end
 
-  resource :freeze, only: [:create]
+  resource :freeze, only: [:create, :destroy]
 end

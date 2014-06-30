@@ -1,6 +1,8 @@
 en:
+  are_you_sure: Are you sure?
   order_created: "You have ordered \"%{menu_set}\""
   orders:
     frozen: 'Orders are frozen for today. You are not be able to manage them.'
   freeze:
-    frozen: 'Orders are frozen for today.'
+    frozen: Orders are frozen for today.
+    unfrozen: Orders are available again.
