@@ -9,6 +9,11 @@ class User < ActiveRecord::Base
 
   has_many :orders, dependent: :destroy
 
+  scope :has_order, -> {
+    joins(:orders).
+      where(:'orders.created_at' => DateTime.current.beginning_of_day..DateTime.current.end_of_day)
+  }
+
   ROLES.each do |role|
     define_method "#{role}?" do
       roles? role

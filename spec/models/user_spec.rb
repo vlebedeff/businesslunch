@@ -8,4 +8,15 @@ RSpec.describe User, type: :model do
   describe '.associations' do
     it { is_expected.to have_many(:orders).dependent :destroy }
   end
+
+  describe '.has_order' do
+    let!(:user1) { create :user }
+    let!(:user2) { create :user }
+    let!(:order2) { create :order, user: user2 }
+    let!(:user3) { create :user }
+    let!(:order3) { create :order, user: user3, created_at: 1.day.ago }
+
+    subject { User.has_order.pluck(:email) }
+    it { is_expected.to eq [user2.email] }
+  end
 end

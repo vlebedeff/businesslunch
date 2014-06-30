@@ -16,6 +16,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Features::AuthHelpers, type: :feature
   config.include Devise::TestHelpers, type: :controller
+  config.include MailerMacros
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
@@ -23,6 +24,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
+    reset_email
   end
 
   config.before(:each, js: true) do

@@ -12,8 +12,8 @@
         - if @dashboard.current_counters.any?
           - @dashboard.current_counters.each do |title, orders_count|
             .row
-              .col-md-2= title
-              .col-md-1= orders_count
+              .col-md-4= title
+              .col-md-8= orders_count
         - else
           There is no orders for today yet
   .col-md-6
@@ -21,6 +21,7 @@
       .panel-heading Additional actions
       .panel-body
         = link_to 'New Menu', new_menu_path, class: 'btn btn-success'
+        = link_to 'Send notification', ready_lunch_path, class: 'btn btn-default', method: :post
 
 .panel.panel-default
   .panel-heading Orders

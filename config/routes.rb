@@ -9,4 +9,8 @@ Rails.application.routes.draw do
   end
   resources :menus, only: [:new, :create]
   resources :menu_sets, only: [:index]
+
+  resource :lunch do
+    post :ready
+  end
 end

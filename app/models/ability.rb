@@ -22,6 +22,7 @@ class Ability
       can :new, :menus
       can [:read, :manage], MenuSet
       can :pay, Order
+      can :ready, :lunch
     end
   end
 end
