@@ -12,7 +12,7 @@ class Ability
     if user.persisted?
       cannot :index, :dashboard
       can :create, Order
-      can :read, Order do |order|
+      can :manage, Order do |order|
         order.user_id == user.id
       end
     end

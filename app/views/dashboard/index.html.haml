@@ -47,4 +47,4 @@
                 .col-md-2
                   - if order.pending?
                     = link_to 'Pay', pay_order_path(order), class: 'btn btn-success btn-sm', method: :patch
-                  = link_to 'Delete', order, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+                  = link_to 'Delete', order, method: :delete, data: { confirm: t(:are_you_sure) }, class: 'btn btn-danger btn-sm'

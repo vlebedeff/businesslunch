@@ -18,7 +18,7 @@ RSpec.describe Ability, type: :model do
     it { is_expected.not_to be_able_to :index, :dashboard }
     it { is_expected.to be_able_to :create, Order }
     it { is_expected.to be_able_to :read, my_order }
-    it { is_expected.not_to be_able_to :read, order }
+    it { is_expected.not_to be_able_to :manage, order }
   end
 
   context 'when user is manager' do

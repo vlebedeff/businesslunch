@@ -16,4 +16,8 @@ module ApplicationHelper
       ''
     end
   end
+
+  def can_remove_order?(order)
+    can?(:manage, order) && !Freeze.frozen? && order.created_on > Date.yesterday
+  end
 end
