@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe DashboardController, type: :controller do
-  let!(:user) { create :user, :manager }
-
-  before { sign_in user }
+  before { sign_in_manager }
 
   describe 'GET #index' do
     before do

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe MenusController, type: :controller do
-  let!(:manager) { create :user, :manager }
   let(:menu_attrs) do
     {
       "available_on(1i)" => "2014",
@@ -14,7 +13,7 @@ RSpec.describe MenusController, type: :controller do
   end
   let(:menu) { double }
 
-  before { sign_in manager }
+  before { sign_in_manager }
 
   describe 'GET #new' do
     before do

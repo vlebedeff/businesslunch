@@ -1,17 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
-  let!(:user) { create :user, :manager }
   let(:order) { mock_model Order, id: 1, menu_set_name: '1st menu set' }
   let(:attrs) do
     {
       'menu_set_id' => '1'
     }
   end
+  let!(:user) { sign_in_manager }
 
   before do
-    sign_in user
-    allow(controller).to receive(:current_user).and_return user
     allow(user).to receive(:orders).and_return Order
   end
 

@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe LunchesController, type: :controller do
-  let!(:manager) { create :user, :manager }
-
-  before { sign_in manager }
+  before { sign_in_manager }
 
   describe "POST #ready" do
     let(:mailer) { double }
