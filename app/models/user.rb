@@ -9,9 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :orders, dependent: :destroy
 
-  scope :has_order, -> {
-    joins(:orders).where(:'orders.created_on' => Date.current)
-  }
+  scope :has_order, -> { joins(:orders).merge(Order.today) }
 
   ROLES.each do |role|
     define_method "#{role}?" do
