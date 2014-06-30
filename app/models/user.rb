@@ -10,8 +10,7 @@ class User < ActiveRecord::Base
   has_many :orders, dependent: :destroy
 
   scope :has_order, -> {
-    joins(:orders).
-      where(:'orders.created_at' => DateTime.current.beginning_of_day..DateTime.current.end_of_day)
+    joins(:orders).where(:'orders.created_on' => Date.current)
   }
 
   ROLES.each do |role|

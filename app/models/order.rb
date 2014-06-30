@@ -12,9 +12,7 @@ class Order < ActiveRecord::Base
   delegate :name, to: :menu_set, prefix: true
   delegate :email, to: :user, prefix: true
 
-  scope :today, -> {
-    where(created_at: DateTime.current.beginning_of_day..DateTime.current.end_of_day)
-  }
+  scope :today, -> { where(created_on: Date.current) }
 
   aasm column: 'state' do
     state :pending, initial: true
