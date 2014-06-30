@@ -31,5 +31,6 @@ RSpec.describe Ability, type: :model do
     it { is_expected.to be_able_to :pay, Order }
     it { is_expected.to be_able_to :destroy, Order }
     it { is_expected.to be_able_to :ready, :lunch }
+    it { is_expected.to be_able_to :manage, :freeze }
   end
 end

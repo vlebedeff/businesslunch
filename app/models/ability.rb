@@ -23,6 +23,7 @@ class Ability
       can [:read, :manage], MenuSet
       can [:pay, :destroy], Order
       can :ready, :lunch
+      can :manage, :freeze
     end
   end
 end
