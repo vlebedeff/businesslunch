@@ -24,9 +24,14 @@ RSpec.describe ReportsController, type: :controller do
       }
     end
     before do
+      allow(Report).to receive(:new).with(
+        Date.parse('2014-July-1'),
+        Date.parse('2014-July-2')
+      )
       post :create, report: attrs
     end
 
+    it { expect(Report).to have_received :new }
     it { is_expected.to render_template :show }
     it { is_expected.to respond_with :success }
   end
