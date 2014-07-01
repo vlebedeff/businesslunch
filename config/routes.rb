@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   end
 
   resource :freeze, only: [:create, :destroy]
+  resource :report, only: [:new, :create]
 end

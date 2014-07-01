@@ -26,6 +26,7 @@
           = link_to 'Unfreeze Orders', freeze_path, method: :delete, class: 'btn btn-danger', data: { confirm: t(:are_you_sure) }
         - else
           = link_to 'Freeze Orders', freeze_path, method: :post, class: 'btn btn-primary'
+        = link_to 'Report', new_report_path, class: 'btn btn-default'
 
 .panel.panel-default
   .panel-heading Orders

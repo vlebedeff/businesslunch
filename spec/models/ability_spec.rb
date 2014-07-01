@@ -20,6 +20,9 @@ RSpec.describe Ability, type: :model do
     it { is_expected.to be_able_to :read, my_order }
     it { is_expected.to be_able_to :manage, my_order }
     it { is_expected.not_to be_able_to :manage, order }
+    it { is_expected.not_to be_able_to :ready, :lunch }
+    it { is_expected.not_to be_able_to :manage, :freeze }
+    it { is_expected.not_to be_able_to :manage, :report }
   end
 
   context 'when user is manager' do
@@ -33,5 +36,6 @@ RSpec.describe Ability, type: :model do
     it { is_expected.to be_able_to :destroy, Order }
     it { is_expected.to be_able_to :ready, :lunch }
     it { is_expected.to be_able_to :manage, :freeze }
+    it { is_expected.to be_able_to :manage, :report }
   end
 end
