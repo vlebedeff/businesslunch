@@ -1,7 +1,8 @@
+%h2= title 'Generate Report'
 = form_tag report_path do
   .form-group
     = date_select :report, :begin_on, {}, class: 'form-control'
     %span.date-range-splitter -
     = date_select :report, :end_on, {}, class: 'form-control'
-  .form-group
+    %span.date-range-splitter
     = submit_tag 'Generate', class: 'btn btn-primary'

@@ -21,6 +21,6 @@ feature "Generate Report" do
     select end_on.strftime("%-d"), from: 'report_end_on_3i'
 
     click_button 'Generate'
-    expect(page).to have_content 'Total: 3'
+    expect(page).to have_content 'Total 3'
   end
 end

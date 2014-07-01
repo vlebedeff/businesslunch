@@ -1,11 +1,16 @@
 class Report
-  attr_reader :begin_on, :end_on
+  attr_reader :from, :to
 
-  def initialize(date_range)
-    @date_range = date_range
+  def initialize(dates)
+    @from = dates.from
+    @to = dates.to
   end
 
   def total
-    Order.where(created_on: @date_range.from..@date_range.to).count
+    orders.count
+  end
+
+  def orders
+    Order.where(created_on: @from..@to)
   end
 end
