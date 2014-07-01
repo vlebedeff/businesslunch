@@ -26,6 +26,10 @@
               = navbar_link_to 'Orders', orders_path
             - if can? :index, MenuSet
               = navbar_link_to 'Menu Sets', menu_sets_path, 'cutlery'
+            - if can? :manage, MenuSet
+              = navbar_link_to 'New Menu', new_menu_path
+            - if can? :manage, :report
+              = navbar_link_to 'Report', new_report_path, 'file'
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               = navbar_link_to 'Edit profile', edit_user_registration_path, 'user'

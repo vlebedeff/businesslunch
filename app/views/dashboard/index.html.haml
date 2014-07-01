@@ -20,13 +20,13 @@
     .panel.panel-default
       .panel-heading Additional actions
       .panel-body
-        = link_to 'New Menu', new_menu_path, class: 'btn btn-success'
-        = link_to 'Send notification', ready_lunch_path, class: 'btn btn-default', method: :post
+        = link_to ready_lunch_path, class: 'btn btn-default', method: :post do
+          %i.glyphicon.glyphicon-envelope
+          Send notification
         - if Freeze.frozen?
           = link_to 'Unfreeze Orders', freeze_path, method: :delete, class: 'btn btn-danger', data: { confirm: t(:are_you_sure) }
         - else
           = link_to 'Freeze Orders', freeze_path, method: :post, class: 'btn btn-primary'
-        = link_to 'Report', new_report_path, class: 'btn btn-default'
 
 .panel.panel-default
   .panel-heading Orders
