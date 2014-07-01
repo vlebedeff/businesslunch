@@ -16,6 +16,6 @@ class DictionaryPresenter
       end
     end
 
-    dictionary
+    dictionary.sort.reverse.to_h
   end
 end

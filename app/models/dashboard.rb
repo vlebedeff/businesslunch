@@ -11,6 +11,6 @@ class Dashboard
   end
 
   def orders
-    Order.includes(:menu_set, :user).order(created_at: :desc)
+    Order.joins(:menu_set, :user).order('users.email')
   end
 end
