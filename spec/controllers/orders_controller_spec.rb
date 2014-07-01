@@ -10,6 +10,7 @@ RSpec.describe OrdersController, type: :controller do
   let!(:user) { sign_in_manager }
 
   before do
+    request.env["HTTP_REFERER"] = dashboard_path
     allow(user).to receive(:orders).and_return Order
   end
 

@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
 
   def destroy
     @order.destroy
-    redirect_to dashboard_path
+    redirect_to :back
   end
 
   private
