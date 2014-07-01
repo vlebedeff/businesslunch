@@ -4,6 +4,6 @@ class ListPresenter
   end
 
   def as_collection
-    @collection.map { |c| [c.name, c.id] }
+    @collection.map { |c| [c.name, c.details, c.id] }
   end
 end
