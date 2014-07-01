@@ -20,4 +20,10 @@ module ApplicationHelper
   def can_remove_order?(order)
     can?(:manage, order) && !Freeze.frozen? && order.created_on > Date.yesterday
   end
+
+  def link_to_delete(object)
+    link_to object, method: :delete, data: { confirm: t(:are_you_sure) }, class: 'btn btn-danger btn-sm', id: dom_id(object, :delete) do
+      content_tag :i, '', class: 'glyphicon glyphicon-trash'
+    end
+  end
 end

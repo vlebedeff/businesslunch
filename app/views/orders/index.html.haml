@@ -23,4 +23,4 @@
                 = order.created_at.to_date
               .col-md-2
                 - if can_remove_order?(order)
-                  = link_to 'Delete', order, method: :delete, data: { confirm: t(:are_you_sure) }, class: 'btn btn-danger btn-sm'
+                  = link_to_delete order

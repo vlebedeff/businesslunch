@@ -51,4 +51,4 @@
                       = link_to 'Pay', pay_order_path(order), class: 'btn btn-success btn-sm', method: :patch
                     - elsif order.paid?
                       = link_to 'Cancel Payment', cancel_payment_order_path(order), class: 'btn btn-danger btn-sm', method: :patch
-                    = link_to 'Delete', order, method: :delete, data: { confirm: t(:are_you_sure) }, class: 'btn btn-danger btn-sm'
+                    = link_to_delete order
