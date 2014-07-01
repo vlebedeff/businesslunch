@@ -13,7 +13,11 @@ RSpec.describe Dashboard, type: :model do
     subject { Dashboard.new.current_counters }
 
     it "calculates today counters" do
-      is_expected.to eq({ menu_set1.name => 2, menu_set2.name => 1 })
+      is_expected.to eq({
+        menu_set1.name => 2,
+        menu_set2.name => 1,
+        'Total' => 3
+      })
     end
   end
 end
