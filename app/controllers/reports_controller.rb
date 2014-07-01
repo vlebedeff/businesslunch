@@ -6,9 +6,11 @@ class ReportsController < ApplicationController
   end
 
   def create
-    begin_on = DateSelectParser.new("begin_on", params[:report]).to_date
-    end_on = DateSelectParser.new("end_on", params[:report]).to_date
-    @report = Report.new(begin_on, end_on)
+    report_dates = DateRange.new(
+      DateSelectParser.new("begin_on", params[:report]).to_date,
+      DateSelectParser.new("end_on", params[:report]).to_date
+    )
+    @report = Report.new(report_dates)
     render :show
   end
 end

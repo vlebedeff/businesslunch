@@ -23,11 +23,12 @@ RSpec.describe ReportsController, type: :controller do
         "end_on(3i)" => '2'
       }
     end
+    let(:date_range) do
+      DateRange.new(Date.parse('2014-July-1'), Date.parse('2014-July-2'))
+    end
     before do
-      allow(Report).to receive(:new).with(
-        Date.parse('2014-July-1'),
-        Date.parse('2014-July-2')
-      )
+      allow(Report).to receive(:new).with(date_range)
+      allow(DateRange).to receive(:new).and_return date_range
       post :create, report: attrs
     end
 
