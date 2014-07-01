@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   before_action :find_order, only: [:pay, :destroy]
 
   def index
-    @orders = current_user.orders.includes(:menu_set).order(:created_at)
+    @orders = current_user.orders.includes(:menu_set).order(created_at: :desc)
   end
 
   def new
