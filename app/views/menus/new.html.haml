@@ -3,4 +3,7 @@
   - @menu.menu_sets.each_with_index do |menu_set, index|
     .form-group
       = text_field_tag "menu[menu_set][#{index}][name]", menu_set.name, id: :"menu_set_#{index}_name", class: 'form-control'
+    .form-group
+      = text_area_tag "menu[menu_set][#{index}][details]", menu_set.details, id: :"menu_set_#{index}_details", class: 'form-control', rows: 7
+    .form-splitter
   = f.button :submit, class: 'btn btn-primary'
