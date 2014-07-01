@@ -21,6 +21,10 @@ class Order < ActiveRecord::Base
     event :pay do
       transitions to: :paid
     end
+
+    event :cancel_payment do
+      transitions to: :pending
+    end
   end
 
   private

@@ -12,11 +12,13 @@ feature 'Dashboard' do
     expect(page).to have_content 'Dashboard'
     within 'li', text: order1.menu_set_name do
       expect(page).to have_content 'Paid'
-      expect(page).not_to have_selector 'a', text: 'Pay'
+      expect(page).not_to have_selector 'a.btn-success', text: 'Pay'
+      expect(page).to have_selector 'a.btn-danger', text: 'Cancel Payment'
     end
     within 'li', text: order2.menu_set_name do
       expect(page).to have_content 'Pending Payment'
-      expect(page).to have_selector 'a', text: 'Pay'
+      expect(page).to have_selector 'a.btn-success', text: 'Pay'
+      expect(page).not_to have_selector 'a.btn-danger', text: 'Cancel Payment'
     end
   end
 end

@@ -40,11 +40,14 @@
               .row
                 .col-md-4
                   = order.user_email
-                .col-md-4
+                .col-md-3
                   = order.menu_set_name
                 .col-md-2
                   = order.decorate.state
-                .col-md-2
-                  - if order.pending?
-                    = link_to 'Pay', pay_order_path(order), class: 'btn btn-success btn-sm', method: :patch
-                  = link_to 'Delete', order, method: :delete, data: { confirm: t(:are_you_sure) }, class: 'btn btn-danger btn-sm'
+                .col-md-3
+                  .pull-right
+                    - if order.pending?
+                      = link_to 'Pay', pay_order_path(order), class: 'btn btn-success btn-sm', method: :patch
+                    - elsif order.paid?
+                      = link_to 'Cancel Payment', cancel_payment_order_path(order), class: 'btn btn-danger btn-sm', method: :patch
+                    = link_to 'Delete', order, method: :delete, data: { confirm: t(:are_you_sure) }, class: 'btn btn-danger btn-sm'

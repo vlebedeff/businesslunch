@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   authorize_resource
   before_action :check_if_not_frozen, only: [:new]
-  before_action :find_order, only: [:pay, :destroy]
+  before_action :find_order, only: [:pay, :cancel_payment, :destroy]
 
   def index
     @orders = current_user.orders.includes(:menu_set).order(created_at: :desc)
@@ -23,6 +23,11 @@ class OrdersController < ApplicationController
 
   def pay
     @order.pay!
+    redirect_to dashboard_path
+  end
+
+  def cancel_payment
+    @order.cancel_payment!
     redirect_to dashboard_path
   end
 

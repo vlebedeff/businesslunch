@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :orders, except: [:show] do
     patch :pay, on: :member
+    patch :cancel_payment, on: :member
   end
   resources :menus, only: [:new, :create]
   resources :menu_sets, only: [:index]

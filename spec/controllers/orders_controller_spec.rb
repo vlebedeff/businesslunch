@@ -91,6 +91,18 @@ RSpec.describe OrdersController, type: :controller do
     it { is_expected.to redirect_to dashboard_path }
   end
 
+  describe 'PATCH #cancel_payment' do
+    before do
+      allow(Order).to receive(:find).with('1').and_return order
+      allow(order).to receive(:cancel_payment!)
+      patch :cancel_payment, id: order.id
+    end
+
+    it { expect(Order).to have_received :find }
+    it { expect(order).to have_received :cancel_payment! }
+    it { is_expected.to redirect_to dashboard_path }
+  end
+
   describe 'DELETE #destroy' do
     before do
       allow(Order).to receive(:find).with('1').and_return order
