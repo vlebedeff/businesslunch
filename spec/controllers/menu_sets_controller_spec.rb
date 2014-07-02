@@ -10,10 +10,12 @@ RSpec.describe MenuSetsController, type: :controller do
 
   describe 'GET #index' do
     before do
-      allow(MenuSet).to receive(:order)
+      allow(MenuSet).to receive(:recent).and_return MenuSet
+      allow(MenuSet).to receive(:order).and_return MenuSet
       get :index
     end
 
+    it { expect(MenuSet).to have_received :recent }
     it { expect(MenuSet).to have_received :order }
     it { is_expected.to respond_with :success }
     it { is_expected.to render_template :index }

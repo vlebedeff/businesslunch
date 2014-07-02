@@ -3,7 +3,7 @@ class MenuSetsController < ApplicationController
   before_action :find_menu_set, only: [:edit, :update]
 
   def index
-    @menu_sets = MenuSet.order(available_on: :desc)
+    @menu_sets = MenuSet.recent.order(available_on: :desc)
   end
 
   def edit
