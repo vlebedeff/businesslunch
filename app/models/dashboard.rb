@@ -11,6 +11,6 @@ class Dashboard
   end
 
   def orders
-    Order.joins(:menu_set, :user).order('users.email')
+    Order.joins(:menu_set, :user).recent.order('users.email')
   end
 end

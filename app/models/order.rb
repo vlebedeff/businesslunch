@@ -13,6 +13,7 @@ class Order < ActiveRecord::Base
   delegate :email, to: :user, prefix: true
 
   scope :today, -> { where(created_on: Date.current) }
+  scope :recent, -> { where('orders.created_on > ?', 5.days.ago ) }
 
   aasm column: 'state' do
     state :pending, initial: true
