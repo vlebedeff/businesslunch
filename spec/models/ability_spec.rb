@@ -27,15 +27,31 @@ RSpec.describe Ability, type: :model do
 
   context 'when user is manager' do
     let!(:user) { create :user, :manager }
+    let!(:past_menu_set) { create :menu_set, available_on: 1.day.ago }
+    let!(:menu_set) { create :menu_set }
 
     it { is_expected.to be_able_to :index, :dashboard }
     it { is_expected.to be_able_to :new, :menus }
     it { is_expected.to be_able_to :read, MenuSet }
-    it { is_expected.to be_able_to :manage, MenuSet }
+    it { is_expected.to be_able_to :new, MenuSet }
+    it { is_expected.to be_able_to :create, MenuSet }
+    it { is_expected.to be_able_to :edit, menu_set }
+    it { is_expected.to be_able_to :update, menu_set }
+    it { is_expected.not_to be_able_to :edit, past_menu_set }
+    it { is_expected.not_to be_able_to :update, past_menu_set }
     it { is_expected.to be_able_to :pay, Order }
     it { is_expected.to be_able_to :destroy, Order }
     it { is_expected.to be_able_to :ready, :lunch }
     it { is_expected.to be_able_to :manage, :freeze }
     it { is_expected.to be_able_to :manage, :report }
+
+    context 'when orders are frozen' do
+      let!(:freeze) { create :freeze }
+      let!(:future_menu_set) { create :menu_set, available_on: 1.day.from_now }
+      it { is_expected.to be_able_to :edit, future_menu_set }
+      it { is_expected.to be_able_to :update, future_menu_set }
+      it { is_expected.not_to be_able_to :edit, menu_set }
+      it { is_expected.not_to be_able_to :update, menu_set }
+    end
   end
 end

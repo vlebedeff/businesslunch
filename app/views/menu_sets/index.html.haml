@@ -15,4 +15,5 @@
                   = menu_set.name
                 .col-md-2
                   .pull-right
-                    = link_to 'Edit', edit_menu_set_path(menu_set), class: 'btn btn-default'
+                    - if can? :edit, menu_set
+                      = link_to 'Edit', edit_menu_set_path(menu_set), class: 'btn btn-default'

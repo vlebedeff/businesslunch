@@ -3,7 +3,8 @@ require 'rails_helper'
 feature "Update menu set" do
   scenario 'can change menu set attributes' do
     create :manager_example_com
-    menu_set = create :menu_set, name: '1st menu set'
+    menu_set = create :menu_set, name: '1st menu set',
+      available_on: 2.days.from_now
 
     sign_in_as 'manager@example.com'
     visit menu_sets_path

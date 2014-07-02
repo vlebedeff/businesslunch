@@ -20,7 +20,11 @@ class Ability
     if user.manager?
       can :index, :dashboard
       can :new, :menus
-      can [:read, :manage], MenuSet
+      can [:read, :new, :create], MenuSet
+      can [:edit, :update], MenuSet do |menu_set|
+        menu_set.available_on > Date.today ||
+          (menu_set.available_on == Date.today && !Freeze.frozen?)
+      end
       can [:pay, :destroy], Order
       can :ready, :lunch
       can :manage, [:freeze, :report]
