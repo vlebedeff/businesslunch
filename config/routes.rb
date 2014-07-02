@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     patch :cancel_payment, on: :member
   end
   resources :menus, only: [:new, :create]
-  resources :menu_sets, only: [:index]
+  resources :menu_sets, only: [:index, :edit, :update]
 
   resource :lunch do
     post :ready

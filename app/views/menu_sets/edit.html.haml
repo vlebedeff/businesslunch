@@ -1,0 +1,7 @@
+.panel.panel-default
+  .panel-heading= 'Edit Menu Set'
+  .panel-body
+    = simple_form_for @menu_set do |f|
+      = f.input :name
+      = f.input :details, as: :text, input_html: { rows: 6 }
+      = f.button :submit, class: 'btn btn-primary', data: { :'disable-with' => '...' }

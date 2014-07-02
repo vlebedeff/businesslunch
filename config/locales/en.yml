@@ -6,3 +6,5 @@ en:
   freeze:
     frozen: Orders are frozen for today.
     unfrozen: Orders are available again.
+
+  updated_successfully: '%{entity} has been updated successfully.'
