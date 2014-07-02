@@ -1,4 +1,3 @@
-require 'pry'
 class DateSelectParser
   def initialize(prefix, params)
     @prefix = prefix
