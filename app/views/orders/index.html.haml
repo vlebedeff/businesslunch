@@ -20,7 +20,7 @@
               .status-container.col-md-2
                 = order.decorate.state
               .date-container.col-md-2
-                = order.created_at.to_date
+                = order.decorate.created_on
               .col-md-2
                 - if can_remove_order?(order)
                   = link_to_delete order

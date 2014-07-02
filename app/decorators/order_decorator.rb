@@ -8,4 +8,8 @@ class OrderDecorator < Draper::Decorator
       h.content_tag :span, 'Pending Payment', class: 'label label-danger'
     end
   end
+
+  def created_on
+    object.created_on.to_s(:weekday_long)
+  end
 end

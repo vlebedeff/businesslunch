@@ -34,7 +34,7 @@
     - DictionaryPresenter.new(OrderPolicy.new, @dashboard.orders).as_dictionary.each do |date, orders|
       %section.orders
         %header.orders-header
-          %h3= date
+          %h3= formatted_date date
         %ul
           - orders.each do |order|
             %li{id: dom_id(order)}

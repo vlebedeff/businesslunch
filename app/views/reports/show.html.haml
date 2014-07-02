@@ -1,7 +1,7 @@
 %h3
-  = @report.from
+  = formatted_date @report.from.to_s
   = "-"
-  = @report.to
+  = formatted_date @report.to.to_s
 %p
   %section.orders
     %ul
@@ -11,7 +11,7 @@
       - if @report.orders.any?
         - DictionaryPresenter.new(OrderPolicy.new, @report.orders).as_dictionary.each do |date, orders|
           %li
-            .col-md-4= date
+            .col-md-4= formatted_date date
             .col-md-4= orders.count
       - else
         %li

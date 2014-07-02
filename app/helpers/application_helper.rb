@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def formatted_date(date)
+    Date.parse(date).to_s(:weekday_long) rescue date
+  end
+
   def navbar_link_to(title, path, icon = '', prefix = true)
     content_tag :li, class: ('active' if current_page?(path)) do
       link_to(iconized_text(title, icon, prefix).html_safe, path)

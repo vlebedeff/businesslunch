@@ -2,6 +2,11 @@
   .panel-heading= 'Edit Menu Set'
   .panel-body
     = simple_form_for @menu_set do |f|
+      .form-group
+        %div
+          %span
+            = MenuSet.human_attribute_name :available_on
+            = formatted_date f.object.available_on.to_s
       = f.input :name
       = f.input :details, as: :text, input_html: { rows: 6 }
       = f.button :submit, class: 'btn btn-primary', data: { :'disable-with' => '...' }

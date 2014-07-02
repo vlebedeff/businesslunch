@@ -6,7 +6,7 @@
     - DictionaryPresenter.new(MenuSetPolicy.new, @menu_sets).as_dictionary.each do |date, menu_sets|
       %section.orders
         %header.orders-header
-          %h3= date
+          %h3= formatted_date date
         %ul
           - menu_sets.each do |menu_set|
             %li{id: dom_id(menu_set)}
