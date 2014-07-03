@@ -15,12 +15,13 @@
         - @orders.each do |order|
           %li{id: dom_id(order)}
             .row
-              .description-container.col-md-6
+              .description-container.col-md-5
                 = order.menu_set_name
               .status-container.col-md-2
                 = order.decorate.state
-              .date-container.col-md-2
+              .date-container.col-md-3
                 = order.decorate.created_on
               .col-md-2
-                - if can_remove_order?(order)
-                  = link_to_delete order
+                .pull-right
+                  - if can_remove_order?(order)
+                    = link_to_delete order
