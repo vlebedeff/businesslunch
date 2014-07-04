@@ -1,9 +1,18 @@
 module MailerMacros
+  def total_emails_count
+    deliveries.count
+  end
+
   def last_email
-    ActionMailer::Base.deliveries.last
+    deliveries.last
   end
 
   def reset_email
-    ActionMailer::Base.deliveries = []
+    deliveries = []
+  end
+
+  private
+  def deliveries
+    ActionMailer::Base.deliveries
   end
 end

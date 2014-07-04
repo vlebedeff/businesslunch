@@ -2,8 +2,9 @@ class LunchesController < ApplicationController
   authorize_resource class: false
 
   def ready
-    emails = User.has_order.pluck(:email)
-    NotificationMailer.lunch_ready(emails).deliver if emails.present?
+    Order.today.find_each do |order|
+      NotificationWorker.perform_async order.user_id, order.menu_set_id
+    end
     redirect_to dashboard_path, notice: 'Notification has been sent.'
   end
 end

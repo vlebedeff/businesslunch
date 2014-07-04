@@ -19,4 +19,10 @@ RSpec.describe User, type: :model do
     subject { User.has_order.pluck(:email) }
     it { is_expected.to eq [user2.email] }
   end
+
+  describe '#full_name' do
+    let(:user) { create :user, email: 'bruce.wayne@example.com' }
+    subject { user.full_name }
+    it { is_expected.to eq 'Bruce Wayne' }
+  end
 end

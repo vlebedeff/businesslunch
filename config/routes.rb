@@ -1,4 +1,10 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  authenticate :user, -> u { u.manager? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   devise_for :users
   root 'welcome#index'
 

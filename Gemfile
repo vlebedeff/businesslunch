@@ -28,6 +28,9 @@ gem 'virtus', '~> 1.0.2'
 gem 'draper'
 gem 'aasm', '~> 3.2.1'
 
+gem 'sidekiq', '~> 3.2.0'
+gem 'sinatra', '~> 1.4.5', require: nil
+
 
 group :development do
   gem 'spring'

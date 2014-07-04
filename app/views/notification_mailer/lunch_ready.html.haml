@@ -1,9 +1,15 @@
 %p
   Hi,
+  = @user.full_name
 
 %p A strange man brought some eat.
 %p
-  -# Someone said that you'd like to take a 2nd menu.
+  = succeed "." do
+    Someone said that you'd like to take a
+    %strong= @menu_set.name
+%p
+  %i= simple_format @menu_set.details
+%p
   So, come to get it!
 
 %p Also, please take some money with you, if you didn't "donate" yet.

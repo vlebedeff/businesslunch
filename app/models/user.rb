@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
       roles? role
     end
   end
+
+  def full_name
+    email.split("@").first.split('.').map(&:capitalize).join(' ')
+  end
 end
