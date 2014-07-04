@@ -29,6 +29,7 @@ gem 'draper'
 gem 'aasm', '~> 3.2.1'
 
 gem 'sidekiq', '~> 3.2.0'
+gem 'sidekiq-failures'
 gem 'sinatra', '~> 1.4.5', require: nil
 
 
