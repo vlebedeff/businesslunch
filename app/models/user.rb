@@ -20,4 +20,8 @@ class User < ActiveRecord::Base
   def full_name
     email.split("@").first.split('.').map(&:capitalize).join(' ')
   end
+
+  def today_order
+    orders.today.first
+  end
 end

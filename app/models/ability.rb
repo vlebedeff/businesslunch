@@ -2,14 +2,13 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new
     cannot :all, :all
 
-    if user.new_record?
+    if user.kind_of? Guest
       cannot :index, :dashboard
     end
 
-    if user.persisted?
+    if user.kind_of? User
       cannot :index, :dashboard
       can :create, Order
       can :manage, Order do |order|

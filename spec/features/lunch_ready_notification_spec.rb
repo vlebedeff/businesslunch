@@ -5,6 +5,7 @@ Sidekiq::Testing.inline!
 
 feature 'Lunch is Ready notification' do
   scenario 'can send Lunch readyness notification' do
+    reset_email
     create :manager_example_com
     user1 = create :user
     user2 = create :user

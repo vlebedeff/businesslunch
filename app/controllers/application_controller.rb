@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
     orders_path
   end
 
+  def current_user
+    super || Guest.new
+  end
+
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:account_update) do |u|

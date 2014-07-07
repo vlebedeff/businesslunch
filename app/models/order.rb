@@ -9,7 +9,7 @@ class Order < ActiveRecord::Base
 
   after_create :set_created_on
 
-  delegate :name, to: :menu_set, prefix: true
+  delegate :name, :details, to: :menu_set, prefix: true
   delegate :email, to: :user, prefix: true
 
   scope :today, -> { where(created_on: Date.current) }

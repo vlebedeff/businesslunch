@@ -25,4 +25,18 @@ RSpec.describe User, type: :model do
     subject { user.full_name }
     it { is_expected.to eq 'Bruce Wayne' }
   end
+
+  describe '#today_order' do
+    let!(:user) { create :user }
+    subject { user.today_order }
+
+    context 'when user has today orders' do
+      let!(:order) { create :order, user: user }
+      it { is_expected.to eq order }
+    end
+
+    context 'when user has no today order' do
+      it { is_expected.to be_nil }
+    end
+  end
 end

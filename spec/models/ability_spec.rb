@@ -5,7 +5,7 @@ RSpec.describe Ability, type: :model do
   subject { Ability.new user }
 
   describe 'when user is guest' do
-    let(:user) { nil }
+    let(:user) { Guest.new }
 
     it { is_expected.not_to be_able_to :index, :dashboard }
   end
