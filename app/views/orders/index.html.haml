@@ -3,7 +3,8 @@
     %h2
       = title 'Orders'
       - unless Freeze.frozen?
-        = link_to 'Order Now!', new_order_path, class: 'btn btn-success'
+        - button_text = current_user.today_order ? 'Make another order' : 'Order Now!'
+        = link_to button_text, new_order_path, class: 'btn btn-success'
 
     - if Freeze.frozen?
       .alert.alert-warning= t('orders.frozen')
@@ -17,6 +18,7 @@
             .row
               .description-container.col-md-5
                 = order.menu_set_name
+                = order.decorate.today
               .status-container.col-md-2
                 = order.decorate.state
               .date-container.col-md-3

@@ -1,6 +1,17 @@
 require 'rails_helper'
 
 feature 'Orders list' do
+  context 'when user didnt make orders yet' do
+    scenario 'can see make order button' do
+      create :user_example_com
+
+      sign_in_as 'user@example.com'
+      visit orders_path
+
+      expect(page).to have_selector 'a', text: 'Order Now!'
+    end
+  end
+
   scenario 'user be able to see his orders' do
     user = create :user_example_com
     order = create :order, user: user
@@ -9,7 +20,7 @@ feature 'Orders list' do
 
     expect(current_path).to eq orders_path
     expect(page).to have_content 'Orders'
-    expect(page).to have_selector 'a', text: 'Order Now!'
+    expect(page).to have_selector 'a', text: 'Make another order'
     within "li#order_#{order.id}" do
       expect(page).to have_content order.menu_set_name
     end

@@ -12,4 +12,10 @@ class OrderDecorator < Draper::Decorator
   def created_on
     object.created_on.to_s(:weekday_long)
   end
+
+  def today
+    if object.created_on == Date.current
+      h.content_tag :span, "Today's", class: 'label label-primary'
+    end
+  end
 end
