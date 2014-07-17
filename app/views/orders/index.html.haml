@@ -27,3 +27,5 @@
                 .pull-right
                   - if can_remove_order?(order)
                     = link_to_delete order
+
+= paginate @orders

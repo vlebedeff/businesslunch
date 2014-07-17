@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-
-
 ruby '2.1.2'
 gem 'rails', '4.1.1'
 
@@ -27,6 +25,7 @@ gem 'bitmask_attributes', '~> 1.0.0'
 gem 'virtus', '~> 1.0.2'
 gem 'draper'
 gem 'aasm', '~> 3.2.1'
+gem 'kaminari'
 
 gem 'sidekiq', '~> 3.2.0'
 gem 'sidekiq-failures'
