@@ -39,11 +39,11 @@
           - orders.each do |order|
             %li{id: dom_id(order)}
               .row
-                .col-md-4
+                .col-md-5
                   = order.user_email
                 .col-md-3
                   = order.menu_set_name
-                .col-md-2
+                .col-md-1
                   = order.decorate.state
                 .col-md-3
                   .pull-right

@@ -14,7 +14,7 @@ describe OrderDecorator do
       let(:order) { double "Order", paid?: false }
       it 'decorates state as Pending Payment label' do
         is_expected.to eq(
-          '<span class="label label-danger">Pending Payment</span>')
+          '<span class="label label-danger">Pending</span>')
       end
     end
   end

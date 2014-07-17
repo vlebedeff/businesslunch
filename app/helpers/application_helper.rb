@@ -36,7 +36,7 @@ module ApplicationHelper
       link_to 'Pay', pay_order_path(order),
         class: 'btn btn-success btn-sm', method: :patch
     elsif order.paid?
-      link_to 'Cancel Payment', cancel_payment_order_path(order),
+      link_to 'Unpaid', cancel_payment_order_path(order),
         class: 'btn btn-danger btn-sm', method: :patch
     end
   end

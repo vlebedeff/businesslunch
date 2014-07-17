@@ -26,16 +26,16 @@
           %li{id: dom_id(order)}
             .row
               - if params[:view].blank?
-                .description-container.col-md-5
+                .description-container.col-md-6
                   = order.menu_set_name
                   = order.decorate.today
               - else
                 .description-container.col-md-3
                   = order.menu_set_name
                   = order.decorate.today
-                .col-md-2
+                .col-md-3
                   = order.user_email
-              .status-container.col-md-2
+              .status-container.col-md-1
                 = order.decorate.state
               .date-container.col-md-3
                 = order.decorate.created_on
