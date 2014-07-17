@@ -15,8 +15,14 @@ RSpec.describe OrdersController, type: :controller do
   end
 
   describe 'GET #index' do
-    before { get :index }
-    it { expect(user).to have_received :orders }
+    let(:query) { double }
+    before do
+      allow(OrdersQuery).to receive(:new).and_return query
+      allow(query).to receive(:all).and_return Order
+      get :index
+    end
+    it { expect(OrdersQuery).to have_received :new }
+    it { expect(query).to have_received :all }
     it { is_expected.to respond_with :success }
     it { is_expected.to render_template :index }
   end

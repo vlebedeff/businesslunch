@@ -4,10 +4,8 @@ class OrdersController < ApplicationController
   before_action :find_order, only: [:pay, :cancel_payment, :destroy]
 
   def index
-    @orders = current_user.orders.
-      includes(:menu_set).
-      order(created_at: :desc).
-      page(params[:page])
+    relation = OrdersRelation.new(current_user).from(params)
+    @orders = OrdersQuery.new(relation).all.page(params[:page])
   end
 
   def new

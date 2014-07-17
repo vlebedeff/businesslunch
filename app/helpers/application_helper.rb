@@ -30,4 +30,15 @@ module ApplicationHelper
       content_tag :i, '', class: 'glyphicon glyphicon-trash'
     end
   end
+
+  def link_to_payment(order)
+    if order.pending?
+      link_to 'Pay', pay_order_path(order),
+        class: 'btn btn-success btn-sm', method: :patch
+    elsif order.paid?
+      link_to 'Cancel Payment', cancel_payment_order_path(order),
+        class: 'btn btn-danger btn-sm', method: :patch
+    end
+  end
+
 end

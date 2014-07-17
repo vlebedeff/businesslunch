@@ -2,9 +2,18 @@
   .col-md-12
     %h2
       = title 'Orders'
-      - unless Freeze.frozen?
-        - button_text = current_user.today_order ? 'Make another order' : 'Order Now!'
-        = link_to button_text, new_order_path, class: 'btn btn-success'
+      .btn-toolbar{role: 'toolbar'}
+        .btn-group
+          - unless Freeze.frozen?
+            - button_text = current_user.today_order ? 'Make another order' : 'Order Now!'
+            = link_to button_text, new_order_path, class: 'btn btn-success'
+
+        - if current_user.manager?
+          .btn-group
+            = link_to 'Mine', url_for(view: nil), class: "btn btn-default #{"active" unless params[:view]}"
+            = link_to 'All', url_for(view: 'all'), class: "btn btn-default #{"active" if params[:view] == 'all'}"
+            = link_to 'Pending', url_for(view: 'pending'), class: "btn btn-default #{"active" if params[:view] == 'pending'}"
+            = link_to 'Paid', url_for(view: 'paid'), class: "btn btn-default #{"active" if params[:view] == 'paid'}"
 
     - if Freeze.frozen?
       .alert.alert-warning= t('orders.frozen')
@@ -16,15 +25,24 @@
         - @orders.each do |order|
           %li{id: dom_id(order)}
             .row
-              .description-container.col-md-5
-                = order.menu_set_name
-                = order.decorate.today
+              - if params[:view].blank?
+                .description-container.col-md-5
+                  = order.menu_set_name
+                  = order.decorate.today
+              - else
+                .description-container.col-md-3
+                  = order.menu_set_name
+                  = order.decorate.today
+                .col-md-2
+                  = order.user_email
               .status-container.col-md-2
                 = order.decorate.state
               .date-container.col-md-3
                 = order.decorate.created_on
               .col-md-2
                 .pull-right
+                  - if can?(:pay, order) && params[:view]
+                    = link_to_payment order
                   - if can_remove_order?(order)
                     = link_to_delete order
 
