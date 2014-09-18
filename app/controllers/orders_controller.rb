@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   authorize_resource
-  before_action :check_if_not_frozen, only: [:new]
+  before_action :check_if_not_frozen, only: [:new, :create]
   before_action :find_order, only: [:pay, :cancel_payment, :destroy]
 
   def index

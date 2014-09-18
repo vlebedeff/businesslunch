@@ -38,6 +38,7 @@ RSpec.describe OrdersController, type: :controller do
         get :new
       end
 
+      it { expect(Freeze).to have_received :frozen? }
       it { expect(Order).not_to have_received :new }
       it { is_expected.to redirect_to orders_path }
       it { is_expected.to set_the_flash[:alert] }
@@ -49,6 +50,7 @@ RSpec.describe OrdersController, type: :controller do
         get :new
       end
 
+      it { expect(Freeze).to have_received :frozen? }
       it { expect(Order).to have_received :new }
       it { is_expected.to render_template :new }
       it { is_expected.to respond_with :success }
@@ -62,10 +64,12 @@ RSpec.describe OrdersController, type: :controller do
 
     context 'with valid attributes' do
       before do
+        allow(Freeze).to receive(:frozen?).and_return false
         allow(order).to receive(:save).and_return true
         post :create, order: attrs
       end
 
+      it { expect(Freeze).to have_received :frozen? }
       it { expect(user).to have_received :orders }
       it { expect(Order).to have_received :new }
       it { expect(order).to have_received :save }
