@@ -34,6 +34,7 @@ gem 'sinatra', '~> 1.4.5', require: nil
 
 gem 'rabl'
 gem 'oj'
+gem 'swagger-docs'
 
 group :development do
   gem 'spring'
