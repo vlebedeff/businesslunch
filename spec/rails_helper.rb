@@ -23,6 +23,7 @@ RSpec.configure do |config|
   config.include Features::AuthHelpers, type: :feature
   config.include Devise::TestHelpers, type: :controller
   config.include ControllerMacros, type: :controller
+  config.include JsonMacros, type: :request
   config.include MailerMacros
 
   config.before(:suite) do
