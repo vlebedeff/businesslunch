@@ -4,6 +4,10 @@
   "basePath": "http://staging-businesslunch.herokuapp.com/",
   "apis": [
     {
+      "path": "api-docs/api/tokens.{format}",
+      "description": "Authorization via OAuth"
+    },
+    {
       "path": "api-docs/api/menus.{format}",
       "description": "Menu"
     }
