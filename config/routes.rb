@@ -38,7 +38,16 @@ Rails.application.routes.draw do
     resource :balance, only: [:edit, :update]
   end
 
+  use_doorkeeper do
+    skip_controllers :tokens, :token_info
+  end
+
   namespace :api, defaults: { format: :json } do
+    use_doorkeeper scope: '' do
+      skip_controllers :applications, :authorizations, :authorized_applications
+      controllers tokens: :tokens
+    end
+
     resources :menus, only: [:index]
   end
 end

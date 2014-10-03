@@ -32,6 +32,7 @@ gem 'sidekiq', '~> 3.2.0'
 gem 'sidekiq-failures'
 gem 'sinatra', '~> 1.4.5', require: nil
 
+gem 'doorkeeper'
 gem 'rabl'
 gem 'oj'
 gem 'swagger-docs'
