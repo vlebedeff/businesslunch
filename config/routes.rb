@@ -37,4 +37,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :destroy] do
     resource :balance, only: [:edit, :update]
   end
+
+  namespace :api, defaults: { format: :json } do
+    get '/menu' => "menus#index"
+  end
 end
