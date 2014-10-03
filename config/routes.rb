@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  use_doorkeeper
   authenticate :user, -> u { u.manager? } do
     mount Sidekiq::Web => '/sidekiq'
   end

@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Api::MenusController, type: :controller do
+  let!(:access_token) { sign_in_api_user }
+
   describe 'GET #index' do
     before do
       allow(MenuSet).to receive(:available)
-      get :index, format: :json
+      get :index, format: :json, access_token: access_token.token
     end
 
     it { expect(MenuSet).to have_received :available }

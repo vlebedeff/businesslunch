@@ -9,6 +9,15 @@
       "operations": [
         {
           "summary": "Fetches today menu",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "access_token",
+              "type": "string",
+              "description": "Access Token",
+              "required": true
+            }
+          ],
           "responseMessages": [
             {
               "code": 200,

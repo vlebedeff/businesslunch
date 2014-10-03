@@ -7,6 +7,7 @@ module Api
 
       swagger_api :index do
         summary "Fetches today menu"
+        param :query, :access_token, :string, :required, 'Access Token'
         response :ok, "Success"
       end
     end

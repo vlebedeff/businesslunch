@@ -27,6 +27,7 @@ module Api
       # properly showed in logs
       ActionController::ParamsWrapper,
 
+      Doorkeeper::Helpers::Filter
     ].each do |mod|
       include mod
     end
@@ -47,6 +48,10 @@ module Api
       respond_to do |format|
         format.any  { head :not_found }
       end
+    end
+
+    def current_resource_owner
+      User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
     end
   end
 end
