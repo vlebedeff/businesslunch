@@ -32,6 +32,8 @@ gem 'sidekiq', '~> 3.2.0'
 gem 'sidekiq-failures'
 gem 'sinatra', '~> 1.4.5', require: nil
 
+gem 'rabl'
+gem 'oj'
 
 group :development do
   gem 'spring'
