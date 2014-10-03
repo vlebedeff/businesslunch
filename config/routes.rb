@@ -39,6 +39,6 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: { format: :json } do
-    get '/menu' => "menus#index"
+    resources :menus, only: [:index]
   end
 end

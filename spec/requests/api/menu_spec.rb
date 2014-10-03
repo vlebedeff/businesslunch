@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Menu API', type: :request do
-  describe 'GET /api/menu.json' do
+  describe 'GET /api/menus.json' do
     let!(:menu_set1) { create :menu_set, details: 'Soup' }
     let!(:menu_set2) { create :menu_set, details: 'Salad' }
     let!(:menu_set3) { create :menu_set, details: 'Salad', available_on: 1.day.ago }
 
     before do
-      get "/api/menu.json"
+      get "/api/menus.json"
     end
 
     it "responds with current menu" do
