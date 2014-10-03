@@ -35,6 +35,7 @@ gem 'sinatra', '~> 1.4.5', require: nil
 gem 'rabl'
 gem 'oj'
 gem 'swagger-docs'
+gem 'rack-cors', require: 'rack/cors'
 
 group :development do
   gem 'spring'
