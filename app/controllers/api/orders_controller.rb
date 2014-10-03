@@ -1,5 +1,7 @@
 module Api
   class OrdersController < ApiController
+    include Docs::Orders
+
     doorkeeper_for :all
 
     def create
