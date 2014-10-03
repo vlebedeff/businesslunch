@@ -4,6 +4,10 @@ module Api
 
     doorkeeper_for :all
 
+    def index
+      @orders = OrdersQuery.new(current_resource_owner.orders).all.limit(10)
+    end
+
     def create
       order = Order.new order_params
       if order.save

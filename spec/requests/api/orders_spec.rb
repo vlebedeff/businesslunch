@@ -6,6 +6,39 @@ RSpec.describe 'Orders API', type: :request do
     create :doorkeeper_access_token, resource_owner_id: user.id
   end
 
+  describe 'GET /api/orders.json' do
+    let!(:yesterday_order) { create :order, user: user, created_on: 1.day.ago }
+    let!(:order) { create :order, user: user }
+    let!(:other_order) { create :order }
+
+    before do
+      get "/api/orders.json?access_token=#{access_token.token}"
+    end
+
+    it "responds with orders list" do
+      expect(json).to eq([
+        {
+          "id" => order.id,
+          "state"  => order.state,
+          "created_on" => order.created_on.to_s,
+          "menu_set" => {
+            "name" => order.menu_set.name,
+            "details" => order.menu_set.details
+          }
+        },
+        {
+          "id" => yesterday_order.id,
+          "state"  => yesterday_order.state,
+          "created_on" => yesterday_order.created_on.to_s,
+          "menu_set" => {
+            "name" => yesterday_order.menu_set.name,
+            "details" => yesterday_order.menu_set.details
+          }
+        }
+      ])
+    end
+  end
+
   describe 'POST /api/orders.json' do
     let!(:menu_set1) { create :menu_set }
 

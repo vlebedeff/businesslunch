@@ -1,13 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe Api::OrdersController, type: :controller do
-  let!(:user) { mock_model User }
+  let!(:order) { mock_model Order }
+  let!(:user) { mock_model User, orders: [order] }
   let!(:access_token) { sign_in_api_user }
   let!(:menu_set) { mock_model MenuSet, id: 3 }
-  let!(:order) { mock_model Order }
 
   before do
     allow(controller).to receive(:current_resource_owner).and_return user
+  end
+
+  describe 'GET #index' do
+    let(:query) { double }
+    before do
+      allow(OrdersQuery).to receive(:new).with([order]).
+        and_return query
+      allow(query).to receive(:all).and_return Order
+      allow(Order).to receive(:limit).with(10)
+      get :index, format: :json, access_token: access_token.token
+    end
+
+    it { is_expected.to respond_with :success }
+    it { is_expected.to render_template :index }
   end
 
   describe 'POST #create' do
