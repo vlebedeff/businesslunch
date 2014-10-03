@@ -8,6 +8,37 @@
       "path": "api/orders.json",
       "operations": [
         {
+          "summary": "Retrieves list of last 10 orders",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "access_token",
+              "type": "string",
+              "description": "Access Token",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Success"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "method": "get",
+          "nickname": "Api::Orders#index"
+        }
+      ]
+    },
+    {
+      "path": "api/orders.json",
+      "operations": [
+        {
           "summary": "Creates new order",
           "parameters": [
             {
@@ -30,6 +61,11 @@
               "code": 201,
               "responseModel": null,
               "message": "Created"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
             },
             {
               "code": 422,
