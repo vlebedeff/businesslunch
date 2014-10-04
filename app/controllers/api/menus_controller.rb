@@ -5,7 +5,7 @@ module Api
     doorkeeper_for :all
 
     def index
-      @menu_sets = MenuSet.available
+      @menu_sets = MenuQuery.if_not_frozen
     end
   end
 end
