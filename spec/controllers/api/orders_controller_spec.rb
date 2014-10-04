@@ -7,6 +7,7 @@ RSpec.describe Api::OrdersController, type: :controller do
   let!(:menu_set) { mock_model MenuSet, id: 3 }
 
   before do
+    allow(Freeze).to receive(:frozen?).and_return false
     allow(controller).to receive(:current_resource_owner).and_return user
   end
 

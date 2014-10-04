@@ -3,6 +3,7 @@ module Api
     include Docs::Orders
 
     doorkeeper_for :all
+    before_action :check_if_not_frozen, only: [:create]
 
     def index
       @orders = OrdersQuery.new(current_resource_owner.orders).all.limit(10)
@@ -23,6 +24,12 @@ module Api
         user: current_resource_owner,
         menu_set: MenuSet.available.find_by(id: params[:order][:menu_set_id])
       }
+    end
+
+    def check_if_not_frozen
+      if Freeze.frozen?
+        render json: { orders: ["are frozen"] }, status: :unprocessable_entity
+      end
     end
   end
 end

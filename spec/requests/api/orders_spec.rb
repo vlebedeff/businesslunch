@@ -71,5 +71,19 @@ RSpec.describe 'Orders API', type: :request do
         expect(json).to eq({ "menu_set" => ["can't be blank"] })
       end
     end
+
+    context 'when orders are frozen' do
+      subject do
+        Freeze.create
+        post "/api/orders.json",
+          access_token: access_token.token,
+          order: { menu_set_id: menu_set1.id }
+      end
+
+      it "responds with errors" do
+        subject
+        expect(json).to eq({ "orders" => ["are frozen"] })
+      end
+    end
   end
 end

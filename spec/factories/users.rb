@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :user do
     sequence(:email) { |n| "user-#{n}@example.com" }
     password 'password'
-    confirmed_at { 1.minute.ago }
+    confirmed_at { 1.day.ago }
 
     trait :manager do |user|
       groupped
