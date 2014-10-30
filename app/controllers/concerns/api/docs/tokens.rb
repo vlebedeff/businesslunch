@@ -12,6 +12,7 @@ module Api
         param :form, :password, :string, :required, 'Password'
         param :form, :client_id, :string, :required, 'Application ID'
         param :form, :client_secret, :string, :required, 'Application Secret Key'
+        param :form, :parse_object_id, :string, :optional, 'Parse Installation Object ID'
         response :ok, "Success"
         response :unauthorized
       end
