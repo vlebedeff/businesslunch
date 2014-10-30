@@ -86,4 +86,16 @@ RSpec.describe 'Orders API', type: :request do
       end
     end
   end
+
+  describe 'DELETE /api/orders.json' do
+    let!(:order) { create :order, user: user }
+
+    subject do
+      delete "/api/orders/#{order.id}.json?access_token=#{access_token.token}"
+    end
+
+    it "removes the order" do
+      expect { subject }.to change(Order, :count).by -1
+    end
+  end
 end

@@ -18,6 +18,12 @@ module Api
       end
     end
 
+    def destroy
+      order = current_resource_owner.orders.find params[:id]
+      order.destroy
+      render json: {}, status: :no_content
+    end
+
     private
     def order_params
       {

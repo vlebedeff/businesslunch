@@ -77,6 +77,44 @@
           "nickname": "Api::Orders#create"
         }
       ]
+    },
+    {
+      "path": "api/orders/{id}.json",
+      "operations": [
+        {
+          "summary": "Retrieves list of last 10 orders",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Order ID",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "access_token",
+              "type": "string",
+              "description": "Access Token",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "responseModel": null,
+              "message": "No Content"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "method": "delete",
+          "nickname": "Api::Orders#destroy"
+        }
+      ]
     }
   ]
 }

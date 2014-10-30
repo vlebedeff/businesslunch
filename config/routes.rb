@@ -50,6 +50,6 @@ Rails.application.routes.draw do
     end
 
     resources :menus, only: [:index]
-    resources :orders, only: [:index, :create]
+    resources :orders, only: [:index, :create, :destroy]
   end
 end
