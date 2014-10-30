@@ -126,6 +126,16 @@ ActiveRecord::Schema.define(version: 20150719035847) do
   add_index "user_groups", ["roles"], name: "index_user_groups_on_roles", using: :btree
   add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id", using: :btree
 
+  create_table "parse_installations", force: true do |t|
+    t.integer  "user_id",         null: false
+    t.string   "parse_object_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "parse_installations", ["parse_object_id"], name: "index_parse_installations_on_parse_object_id", using: :btree
+  add_index "parse_installations", ["user_id"], name: "index_parse_installations_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false

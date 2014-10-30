@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :orders, dependent: :destroy
   has_many :user_groups, dependent: :destroy
   has_many :groups, through: :user_groups
+  has_many :parse_installations, dependent: :destroy
 
   scope :has_order, -> { joins(:orders).merge(Order.today) }
   scope :search, -> term {
