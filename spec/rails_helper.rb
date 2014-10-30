@@ -39,6 +39,10 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :truncation
   end
 
+  config.before(:each, type: :feature) do
+    allow(Parse::Push).to receive(:new).and_return FakeParsePush.new
+  end
+
   config.before(:each) do
     DatabaseCleaner.start
   end
@@ -47,3 +51,10 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
+
+class FakeParsePush
+  def initialize(data = {}, channels = ""); end
+  def where=(value); end
+  def save; end
+end
+

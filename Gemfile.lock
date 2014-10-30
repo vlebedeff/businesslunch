@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/adelevie/parse-ruby-client.git
+  revision: b52a2309c2391acc943a4249ff0cd22f99829e35
+  specs:
+    parse-ruby-client (0.3.0)
+      faraday
+      faraday_middleware
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -105,6 +113,10 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
     ffaker (1.24.0)
     ffi (1.9.3)
     font-awesome-rails (4.2.0.0)
@@ -154,6 +166,7 @@ GEM
     mini_portile (0.6.0)
     minitest (5.3.5)
     multi_json (1.10.1)
+    multipart-post (2.0.0)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     oj (2.10.2)
@@ -340,6 +353,7 @@ DEPENDENCIES
   letter_opener
   meta-tags (~> 2.0.0)
   oj
+  parse-ruby-client!
   pg
   pry-rails
   quiet_assets

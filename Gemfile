@@ -27,6 +27,7 @@ gem 'virtus', '~> 1.0.2'
 gem 'draper'
 gem 'aasm', '~> 3.2.1'
 gem 'kaminari'
+gem 'parse-ruby-client', github: 'adelevie/parse-ruby-client'
 
 gem 'sidekiq', '~> 3.2.0'
 gem 'sidekiq-failures'
