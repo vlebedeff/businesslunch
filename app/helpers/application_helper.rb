@@ -10,15 +10,7 @@ module ApplicationHelper
   end
 
   def iconized_text(text, icon, prefix = true)
-    prefix ? "#{glyphicon(icon)} #{text}" : "#{text} #{glyphicon(icon)}"
-  end
-
-  def glyphicon(name)
-    if name
-      content_tag :i, '', class: "glyphicon glyphicon-#{name}"
-    else
-      ''
-    end
+    prefix ? "#{fa_icon(icon)} #{text}" : "#{text} #{fa_icon(icon)}"
   end
 
   def can_remove_order?(order)
@@ -27,7 +19,7 @@ module ApplicationHelper
 
   def link_to_delete(object)
     link_to object, method: :delete, data: { confirm: t(:are_you_sure) }, class: 'btn btn-danger btn-sm', id: dom_id(object, :delete) do
-      content_tag :i, '', class: 'glyphicon glyphicon-trash'
+      fa_icon 'trash'
     end
   end
 

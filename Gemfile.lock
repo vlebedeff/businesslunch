@@ -92,6 +92,8 @@ GEM
       railties (>= 3.0.0)
     ffaker (1.24.0)
     ffi (1.9.3)
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
     foreman (0.71.0)
       dotenv (~> 0.11.1)
       thor (~> 0.19.1)
@@ -282,6 +284,7 @@ DEPENDENCIES
   erb2haml
   factory_girl_rails
   ffaker
+  font-awesome-rails
   foreman
   haml
   html2haml
