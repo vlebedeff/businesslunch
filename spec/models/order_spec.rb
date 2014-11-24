@@ -32,4 +32,47 @@ RSpec.describe Order, type: :model do
       }.to change { order.created_on }
     end
   end
+
+  describe '.removable' do
+    let!(:today_order) { create :order }
+    let!(:yesterday_order) { create :order, created_at: 1.day.ago }
+
+    context 'when orders are frozen' do
+      it "retuns empty set" do
+        allow(Freeze).to receive(:frozen?).and_return true
+        expect(Order.removable).to be_empty
+      end
+    end
+
+    context 'when order aint frozen' do
+      it "returns only today orders" do
+        allow(Freeze).to receive(:frozen?).and_return false
+        expect(Order.removable).to eq [today_order]
+      end
+    end
+  end
+
+  describe '#removable?' do
+    subject { order }
+
+    context 'when it is today order' do
+      let!(:order) { create :order }
+
+      context 'when orders is frozen' do
+        before { allow(Freeze).to receive(:frozen?).and_return true }
+        it { is_expected.not_to be_removable }
+      end
+
+      context 'when orders is not frozen' do
+        before { allow(Freeze).to receive(:frozen?).and_return false }
+        it { is_expected.to be_removable }
+      end
+    end
+
+    context 'when it is past order' do
+      let!(:order) { create :order, created_at: 2.days.ago }
+      before { allow(Freeze).to receive(:frozen?).and_return false }
+      it { is_expected.not_to be_removable }
+    end
+  end
 end

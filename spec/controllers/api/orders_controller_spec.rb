@@ -57,4 +57,21 @@ RSpec.describe Api::OrdersController, type: :controller do
       it { is_expected.to respond_with :unprocessable_entity }
     end
   end
+
+  describe 'DELETE #destroy' do
+    before do
+      allow(user).to receive(:orders).and_return Order
+      allow(Order).to receive(:removable).and_return Order
+      allow(Order).to receive(:find).and_return order
+      allow(order).to receive(:destroy)
+
+      delete :destroy, id: order.id, access_token: access_token.token
+    end
+
+    it { expect(user).to have_received :orders }
+    it { expect(Order).to have_received :removable }
+    it { expect(Order).to have_received :find }
+    it { expect(order).to have_received :destroy }
+    it { is_expected.to respond_with :no_content }
+  end
 end

@@ -19,7 +19,7 @@ module Api
     end
 
     def destroy
-      order = current_resource_owner.orders.find params[:id]
+      order = current_resource_owner.orders.removable.find params[:id]
       order.destroy
       render json: {}, status: :no_content
     end

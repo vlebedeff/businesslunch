@@ -17,6 +17,13 @@ class Order < ActiveRecord::Base
 
   scope :today, -> { where(created_on: Date.current) }
   scope :recent, -> { where('orders.created_on > ?', 5.days.ago ) }
+  scope :removable, -> {
+    if Freeze.frozen?
+      none
+    else
+      where('orders.created_on > ?', Date.yesterday)
+    end
+  }
 
   aasm column: 'state' do
     state :pending, initial: true
@@ -29,6 +36,10 @@ class Order < ActiveRecord::Base
     event :cancel_payment do
       transitions to: :pending
     end
+  end
+
+  def removable?
+    created_on > Date.yesterday && !Freeze.frozen?
   end
 
   private

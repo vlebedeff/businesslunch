@@ -49,7 +49,7 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    @order.destroy
+    Order.removable.find(params[:id]).destroy
     redirect_to :back
   end
 
