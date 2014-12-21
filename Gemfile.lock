@@ -93,7 +93,7 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.5)
-    doorkeeper (1.4.0)
+    doorkeeper (1.4.1)
       railties (>= 3.1)
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
@@ -164,7 +164,7 @@ GEM
       mini_portile (~> 0.6.0)
     mime-types (1.25.1)
     mini_portile (0.6.0)
-    minitest (5.3.5)
+    minitest (5.5.0)
     multi_json (1.10.1)
     multipart-post (2.0.0)
     nokogiri (1.6.2.1)
@@ -306,6 +306,9 @@ GEM
     thread_safe (0.3.5)
     tilt (1.4.1)
     timers (1.1.0)
+    treetop (1.4.15)
+      polyglot
+      polyglot (>= 0.3.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.5.1)
@@ -339,7 +342,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise (~> 3.5.1)
-  doorkeeper
+  doorkeeper (~> 1.4.1)
   draper
   erb2haml
   factory_girl_rails
