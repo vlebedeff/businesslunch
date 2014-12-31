@@ -14,3 +14,8 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+
+$(function() {
+  $("[data-toggle=popover]").popover({ html: true })
+});

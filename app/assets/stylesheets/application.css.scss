@@ -79,8 +79,19 @@ body > .container {
   font-size: 50px;
 }
 
-.counters {
-  .title {
-    line-height: 70px;
-  }
+.status .panel-title {
+    font-size: 72px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 45px;
+    padding-top: 20px;
+    letter-spacing: -0.8px;
+}
+
+a.icon-info {
+  padding: 5px 11px;
+  border: 1px solid $brand-primary;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
 }

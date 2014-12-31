@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Dashboard, type: :model do
 
   describe '#current_counters' do
-    let!(:menu_set1) { create :menu_set }
-    let!(:menu_set2) { create :menu_set }
+    let!(:menu_set1) { create :menu_set, details: 'Menu Set 1' }
+    let!(:menu_set2) { create :menu_set, details: 'Menu Set 2' }
     let!(:order1) { create :order, menu_set: menu_set1 }
     let!(:order2) { create :order, menu_set: menu_set1 }
     let!(:order3) { create :order, menu_set: menu_set2 }
@@ -14,9 +14,9 @@ RSpec.describe Dashboard, type: :model do
 
     it "calculates today counters" do
       is_expected.to eq({
-        menu_set1.name => 2,
-        menu_set2.name => 1,
-        'Total' => 3
+        menu_set1.name => OpenStruct.new(count: 2, details: menu_set1.details),
+        menu_set2.name => OpenStruct.new(count: 1, details: menu_set2.details),
+        'Total' => OpenStruct.new(count: 3)
       })
     end
   end

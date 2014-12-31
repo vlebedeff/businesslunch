@@ -7,13 +7,16 @@
   .col-md-9
     - if @dashboard.current_counters.any?
       .row
-        - @dashboard.current_counters.each do |title, orders_count|
+        - @dashboard.current_counters.each do |title, counter|
           .col-md-3
-            .panel.panel-primary.counters
+            .panel.status.panel-primary.counters
               .panel-heading
-                .pull-left.title= title
-                .pull-right.huge.text-right= orders_count
-                .clearfix
+                .panel-title.text-center= counter.count
+
+              .panel-body.text-center
+                %strong= title
+                - if counter.details.present?
+                  = link_to fa_icon('info'), '#', class: 'icon-info', data: { toggle: 'popover', content: simple_format(counter.details), container: 'body', placement: 'top' }
     - else
       .panel.panel-default.counters
         .panel-heading
