@@ -23,13 +23,13 @@ module ApplicationHelper
     end
   end
 
-  def link_to_payment(order)
+  def link_to_payment(order, options = {})
     if order.pending?
       link_to 'Pay', pay_order_path(order),
-        class: 'btn btn-success btn-sm', method: :patch
+        options.merge({ class: 'btn btn-success btn-sm', method: :patch })
     elsif order.paid?
       link_to 'Unpaid', cancel_payment_order_path(order),
-        class: 'btn btn-danger btn-sm', method: :patch
+        options.merge({ class: 'btn btn-danger btn-sm', method: :patch })
     end
   end
 

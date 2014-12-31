@@ -49,15 +49,4 @@
           %h3= formatted_date date
         %ul
           - orders.each do |order|
-            %li{id: dom_id(order)}
-              .row
-                .col-md-5
-                  = order.user_email
-                .col-md-3
-                  = order.menu_set_name
-                .col-md-1
-                  = order.decorate.state
-                .col-md-3
-                  .pull-right
-                    = link_to_payment order
-                    = link_to_delete order
+            = render 'orders/order', order: order

@@ -24,12 +24,18 @@ class OrdersController < ApplicationController
 
   def pay
     @order.pay!
-    redirect_to dashboard_path
+    respond_to do |format|
+      format.html { redirect_to dashboard_path }
+      format.js
+    end
   end
 
   def cancel_payment
     @order.cancel_payment!
-    redirect_to dashboard_path
+    respond_to do |format|
+      format.html { redirect_to dashboard_path }
+      format.js { render 'pay' }
+    end
   end
 
   def destroy
