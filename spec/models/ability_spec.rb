@@ -23,6 +23,7 @@ RSpec.describe Ability, type: :model do
     it { is_expected.not_to be_able_to :ready, :lunch }
     it { is_expected.not_to be_able_to :manage, :freeze }
     it { is_expected.not_to be_able_to :manage, :report }
+    it { is_expected.not_to be_able_to :index, User }
   end
 
   context 'when user is manager' do
@@ -44,6 +45,7 @@ RSpec.describe Ability, type: :model do
     it { is_expected.to be_able_to :ready, :lunch }
     it { is_expected.to be_able_to :manage, :freeze }
     it { is_expected.to be_able_to :manage, :report }
+    it { is_expected.to be_able_to :index, User }
 
     context 'when orders are frozen' do
       let!(:freeze) { create :freeze }

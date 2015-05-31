@@ -30,6 +30,8 @@
               = navbar_link_to 'New Menu', new_menu_path
             - if can? :manage, :report
               = navbar_link_to 'Report', new_report_path, 'file'
+            - if can? :index, User
+              = navbar_link_to 'Users', users_path, 'group'
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               = navbar_link_to 'Edit profile', edit_user_registration_path, 'user'

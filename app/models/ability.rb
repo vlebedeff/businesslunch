@@ -27,6 +27,7 @@ class Ability
       can [:pay, :destroy], Order
       can :ready, :lunch
       can :manage, [:freeze, :report]
+      can :index, User
     end
   end
 end

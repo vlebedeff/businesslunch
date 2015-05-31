@@ -1,0 +1,18 @@
+.row
+  .col-md-12
+    %h1 Users
+.row
+  .col-md-12
+    %table.table.table-responsive.table-hover
+      %thead
+        %tr
+          %th= User.human_attribute_name :email
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= user.email
+
+.row
+  .col-md-12
+    = paginate @users
+
