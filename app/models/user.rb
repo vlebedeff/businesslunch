@@ -9,6 +9,11 @@ class User < ActiveRecord::Base
 
   has_many :orders, dependent: :destroy
 
+  validates :amount, presence: true, numericality: {
+    only_integer: true,
+    greater_than_or_equal_to: 0
+  }
+
   scope :has_order, -> { joins(:orders).merge(Order.today) }
 
   ROLES.each do |role|

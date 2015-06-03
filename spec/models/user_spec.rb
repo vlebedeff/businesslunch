@@ -9,6 +9,18 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:orders).dependent :destroy }
   end
 
+  describe '.validations' do
+    context 'when valid' do
+      subject { create :user }
+      it { is_expected.to validate_presence_of :amount }
+      it do
+        is_expected.to validate_numericality_of(:amount)
+          .only_integer
+          .is_greater_than_or_equal_to(0)
+      end
+    end
+  end
+
   describe '.has_order' do
     let!(:user1) { create :user }
     let!(:user2) { create :user }

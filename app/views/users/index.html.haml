@@ -7,10 +7,12 @@
       %thead
         %tr
           %th= User.human_attribute_name :email
+          %th= User.human_attribute_name :amount
       %tbody
         - @users.each do |user|
           %tr
             %td= user.email
+            %td= user.amount
 
 .row
   .col-md-12
