@@ -10,6 +10,7 @@ class Ability
 
     if user.kind_of? User
       cannot :index, :dashboard
+      cannot :manage, :balances
       can :create, Order
       can :manage, Order do |order|
         order.user_id == user.id
@@ -18,6 +19,7 @@ class Ability
 
     if user.manager?
       can :index, :dashboard
+      can [:edit, :update], :balance
       can :new, :menus
       can [:read, :new, :create], MenuSet
       can [:edit, :update], MenuSet do |menu_set|

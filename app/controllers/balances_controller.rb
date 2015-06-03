@@ -1,4 +1,5 @@
 class BalancesController < ApplicationController
+  authorize_resource class: false
   before_action :find_user
 
   def edit
