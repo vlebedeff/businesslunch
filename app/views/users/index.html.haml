@@ -8,11 +8,17 @@
         %tr
           %th= User.human_attribute_name :email
           %th= User.human_attribute_name :amount
+          %th
+            .pull-right
+
       %tbody
         - @users.each do |user|
           %tr
             %td= user.email
             %td= user.amount
+            %td
+              .pull-right
+                = link_to t('balance.helpers.edit'), edit_user_balance_path(user), class: 'btn btn-white'
 
 .row
   .col-md-12

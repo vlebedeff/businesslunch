@@ -8,3 +8,9 @@ en:
     unfrozen: Orders are available again.
 
   updated_successfully: '%{entity} has been updated successfully.'
+
+  balance:
+    edit_title: "Edit balance for %{user}"
+    helpers:
+      update: Update Balance
+      edit: Update Balance

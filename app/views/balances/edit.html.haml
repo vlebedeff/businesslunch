@@ -1,0 +1,6 @@
+%h2= t('balance.edit_title', user: @user.email)
+
+= simple_form_for @balance, url: user_balance_path(@balance.user), method: :patch, html: { id: 'edit_balance' } do |f|
+  = f.input :amount
+  = f.button :submit, t('balance.helpers.update'), class: 'btn btn-success', data: { disable_with: '...' }
+
