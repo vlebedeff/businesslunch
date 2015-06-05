@@ -4,8 +4,9 @@ class Balance
 
   attribute :user, User
   attribute :amount, Integer, default: 0
+  attribute :manager, User
 
-  validates :user, presence: true
+  validates :user, :manager, presence: true
   validates :amount, presence: true, numericality: { only_integer: true }
 
   def update
@@ -19,5 +20,7 @@ class Balance
   def deposit!
     user.amount += amount
     user.save!
+    Activity.create user: manager, subject: user, action: 'balance_update',
+                    data: amount
   end
 end

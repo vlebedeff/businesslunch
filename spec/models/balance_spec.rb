@@ -6,14 +6,16 @@ RSpec.describe Balance, type: :model do
   it { is_expected.to validate_presence_of :user }
   it { is_expected.to validate_presence_of :amount }
   it { is_expected.to validate_numericality_of(:amount) }
+  it { is_expected.to validate_presence_of :manager }
 
   describe '#update' do
     subject { Balance.new(attributes).update }
 
     let!(:user) { create :user, amount: 30 }
+    let!(:manager) { create :user }
 
     context 'when valid attributes' do
-      let(:attributes) { { user: user, amount: 100 } }
+      let(:attributes) { { user: user, amount: 100, manager: manager } }
 
       it { is_expected.to be_truthy }
 
@@ -22,6 +24,10 @@ RSpec.describe Balance, type: :model do
           subject
           user.reload
         }.to change { user.amount }.to 130
+      end
+
+      it 'creates new activity record' do
+        expect { subject }.to change(Activity, :count).by 1
       end
     end
 
