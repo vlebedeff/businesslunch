@@ -10,4 +10,7 @@ class UserDecorator < Draper::Decorator
     h.content_tag(:span, content, class: span_class)
   end
 
+  def full_name
+    object.email.split('@').first.split('.').map(&:capitalize).join(' ')
+  end
 end

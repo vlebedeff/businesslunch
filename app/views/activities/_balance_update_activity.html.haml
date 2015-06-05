@@ -1,5 +1,15 @@
-%div
-  = t("activity.balance_updated_activity",
-    manager: activity.user_email,
-    user: activity.subject.email,
-    amount: activity.data)
+.timeline-badge.success= fa_icon 'money'
+.timeline-panel
+  .timeline-heading
+    %p
+      %small.text-muted
+        %i.glyphicon.glyphicon-time
+          = l(activity.created_at, format: :long)
+  .timeline-body
+    %strong= activity.user.decorate.full_name
+    have updated balance of
+    %strong= activity.subject.decorate.full_name
+    for
+    %strong.text-success
+      = activity.data
+      Lei

@@ -20,4 +20,14 @@ RSpec.describe UserDecorator, type: :decorator do
       end
     end
   end
+
+  describe '#full_name' do
+    context "when user's email is john.doe@example.com" do
+      subject do
+        UserDecorator.new(double email: 'john.doe@example.com').full_name
+      end
+
+      it { is_expected.to eq 'John Doe' }
+    end
+  end
 end
