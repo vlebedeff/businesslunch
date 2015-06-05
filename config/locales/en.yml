@@ -14,3 +14,7 @@ en:
     helpers:
       update: Update Balance
       edit: Update Balance
+
+  activity:
+    feed: Activity feed
+    balance_updated_activity: "%{manager} have updated balance of %{user} for %{amount} Lei"

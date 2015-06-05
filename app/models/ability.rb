@@ -30,6 +30,7 @@ class Ability
       can :ready, :lunch
       can :manage, [:freeze, :report]
       can :index, User
+      can :read, Activity
     end
   end
 end

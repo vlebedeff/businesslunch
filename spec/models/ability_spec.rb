@@ -25,6 +25,7 @@ RSpec.describe Ability, type: :model do
     it { is_expected.not_to be_able_to :manage, :report }
     it { is_expected.not_to be_able_to :index, User }
     it { is_expected.not_to be_able_to :all, :balance }
+    it { is_expected.not_to be_able_to :all, Activity }
   end
 
   context 'when user is manager' do
@@ -49,6 +50,7 @@ RSpec.describe Ability, type: :model do
     it { is_expected.to be_able_to :index, User }
     it { is_expected.to be_able_to :edit, :balance }
     it { is_expected.to be_able_to :update, :balance }
+    it { is_expected.to be_able_to :read, Activity }
 
     context 'when orders are frozen' do
       let!(:freeze) { create :freeze }

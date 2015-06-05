@@ -1,0 +1,5 @@
+%div
+  = t("activity.balance_updated_activity",
+    manager: activity.user_email,
+    user: activity.subject.email,
+    amount: activity.data)

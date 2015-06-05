@@ -1,0 +1,6 @@
+%h1= t('activity.feed')
+
+- @activities.each do |activity|
+  = render "activities/#{activity.action}_activity", activity: activity
+
+= paginate @activities

@@ -32,6 +32,8 @@
               = navbar_link_to 'Report', new_report_path, 'file'
             - if can? :index, User
               = navbar_link_to 'Users', users_path, 'group'
+            - if can? :read, Activity
+              = navbar_link_to 'Activity', activity_path, 'history'
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               %p.navbar-text= current_user.decorate.amount
