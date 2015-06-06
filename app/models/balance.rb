@@ -8,6 +8,7 @@ class Balance
 
   validates :user, :manager, presence: true
   validates :amount, presence: true, numericality: { only_integer: true }
+  validate :ensure_user_balance_positive
 
   def update
     return false if invalid?
@@ -22,5 +23,10 @@ class Balance
     user.save!
     Activity.create user: manager, subject: user, action: 'balance_update',
                     data: amount
+  end
+
+  def ensure_user_balance_positive
+    return unless user && (user.amount + amount.to_i < 0)
+    errors.add :amount, I18n.t('errors.balance.negative')
   end
 end

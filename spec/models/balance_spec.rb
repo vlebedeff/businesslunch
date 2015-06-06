@@ -1,12 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Balance, type: :model do
-  subject { Balance.new }
+  describe '.validations' do
+    context 'when valid' do
+      subject { Balance.new user: user, manager: user }
 
-  it { is_expected.to validate_presence_of :user }
-  it { is_expected.to validate_presence_of :amount }
-  it { is_expected.to validate_numericality_of(:amount) }
-  it { is_expected.to validate_presence_of :manager }
+      let!(:user) { create :user, amount: 5 }
+
+      it { is_expected.to validate_presence_of :user }
+      it { is_expected.to validate_presence_of :amount }
+      it { is_expected.to validate_numericality_of(:amount) }
+      it { is_expected.to validate_presence_of :manager }
+      it do
+        is_expected.not_to allow_value(-6).for(:amount)
+          .with_message "User's balance cannot be negative"
+      end
+      it { is_expected.to allow_value(-5).for :amount }
+    end
+  end
 
   describe '#update' do
     subject { Balance.new(attributes).update }

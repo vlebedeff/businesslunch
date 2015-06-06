@@ -1,4 +1,7 @@
 en:
+  errors:
+    balance:
+      negative: "User's balance cannot be negative"
   are_you_sure: Are you sure?
   order_created: "You have ordered \"%{menu_set}\""
   orders:
