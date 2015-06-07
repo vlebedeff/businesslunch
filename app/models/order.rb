@@ -1,6 +1,8 @@
 class Order < ActiveRecord::Base
   include AASM
 
+  PRICE = 35
+
   belongs_to :user
   belongs_to :menu_set
 

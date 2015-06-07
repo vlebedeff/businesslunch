@@ -13,10 +13,13 @@ en:
   updated_successfully: '%{entity} has been updated successfully.'
 
   balance:
+    paid_successfully: You have paid for order from your balance
     edit_title: "Edit balance for %{user}"
     helpers:
       update: Update Balance
       edit: Update Balance
+      pay: Pay from Balance
+    pay_confirm: "You're about to pay for lunch from your balance.\n\rThat action cannot be undone.\n\rDo you want to proceed?"
 
   activity:
     feed: Activity feed

@@ -22,6 +22,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def can_pay_for?(order)
+    order &&
+      order.pending? &&
+      order.user == self &&
+      amount >= Order::PRICE
+  end
+
   def full_name
     email.split("@").first.split('.').map(&:capitalize).join(' ')
   end

@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   authorize_resource
   before_action :check_if_not_frozen, only: [:new, :create]
-  before_action :find_order, only: [:pay, :cancel_payment, :destroy]
+  before_action :find_order, only: [:pay, :cancel_payment, :destroy, :pay_from_balance]
 
   def index
     relation = OrdersRelation.new(current_user).from(params)
@@ -36,6 +36,14 @@ class OrdersController < ApplicationController
       format.html { redirect_to dashboard_path }
       format.js { render 'pay' }
     end
+  end
+
+  def pay_from_balance
+    if PayFromBalance.call(@order, current_user)
+      flash[:notice] = t('balance.paid_successfully')
+    end
+
+    redirect_to :back
   end
 
   def destroy

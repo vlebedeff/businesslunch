@@ -51,4 +51,45 @@ RSpec.describe User, type: :model do
       it { is_expected.to be_nil }
     end
   end
+
+  describe '#can_pay_for?' do
+    subject { user.can_pay_for? order }
+
+    let!(:user) { create :user }
+    let!(:order) { create :order, user: user }
+
+    context 'when order belongs to user' do
+      context "when user's balance more than order price" do
+        let!(:user) { create :user, amount: 40 }
+
+        context 'when order is pending' do
+          let!(:order) { create :order, user: user }
+
+          it { is_expected.to be_truthy }
+        end
+
+        context 'when order is paid' do
+          let!(:order) { create :order, :paid, user: user }
+
+          it { is_expected.to be_falsey }
+        end
+      end
+
+      context "when user's balance less than order price" do
+        it { is_expected.to be_falsey }
+      end
+    end
+
+    context 'when order is blank' do
+      let(:order) { nil }
+
+      it { is_expected.to be_falsey }
+    end
+
+    context 'when order of different user' do
+      let!(:order) { create :order }
+
+      it { is_expected.to be_falsey }
+    end
+  end
 end
