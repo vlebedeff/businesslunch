@@ -1,0 +1,13 @@
+.timeline-badge.success= fa_icon 'credit-card'
+.timeline-panel
+  .timeline-heading
+    %p
+      %small.text-muted
+        %i.glyphicon.glyphicon-time
+          = l(activity.created_at, format: :long)
+  .timeline-body
+    %strong= activity.user.decorate.full_name
+    have paid for the lunch
+    %strong.text-success
+      = activity.data
+      Lei

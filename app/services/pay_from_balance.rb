@@ -16,8 +16,18 @@ class PayFromBalance
     ActiveRecord::Base.transaction do
       order.pay!
       user.decrement! :amount, Order::PRICE
+      track_activity
     end
 
     true
+  end
+
+  private
+
+  def track_activity
+    Activity.create user: user,
+                    subject: order,
+                    action: 'payment',
+                    data: Order::PRICE
   end
 end

@@ -20,6 +20,10 @@ RSpec.describe PayFromBalance, type: :model do
         expect { subject }.to change { user.amount }.to 65
       end
 
+      it "creates payment activity" do
+        expect { subject }.to change(Activity, :count).by 1
+      end
+
       it { is_expected.to be_truthy }
     end
 
