@@ -1,4 +1,5 @@
-.timeline-badge.success= fa_icon 'money'
+- color_class = activity.data.to_i >= 0 ? 'success' : 'danger'
+.timeline-badge{class: color_class}= fa_icon 'money'
 .timeline-panel
   .timeline-heading
     %p
@@ -10,6 +11,6 @@
     have updated balance of
     %strong= activity.subject.decorate.full_name
     for
-    %strong.text-success
+    %strong{class: "text-#{color_class}"}
       = activity.data
       Lei
