@@ -8,7 +8,7 @@
           = l(activity.created_at, format: :long)
   .timeline-body
     %strong= activity.user.decorate.full_name
-    have updated balance of
+    has updated balance of
     %strong= activity.subject.decorate.full_name
     for
     %strong{class: "text-#{color_class}"}
