@@ -1,5 +1,26 @@
 
 .welcome
+  - unless cookies[:pay_from_balance_announcement_disabled]
+    .row#pay_from_balance_announcement
+      .col-md-12
+        .jumbotron
+          %h2 New Feature: Pay from your Balance
+          %p Today we glad to announce brand new feature. Now you can pay for lunch from your balance.
+          %p
+            %strong What does it mean?
+          %p
+            Now you have possilibity to add funds to your balance and pay for lunch every day.
+          %p
+            = link_to 'Pay from Balance', '#', class: 'btn btn-success disabled'
+            button will be available in your list of orders when you have enough funds.
+          %p All you need to do to start using that feature is to contact current lunch representative to add funds to your account.
+          %p
+            = link_to 'Got it! Hide it from me',
+              disable_announcement_path(announcement: 'pay_from_balance'),
+              class: 'btn btn-success',
+              remote: true,
+              method: :patch
+
   .row
     .col-md-6.col-md-offset-3
       %p.lead

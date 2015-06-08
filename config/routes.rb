@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   root 'welcome#index'
+  patch '/disable_announcement' => 'welcome#disable_announcement'
 
   get '/dashboard' => 'dashboard#index'
 
