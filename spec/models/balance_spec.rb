@@ -5,7 +5,7 @@ RSpec.describe Balance, type: :model do
     context 'when valid' do
       subject { Balance.new user: user, manager: user }
 
-      let!(:user) { create :user, amount: 5 }
+      let!(:user) { create :user, balance: 5 }
 
       it { is_expected.to validate_presence_of :user }
       it { is_expected.to validate_presence_of :amount }
@@ -22,7 +22,7 @@ RSpec.describe Balance, type: :model do
   describe '#update' do
     subject { Balance.new(attributes).update }
 
-    let!(:user) { create :user, amount: 30 }
+    let!(:user) { create :user, balance: 30 }
     let!(:manager) { create :user }
 
     context 'when valid attributes' do
@@ -34,7 +34,7 @@ RSpec.describe Balance, type: :model do
         expect {
           subject
           user.reload
-        }.to change { user.amount }.to 130
+        }.to change { user.balance }.to 130
       end
 
       it 'creates new activity record' do
@@ -51,7 +51,7 @@ RSpec.describe Balance, type: :model do
         expect {
           subject
           user.reload
-        }.not_to change { user.amount }
+        }.not_to change { user.balance }
       end
     end
   end

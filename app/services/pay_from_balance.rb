@@ -15,7 +15,7 @@ class PayFromBalance
 
     ActiveRecord::Base.transaction do
       order.pay!
-      user.decrement! :amount, Order::PRICE
+      user.decrement! :balance, Order::PRICE
       track_activity
     end
 

@@ -4,7 +4,7 @@ RSpec.describe PayFromBalance, type: :model do
   describe '.call' do
     subject { PayFromBalance.call order, user }
 
-    let!(:user) { create :user, amount: 100 }
+    let!(:user) { create :user, balance: 100 }
     let!(:order) { create :order, user: user }
 
     context 'when user can pay' do
@@ -17,7 +17,7 @@ RSpec.describe PayFromBalance, type: :model do
       end
 
       it "changes user's balance" do
-        expect { subject }.to change { user.amount }.to 65
+        expect { subject }.to change { user.balance }.to 65
       end
 
       it "creates payment activity" do
@@ -37,7 +37,7 @@ RSpec.describe PayFromBalance, type: :model do
       end
 
       it "do not changes user's balance" do
-        expect { subject }.not_to change { user.amount }
+        expect { subject }.not_to change { user.balance }
       end
 
       it { is_expected.to be_falsey }

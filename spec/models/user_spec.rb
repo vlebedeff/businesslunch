@@ -12,9 +12,9 @@ RSpec.describe User, type: :model do
   describe '.validations' do
     context 'when valid' do
       subject { create :user }
-      it { is_expected.to validate_presence_of :amount }
+      it { is_expected.to validate_presence_of :balance }
       it do
-        is_expected.to validate_numericality_of(:amount)
+        is_expected.to validate_numericality_of(:balance)
           .only_integer
           .is_greater_than_or_equal_to(0)
       end
@@ -60,7 +60,7 @@ RSpec.describe User, type: :model do
 
     context 'when order belongs to user' do
       context "when user's balance more than order price" do
-        let!(:user) { create :user, amount: 40 }
+        let!(:user) { create :user, balance: 40 }
 
         context 'when order is pending' do
           let!(:order) { create :order, user: user }

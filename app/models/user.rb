@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :orders, dependent: :destroy
 
-  validates :amount, presence: true, numericality: {
+  validates :balance, presence: true, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 0
   }
@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
     order &&
       order.pending? &&
       order.user == self &&
-      amount >= Order::PRICE
+      balance >= Order::PRICE
   end
 
   def full_name

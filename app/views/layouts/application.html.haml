@@ -36,7 +36,7 @@
               = navbar_link_to 'Activity', activity_path, 'history'
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
-              %p.navbar-text= current_user.decorate.amount
+              %p.navbar-text= current_user.decorate.balance
               = navbar_link_to 'Edit profile', edit_user_registration_path, 'user'
               = navbar_link_to 'Sign Out', destroy_user_session_path, 'log-out', false
             - else

@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Add funds' do
   scenario 'can add funds to user account' do
     create :manager_example_com
-    user = create :user, email: 'user-name@example.com', amount: 35
+    user = create :user, email: 'user-name@example.com', balance: 35
 
     sign_in_as 'manager@example.com'
     visit users_path
@@ -17,7 +17,7 @@ feature 'Add funds' do
 
     expect(page).to have_content successful_message
     user.reload
-    expect(user.amount).to eq 135
+    expect(user.balance).to eq 135
   end
 end
 

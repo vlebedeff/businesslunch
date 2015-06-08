@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Pay from Balance' do
   context 'when there is enough funds to pay for lunch' do
-    given!(:user) { create :user_example_com, amount: 100 }
+    given!(:user) { create :user_example_com, balance: 100 }
     given!(:order) { create :order, user: user }
 
     scenario 'user can pay from balance' do
@@ -16,7 +16,7 @@ feature 'Pay from Balance' do
 
       expect(page).to have_content 'You have paid for order from your balance'
       user.reload
-      expect(user.amount).to eq 65
+      expect(user.balance).to eq 65
       within "#order_#{order.id}" do
         expect(page).to have_selector 'span.label-success', text: 'Paid'
         expect(page).not_to have_selector 'a', text: 'Pay from Balance'

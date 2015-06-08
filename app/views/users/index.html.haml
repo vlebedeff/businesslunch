@@ -7,7 +7,7 @@
       %thead
         %tr
           %th= User.human_attribute_name :email
-          %th= User.human_attribute_name :amount
+          %th= User.human_attribute_name :balance
           %th
             .pull-right
 
@@ -15,7 +15,7 @@
         - @users.each do |user|
           %tr
             %td= user.email
-            %td= user.amount
+            %td= user.balance
             %td
               .pull-right
                 = link_to t('balance.helpers.edit'), edit_user_balance_path(user), class: 'btn btn-default'

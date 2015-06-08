@@ -19,14 +19,14 @@ class Balance
   private
 
   def deposit!
-    user.amount += amount
+    user.balance += amount
     user.save!
     Activity.create user: manager, subject: user, action: 'balance_update',
                     data: amount
   end
 
   def ensure_user_balance_positive
-    return unless user && (user.amount + amount.to_i < 0)
+    return unless user && (user.balance + amount.to_i < 0)
     errors.add :amount, I18n.t('errors.balance.negative')
   end
 end

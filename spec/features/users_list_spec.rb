@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Users List' do
   scenario 'manager can view list of all users' do
     create :manager_example_com
-    create :user, email: 'user@example.com', amount: 100
+    create :user, email: 'user@example.com', balance: 100
 
     sign_in_as 'manager@example.com'
     visit dashboard_path
