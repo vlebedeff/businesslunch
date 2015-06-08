@@ -1,7 +1,10 @@
 %h1= t('activity.feed')
 
-%ul.timeline
-  - @activities.each do |activity|
-    %li{class: cycle('', 'timeline-inverted')}= render "activities/#{activity.action}_activity", activity: activity
+- if @activities.any?
+  %ul.timeline
+    - @activities.each do |activity|
+      %li{class: cycle('', 'timeline-inverted')}= render "activities/#{activity.action}_activity", activity: activity
+- else
+  %p.text-center= t('activity.no_recent_activity')
 
 = paginate @activities
