@@ -13,7 +13,7 @@ class Ability
       cannot :manage, :balances
       can :create, Order
       can :manage, Order do |order|
-        order.user_id == user.id
+        order.pending? && order.user_id == user.id
       end
     end
 

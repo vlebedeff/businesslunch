@@ -13,12 +13,14 @@ RSpec.describe Ability, type: :model do
   context 'when user is signed in' do
     let!(:user) { create :user }
     let!(:my_order) { create :order, user: user }
+    let!(:my_paid_order) { create :order, :paid, user: user }
     let!(:order) { create :order }
 
     it { is_expected.not_to be_able_to :index, :dashboard }
     it { is_expected.to be_able_to :create, Order }
     it { is_expected.to be_able_to :read, my_order }
     it { is_expected.to be_able_to :manage, my_order }
+    it { is_expected.not_to be_able_to :manage, my_paid_order }
     it { is_expected.not_to be_able_to :manage, order }
     it { is_expected.not_to be_able_to :ready, :lunch }
     it { is_expected.not_to be_able_to :manage, :freeze }
