@@ -95,3 +95,21 @@ a.icon-info {
   -moz-border-radius: 50%;
   border-radius: 50%;
 }
+
+.home-header {
+  box-shadow: 0 0 20px #888;
+  position: relative;
+  overflow: hidden;
+
+  .intro-text {
+    padding-top: 170px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    color: #FFF;
+    background: rgba(0,0,0,0.5);
+    text-align: center;
+  }
+}
