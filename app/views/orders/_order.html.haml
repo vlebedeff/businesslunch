@@ -1,11 +1,10 @@
 %li{id: dom_id(order)}
   .row
-    .col-md-5
+    .col-md-6
       = order.user_email
+      = order.decorate.state
     .col-md-3
       = order.menu_set_name
-    .col-md-1
-      = order.decorate.state
     .col-md-3
       .pull-right
         = link_to_payment order, remote: true
