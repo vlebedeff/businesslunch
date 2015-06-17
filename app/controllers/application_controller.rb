@@ -17,6 +17,11 @@ class ApplicationController < ActionController::Base
     super || Guest.new
   end
 
+  def last_order
+    current_user.orders.pending.last
+  end
+  helper_method :last_order
+
   def user_signed_in?
     current_user.kind_of? User
   end
