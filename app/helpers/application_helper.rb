@@ -33,10 +33,6 @@ module ApplicationHelper
     end
   end
 
-  def display_pay_from_balance_hint?
-    last_order && current_user.can_pay_for?(last_order)
-  end
-
   def link_to_pay_from_balance(title = t('balance.helpers.pay'), order)
     link_to title,
       pay_from_balance_order_path(order),
