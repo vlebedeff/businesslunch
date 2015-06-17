@@ -44,4 +44,12 @@ module ApplicationHelper
       method: :patch,
       data: { confirm: t('balance.pay_confirm') }
   end
+
+  def link_to_pay_from_balance(title, order, classes = '')
+    link_to title,
+      pay_from_balance_order_path(order),
+      class: "btn btn-success #{classes}",
+      method: :patch,
+      data: { confirm: t('balance.pay_confirm') }
+  end
 end

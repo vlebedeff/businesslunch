@@ -6,10 +6,5 @@
       %h3 Pay from balance is available now!
       %p You have sufficient funds to pay for the order from your balance.
       %p Would you like to pay it now?
-      %p
-        = link_to 'Yes. Pay from my balance!',
-          pay_from_balance_order_path(last_order),
-          class: 'btn btn-success',
-          method: :patch,
-          data: { confirm: t('balance.pay_confirm') }
+      %p= link_to_pay_from_balance 'Yes. Pay from my balance!', last_order
 

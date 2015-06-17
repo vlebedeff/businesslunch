@@ -3,7 +3,8 @@
     = image_tag('meat.png', class: 'img-responsive')
     .intro-text
       %p.lead
-        - if order = current_user.today_order
+        - order = current_user.today_order
+        - if order
           - button_text = 'Make another order'
           %h2 Your today's order
           %h3= order.menu_set_name
@@ -16,6 +17,12 @@
 
       %p.lead
         = link_to button_text, new_order_path, class: 'btn btn-default btn-lg'
+
+      - if order && current_user.can_pay_for?(order)
+        .lead.lead-success-light
+          %h4
+            You can now pay for order from your balance
+          = link_to_pay_from_balance 'Yes. Pay now!', order, 'btn-lg'
 
 .welcome
   - unless cookies[:pay_from_balance_announcement_disabled]

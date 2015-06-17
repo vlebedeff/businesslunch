@@ -45,11 +45,7 @@
               .col-md-3
                 .pull-right.text-nowrap
                   - if current_user.can_pay_for? order
-                    = link_to t('balance.helpers.pay'),
-                      pay_from_balance_order_path(order),
-                      class: 'btn btn-sm btn-success',
-                      method: :patch,
-                      data: { confirm: t('balance.pay_confirm') }
+                    = link_to_pay_from_balance t('balance.helpers.pay'), order, 'btn-sm'
                   - if can?(:pay, order) && params[:view]
                     = link_to_payment order
                   - if can_remove_order?(order)
