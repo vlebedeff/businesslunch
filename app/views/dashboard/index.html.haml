@@ -16,7 +16,12 @@
               .panel-body.text-center
                 %strong= title
                 - if counter.details.present?
-                  = link_to fa_icon('info'), '#', class: 'icon-info', data: { toggle: 'popover', content: simple_format(counter.details), container: 'body', placement: 'bottom' }
+                  = link_to fa_icon('info'),
+                    '#',
+                    class: 'icon-info',
+                    data: { toggle: 'popover',
+                      content: simple_format(counter.details).tr("\"", "\\\""),
+                      container: 'body', placement: 'bottom' }
     - else
       .panel.panel-default.counters
         .panel-heading
