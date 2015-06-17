@@ -29,22 +29,22 @@
                 .description-container.col-md-6
                   = order.menu_set_name
                   = order.decorate.today
+                  = order.decorate.state
               - else
                 .description-container.col-md-3
                   = order.menu_set_name
                   = order.decorate.today
+                  = order.decorate.state
                 .col-md-3
                   = order.user_email
-              .status-container.col-md-1
-                = order.decorate.state
               .date-container.col-md-3
                 = order.decorate.created_on
-              .col-md-2
+              .col-md-3
                 .pull-right.text-nowrap
                   - if current_user.can_pay_for? order
                     = link_to t('balance.helpers.pay'),
                       pay_from_balance_order_path(order),
-                      class: 'btn btn-success',
+                      class: 'btn btn-sm btn-success',
                       method: :patch,
                       data: { confirm: t('balance.pay_confirm') }
                   - if can?(:pay, order) && params[:view]
