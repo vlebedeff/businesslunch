@@ -120,3 +120,29 @@ a.icon-info {
     color: #ffce00;
   }
 }
+
+.absolute-flashes {
+  position: absolute;
+  z-index: 10000;
+  top: 55px;
+}
+@media (min-width: 320px) {
+  .absolute-flashes {
+    width: 290px;
+  }
+}
+@media (min-width: 768px) {
+  .absolute-flashes {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .absolute-flashes {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .absolute-flashes {
+    width: 1170px;
+  }
+}

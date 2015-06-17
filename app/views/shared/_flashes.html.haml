@@ -1,4 +1,4 @@
-.flashes
+.flashes{class: ('absolute-flashes' if controller_name == 'welcome')}
   - flash.each do |type, message|
     .alert.fade.in{:"data-dismiss" => "alert", class: "alert-#{type.to_sym == :alert ? "danger" : "success"}"}
       %button.close ×
