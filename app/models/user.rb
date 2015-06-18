@@ -36,10 +36,6 @@ class User < ActiveRecord::Base
       balance < Order::PRICE
   end
 
-  def full_name
-    email.split("@").first.split('.').map(&:capitalize).join(' ')
-  end
-
   def today_order
     orders.today.first
   end
