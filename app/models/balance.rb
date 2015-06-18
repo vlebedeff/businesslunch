@@ -23,6 +23,7 @@ class Balance
     user.save!
     Activity.create user: manager, subject: user, action: 'balance_update',
                     data: amount
+    BalanceUpdatedWorker.perform_async user.id, amount
   end
 
   def ensure_user_balance_positive

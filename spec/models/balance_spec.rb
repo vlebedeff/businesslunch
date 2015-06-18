@@ -40,6 +40,12 @@ RSpec.describe Balance, type: :model do
       it 'creates new activity record' do
         expect { subject }.to change(Activity, :count).by 1
       end
+
+      it 'sends notification about balance changes' do
+        expect {
+          subject
+        }.to change(BalanceUpdatedWorker.jobs, :size).by 1
+      end
     end
 
     context 'when invalid attributes' do
