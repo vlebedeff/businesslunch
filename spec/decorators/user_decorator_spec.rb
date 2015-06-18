@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe UserDecorator, type: :decorator do
   describe '#balance' do
-    subject { UserDecorator.new(user).balance }
+    subject { UserDecorator.new(user).balance('Balance: ') }
 
     context 'when balance is more than lunch price' do
       let(:user) { double balance: 100 }

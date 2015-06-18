@@ -24,7 +24,7 @@
         - @users.each do |user|
           %tr
             %td= user.email
-            %td= user.balance
+            %td= user.decorate.balance
             %td
               .pull-right
                 = link_to t('balance.helpers.edit'), edit_user_balance_path(user), class: 'btn btn-default'
