@@ -2,6 +2,6 @@ class UsersController < ApplicationController
   authorize_resource
 
   def index
-    @users = User.order(:email).page(params[:page])
+    @users = User.search(params[:query]).order(:email).page(params[:page])
   end
 end

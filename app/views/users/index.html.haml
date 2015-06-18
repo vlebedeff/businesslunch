@@ -1,7 +1,16 @@
-.row
+.row.margin-bottom
   .col-md-12
     %h1 Users
-.row
+
+.row.margin-bottom
+  .col-md-12
+    = form_tag url_for, method: :get do
+      .input-group
+        = text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search users by email'
+        %span.input-group-btn
+          %button.btn.btn-default{type: 'submit'} Search!
+
+.row.margin-bottom
   .col-md-12
     %table.table.table-responsive.table-hover
       %thead

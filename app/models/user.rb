@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
   }
 
   scope :has_order, -> { joins(:orders).merge(Order.today) }
+  scope :search, -> term {
+    where('email ILIKE ?', "%#{term}%") if term.present?
+  }
 
   ROLES.each do |role|
     define_method "#{role}?" do
