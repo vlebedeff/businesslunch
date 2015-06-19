@@ -11,9 +11,14 @@
   %thead
     %tr
       %th= Vendor.human_attribute_name :name
+      %th
 
   %tbody
     - @vendors.each do |vendor|
       %tr
         %td= vendor.name
+        %td
+          .pull-right
+            - if can? :update, vendor
+              = link_to 'Edit', edit_vendor_path(vendor), class: 'btn btn-default'
 
