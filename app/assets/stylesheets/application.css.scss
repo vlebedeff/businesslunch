@@ -147,6 +147,15 @@ a.icon-info {
   }
 }
 
-.margin-bottom {
-  margin-bottom: 30px;
+.margin-bottom, .subnav {
+  margin-bottom: 20px;
+}
+
+.border-right {
+  padding-right: 10px;
+  border-right: 1px solid #eee;
+}
+
+.margin-left-10 {
+  margin-left: 10px !important;
 }
