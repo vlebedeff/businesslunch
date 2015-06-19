@@ -9,21 +9,24 @@
       .row
         - @dashboard.current_counters.each do |title, counter|
           .col-md-3
-            .panel.status.panel-primary.counters
-              .panel-heading
-                .panel-title.text-center= counter.count
+            .small-box.bg-aqua
+              .inner
+                %h3= counter.count
+                %p= title
+              .icon
+                = fa_icon 'cutlery'
+              - if counter.details.present?
+                = link_to '#',
+                  class: 'small-box-footer',
+                  data: { toggle: 'popover', content: simple_format(counter.details).tr("\"", "\\\""), container: 'body', placement: 'bottom' } do
+                  = 'More info'
+                  = fa_icon 'arrow-circle-right'
+              - else
+                .small-box-footer
+                  &nbsp;
 
-              .panel-body.text-center
-                %strong= title
-                - if counter.details.present?
-                  = link_to fa_icon('info'),
-                    '#',
-                    class: 'icon-info',
-                    data: { toggle: 'popover',
-                      content: simple_format(counter.details).tr("\"", "\\\""),
-                      container: 'body', placement: 'bottom' }
     - else
-      .panel.panel-default.counters
+      .panel.panel-default
         .panel-heading
           Today orders
         .panel-body
