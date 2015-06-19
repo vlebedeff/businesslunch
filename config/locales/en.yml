@@ -10,6 +10,7 @@ en:
     frozen: Orders are frozen for today.
     unfrozen: Orders are available again.
 
+  created_successfully: '%{entity} has been created successfully.'
   updated_successfully: '%{entity} has been updated successfully.'
 
   balance:
@@ -24,3 +25,7 @@ en:
   activity:
     feed: Activity feed
     no_recent_activity: There is no recent activity
+
+  vendor:
+    new:
+      title: New Vendor

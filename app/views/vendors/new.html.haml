@@ -1,0 +1,6 @@
+%h1= t('vendor.new.title')
+
+= simple_form_for @vendor do |f|
+  = f.input :name
+  = f.button :submit, class: 'btn btn-success', data: { disable_with: '...' }
+

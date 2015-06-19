@@ -2,6 +2,10 @@
   .col-md-12
     %h1 Vendors
 
+.row.subnav
+  .col-md-12
+    - if can? :create, Vendor
+      = link_to 'Add Vendor', new_vendor_path, class: 'btn btn-success'
 
 %table.table
   %thead

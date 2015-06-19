@@ -21,5 +21,9 @@ FactoryGirl.define do
     factory :manager_example_com, traits: [:manager] do
       email 'manager@example.com'
     end
+
+    factory :admin_example_com, traits: [:admin] do
+      email 'admin@example.com'
+    end
   end
 end

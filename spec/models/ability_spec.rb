@@ -53,7 +53,6 @@ RSpec.describe Ability, type: :model do
     it { is_expected.to be_able_to :edit, :balance }
     it { is_expected.to be_able_to :update, :balance }
     it { is_expected.to be_able_to :read, Activity }
-    it { is_expected.to be_able_to :read, Vendor }
 
     context 'when orders are frozen' do
       let!(:freeze) { create :freeze }
@@ -70,5 +69,6 @@ RSpec.describe Ability, type: :model do
     it 'he is almighty' do
       is_expected.to be_able_to :all, :all
     end
+    it { is_expected.to be_able_to :read, Vendor }
   end
 end

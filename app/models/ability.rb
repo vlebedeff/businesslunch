@@ -10,7 +10,7 @@ class Ability
     guest_abilities if user.kind_of? Guest
     logged_in_user_abilities if user.kind_of? User
     manager_abilities if user.manager?
-    can :all, :all if user.admin?
+    admin_abilities if user.admin?
   end
 
   private
@@ -42,6 +42,9 @@ class Ability
     can :manage, [:freeze, :report]
     can :index, User
     can :read, Activity
-    can :read, Vendor
+  end
+
+  def admin_abilities
+    can :manage, :all
   end
 end
