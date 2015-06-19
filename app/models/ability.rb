@@ -42,5 +42,6 @@ class Ability
     can :manage, [:freeze, :report]
     can :index, User
     can :read, Activity
+    can :read, Vendor
   end
 end

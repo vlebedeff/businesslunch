@@ -1,3 +1,15 @@
 .row.margin-bottom
   .col-md-12
     %h1 Vendors
+
+
+%table.table
+  %thead
+    %tr
+      %th= Vendor.human_attribute_name :name
+
+  %tbody
+    - @vendors.each do |vendor|
+      %tr
+        %td= vendor.name
+

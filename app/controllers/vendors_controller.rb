@@ -1,5 +1,7 @@
 class VendorsController < ApplicationController
-  def index
+  authorize_resource
 
+  def index
+    @vendors = Vendor.all
   end
 end
