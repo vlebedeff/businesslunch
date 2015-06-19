@@ -10,6 +10,7 @@ class Ability
     guest_abilities if user.kind_of? Guest
     logged_in_user_abilities if user.kind_of? User
     manager_abilities if user.manager?
+    can :all, :all if user.admin?
   end
 
   private

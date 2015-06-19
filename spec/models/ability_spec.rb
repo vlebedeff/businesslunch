@@ -63,4 +63,11 @@ RSpec.describe Ability, type: :model do
       it { is_expected.not_to be_able_to :update, menu_set }
     end
   end
+
+  context 'when user is admin' do
+    let!(:user) { create :user, :admin }
+    it 'he is almighty' do
+      is_expected.to be_able_to :all, :all
+    end
+  end
 end
