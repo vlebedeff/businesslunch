@@ -1,12 +1,11 @@
-- color_class = activity.data.to_i >= 0 ? 'success' : 'danger'
-.timeline-badge{class: color_class}= fa_icon 'money'
-.timeline-panel
-  .timeline-heading
-    %p
-      %small.text-muted
-        %i.glyphicon.glyphicon-time
-          = l(activity.created_at, format: :long)
-  .timeline-body
+- bg_class, color_class = activity.data.to_i >= 0 ? ['bg-green', 'success'] : ['bg-red', 'danger']
+%i.fa.fa-money{class: bg_class}
+.timeline-item
+  %span.time
+    = fa_icon 'clock-o'
+    = l activity.created_at, format: :short
+
+  %h3.timeline-header.no-border
     %strong= activity.user.decorate.full_name
     has updated balance of
     %strong= activity.subject.decorate.full_name
@@ -14,3 +13,4 @@
     %strong{class: "text-#{color_class}"}
       = activity.data
       Lei
+

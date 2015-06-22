@@ -1,9 +1,14 @@
 %h1= t('activity.feed')
 
 - if @activities.any?
+  - current_date = nil
   %ul.timeline
     - @activities.each do |activity|
-      %li{class: cycle('', 'timeline-inverted')}= render "activities/#{activity.action}_activity", activity: activity
+      - if current_date.blank? || current_date > activity.created_at.to_date
+        - current_date = activity.created_at.to_date
+        %li.timelabel
+          %span{class: (current_date == Date.current ? 'bg-purple' : 'bg-red')}= l(current_date, format: :short)
+      %li= render "activities/#{activity.action}_activity", activity: activity
 - else
   %p.text-center= t('activity.no_recent_activity')
 
