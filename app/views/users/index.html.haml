@@ -19,6 +19,8 @@
           %th= User.human_attribute_name :balance
           %th
             .pull-right
+              .text.text-info
+                = t('balance.summary', balance: User.sum(:balance))
 
       %tbody
         - @users.each do |user|
