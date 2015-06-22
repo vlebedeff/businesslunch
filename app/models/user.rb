@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def super_user?
+    manager? || admin?
+  end
+
   def can_pay_for?(order)
     order &&
       order.pending? &&

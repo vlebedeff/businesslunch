@@ -7,11 +7,11 @@
     .btn-toolbar.subnav{role: 'toolbar'}
       .btn-group
         - unless Freeze.frozen?
-          %div{class: ('border-right' if current_user.manager?)}
+          %div{class: ('border-right' if current_user.super_user?)}
             - button_text = current_user.today_order ? 'Make another order' : 'Order Now!'
             = link_to button_text, new_order_path, class: 'btn btn-success'
 
-      - if current_user.manager?
+      - if current_user.super_user?
         .btn-group.margin-left-10
           = link_to 'Mine', url_for(view: nil), class: "btn btn-default #{"active" unless params[:view]}"
           = link_to 'All', url_for(view: 'all'), class: "btn btn-default #{"active" if params[:view] == 'all'}"
