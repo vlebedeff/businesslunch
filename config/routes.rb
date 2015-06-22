@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   resource :freeze, only: [:create, :destroy]
   resource :report, only: [:new, :create]
-  resources :users, only: [:index] do
+  resources :users, only: [:index, :destroy] do
     resource :balance, only: [:edit, :update]
   end
 end

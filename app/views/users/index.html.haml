@@ -30,6 +30,9 @@
             %td
               .pull-right
                 = link_to t('balance.helpers.edit'), edit_user_balance_path(user), class: 'btn btn-default'
+                - if can?(:destroy, user) && user.balance.zero?
+                  = link_to_delete user
+
 
 .row
   .col-md-12
