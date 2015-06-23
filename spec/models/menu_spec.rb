@@ -13,14 +13,14 @@ RSpec.describe Menu, type: :model do
 
     context 'when valid attributes' do
       let(:menu_attrs) do
-        {
+        ActionController::Parameters.new(
           "available_on(1i)" => "2014",
           "available_on(2i)" => "6",
           "available_on(3i)" => "24",
-          "menu_set"=>{
+          "menu_set" => {
             "0" => { "name"=>"1st menu set" },
             "1" => { "name"=>"2nd menu set" },
-            "2" => { "name"=>"Diet menu" } } }
+            "2" => { "name"=>"Diet menu" } })
       end
 
       it { is_expected.to be_truthy }
@@ -34,11 +34,11 @@ RSpec.describe Menu, type: :model do
 
     context 'when invalid attributes' do
       let(:menu_attrs) do
-        {
+        ActionController::Parameters.new(
           "menu_set"=>{
             "0" => { "name"=>"1st menu set" },
             "1" => { "name"=>"2nd menu set" },
-            "2" => { "name"=>"Diet menu" } } }
+            "2" => { "name"=>"Diet menu" } })
       end
 
       it { is_expected.to be_falsey }
