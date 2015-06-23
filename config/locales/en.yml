@@ -27,7 +27,11 @@ en:
     summary: "Balance summary: %{balance} Lei"
 
   groups:
+    helpers:
+      join: Join
+      leave: Leave
     successfully_joined: "You have joined \"%{group}\" group"
+    successfully_left: "You have left \"%{group}\" group"
 
   activity:
     feed: Activity feed

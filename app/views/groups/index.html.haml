@@ -8,4 +8,13 @@
       %div{id: dom_id(group)}
         = group.name
         - if can? :join, group
-          = link_to 'Join', join_group_path(group), method: :post, class: 'btn btn-success'
+          = link_to t('groups.helpers.join'),
+            join_group_path(group),
+            method: :post,
+            class: 'btn btn-success'
+        - if can? :leave, group
+          = link_to t('groups.helpers.leave'),
+            leave_group_path(group),
+            method: :delete,
+            data: { confirm: t(:are_you_sure) },
+            class: 'btn btn-danger'

@@ -1,6 +1,34 @@
 require 'rails_helper'
 require 'cancan/matchers'
 
+shared_examples 'group abilities' do
+  context 'when user is not a member of the group' do
+    let!(:group) { create :group }
+
+    it 'are able to join the group' do
+      is_expected.to be_able_to :join, group
+    end
+
+    it 'are not be able to leave group' do
+      is_expected.not_to be_able_to :leave, group
+    end
+  end
+
+  context 'when user is a member of the group' do
+    let!(:group) { create :group }
+
+    before { create :user_group, user: user, group: group }
+
+    it 'are not able to join group' do
+      is_expected.not_to be_able_to :join, group
+    end
+
+    it 'are able to leave group' do
+      is_expected.to be_able_to :leave, group
+    end
+  end
+end
+
 RSpec.describe Ability, type: :model do
   subject { Ability.new user }
 
@@ -15,7 +43,6 @@ RSpec.describe Ability, type: :model do
     let!(:my_order) { create :order, user: user }
     let!(:my_paid_order) { create :order, :paid, user: user }
     let!(:order) { create :order }
-    let!(:group) { create :group }
 
     it { is_expected.not_to be_able_to :index, :dashboard }
     it { is_expected.to be_able_to :create, Order }
@@ -30,18 +57,7 @@ RSpec.describe Ability, type: :model do
     it { is_expected.not_to be_able_to :all, :balance }
     it { is_expected.not_to be_able_to :all, Activity }
     it { is_expected.to be_able_to :read, Group }
-    context 'when user is no a member of the group' do
-      it 'are able to join the group' do
-        is_expected.to be_able_to :join, group
-      end
-    end
-
-    context 'when user is a member of the group' do
-      before { create :user_group, user: user, group: group }
-      it 'are not able to join group' do
-        is_expected.not_to be_able_to :join, group
-      end
-    end
+    it_behaves_like 'group abilities'
   end
 
   context 'when user is manager' do
@@ -67,6 +83,7 @@ RSpec.describe Ability, type: :model do
     it { is_expected.to be_able_to :edit, :balance }
     it { is_expected.to be_able_to :update, :balance }
     it { is_expected.to be_able_to :read, Activity }
+    it_behaves_like 'group abilities'
 
     context 'when orders are frozen' do
       let!(:freeze) { create :freeze }
@@ -84,5 +101,6 @@ RSpec.describe Ability, type: :model do
       is_expected.to be_able_to :all, :all
     end
     it { is_expected.to be_able_to :read, Vendor }
+    it_behaves_like 'group abilities'
   end
 end

@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
     user_groups.create group: group
   end
 
+  def leave_group(group)
+    user_groups.where(group: group).first.try(:destroy)
+  end
+
   def today_order
     orders.today.first
   end

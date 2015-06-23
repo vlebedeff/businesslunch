@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resource :activity, only: [:show]
   resources :groups, only: [:index] do
     post :join, on: :member
+    delete :leave, on: :member
   end
   resources :orders, except: [:show] do
     patch :pay, on: :member

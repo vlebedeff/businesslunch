@@ -90,13 +90,28 @@ RSpec.describe User, type: :model do
   end
 
   describe '#join_group' do
+    subject { user.join_group group }
+
     let!(:user) { create :user }
     let!(:group) { create :group }
 
-    subject { user.join_group group }
-
     it 'creates new UserGroup record' do
       expect { subject }.to change(UserGroup, :count).by 1
+    end
+  end
+
+  describe '#leave_group' do
+    subject { user.leave_group group }
+
+    let!(:user) { create :user }
+    let!(:group) { create :group }
+
+    before do
+      create :user_group, user: user, group: group
+    end
+
+    it 'leaves group' do
+      expect { subject }.to change(UserGroup, :count).by -1
     end
   end
 end
