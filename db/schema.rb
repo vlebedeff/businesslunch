@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150619043220) do
+ActiveRecord::Schema.define(version: 20150623040959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "activities", force: true do |t|
-    t.integer  "user_id",      null: false
-    t.string   "action",       null: false
-    t.integer  "subject_id",   null: false
-    t.string   "subject_type", null: false
-    t.string   "data"
+  create_table "activities", force: :cascade do |t|
+    t.integer  "user_id",                  null: false
+    t.string   "action",       limit: 255, null: false
+    t.integer  "subject_id",               null: false
+    t.string   "subject_type", limit: 255, null: false
+    t.string   "data",         limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20150619043220) do
   add_index "activities", ["subject_id", "subject_type"], name: "index_activities_on_subject_id_and_subject_type", using: :btree
   add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
 
-  create_table "freezes", force: true do |t|
+  create_table "freezes", force: :cascade do |t|
     t.date     "frozen_on"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -37,20 +37,28 @@ ActiveRecord::Schema.define(version: 20150619043220) do
 
   add_index "freezes", ["frozen_on"], name: "index_freezes_on_frozen_on", using: :btree
 
-  create_table "menu_sets", force: true do |t|
-    t.string   "name",         null: false
+  create_table "groups", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "groups", ["name"], name: "index_groups_on_name", unique: true, using: :btree
+
+  create_table "menu_sets", force: :cascade do |t|
+    t.string   "name",         limit: 255, null: false
     t.text     "details"
-    t.date     "available_on", null: false
+    t.date     "available_on",             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "orders", force: true do |t|
-    t.integer  "user_id",                         null: false
-    t.integer  "menu_set_id",                     null: false
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id",                                     null: false
+    t.integer  "menu_set_id",                                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "state",       default: "pending"
+    t.string   "state",       limit: 255, default: "pending"
     t.date     "created_on"
   end
 
@@ -58,25 +66,25 @@ ActiveRecord::Schema.define(version: 20150619043220) do
   add_index "orders", ["menu_set_id"], name: "index_orders_on_menu_set_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
-  create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "confirmation_token",     limit: 255
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
+    t.string   "unconfirmed_email",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "roles"
-    t.integer  "balance",                default: 0
+    t.integer  "balance",                            default: 0
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
@@ -84,8 +92,8 @@ ActiveRecord::Schema.define(version: 20150619043220) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["roles"], name: "index_users_on_roles", using: :btree
 
-  create_table "vendors", force: true do |t|
-    t.string   "name",       null: false
+  create_table "vendors", force: :cascade do |t|
+    t.string   "name",       limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
