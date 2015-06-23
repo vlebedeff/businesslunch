@@ -19,7 +19,7 @@ class Menu
     ].compact.join('-')
 
     menu_sets = params["menu_set"].map do |index, attrs|
-      MenuSet.new attrs
+      MenuSet.new attrs.permit(:name, :details)
     end
 
     new(

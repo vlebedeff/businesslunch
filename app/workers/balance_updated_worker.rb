@@ -3,6 +3,6 @@ class BalanceUpdatedWorker
 
   def perform(user_id, amount)
     user = User.find user_id
-    NotificationMailer.balance_updated(user, amount).deliver
+    NotificationMailer.balance_updated(user, amount).deliver_now
   end
 end
