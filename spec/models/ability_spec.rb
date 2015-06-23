@@ -28,6 +28,7 @@ RSpec.describe Ability, type: :model do
     it { is_expected.not_to be_able_to :index, User }
     it { is_expected.not_to be_able_to :all, :balance }
     it { is_expected.not_to be_able_to :all, Activity }
+    it { is_expected.to be_able_to :read, Group }
   end
 
   context 'when user is manager' do

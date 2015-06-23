@@ -26,6 +26,7 @@ class Ability
     can :manage, Order do |order|
       order.pending? && order.user_id == user.id
     end
+    can :read, Group
   end
 
   def manager_abilities

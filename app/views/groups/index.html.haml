@@ -1,0 +1,9 @@
+.row.margin-bottom
+  .col-md-12
+    %h1 Groups
+
+.row.subnav
+  .col-md-12
+    - @groups.each do |group|
+      %div{id: dom_id(group)}
+        = group.name
