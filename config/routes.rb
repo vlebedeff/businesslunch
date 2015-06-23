@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   get '/dashboard' => 'dashboard#index'
 
   resource :activity, only: [:show]
-  resources :groups, only: [:index]
+  resources :groups, only: [:index] do
+    post :join, on: :member
+  end
   resources :orders, except: [:show] do
     patch :pay, on: :member
     patch :cancel_payment, on: :member

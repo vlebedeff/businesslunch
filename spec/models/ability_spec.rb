@@ -15,6 +15,7 @@ RSpec.describe Ability, type: :model do
     let!(:my_order) { create :order, user: user }
     let!(:my_paid_order) { create :order, :paid, user: user }
     let!(:order) { create :order }
+    let!(:group) { create :group }
 
     it { is_expected.not_to be_able_to :index, :dashboard }
     it { is_expected.to be_able_to :create, Order }
@@ -29,6 +30,18 @@ RSpec.describe Ability, type: :model do
     it { is_expected.not_to be_able_to :all, :balance }
     it { is_expected.not_to be_able_to :all, Activity }
     it { is_expected.to be_able_to :read, Group }
+    context 'when user is no a member of the group' do
+      it 'are able to join the group' do
+        is_expected.to be_able_to :join, group
+      end
+    end
+
+    context 'when user is a member of the group' do
+      before { create :user_group, user: user, group: group }
+      it 'are not able to join group' do
+        is_expected.not_to be_able_to :join, group
+      end
+    end
   end
 
   context 'when user is manager' do

@@ -7,6 +7,8 @@ RSpec.describe User, type: :model do
 
   describe '.associations' do
     it { is_expected.to have_many(:orders).dependent :destroy }
+    it { is_expected.to have_many(:user_groups).dependent :destroy }
+    it { is_expected.to have_many(:groups).through :user_groups }
   end
 
   describe '.validations' do
@@ -84,6 +86,17 @@ RSpec.describe User, type: :model do
       let!(:order) { create :order }
 
       it { is_expected.to be_falsey }
+    end
+  end
+
+  describe '#join_group' do
+    let!(:user) { create :user }
+    let!(:group) { create :group }
+
+    subject { user.join_group group }
+
+    it 'creates new UserGroup record' do
+      expect { subject }.to change(UserGroup, :count).by 1
     end
   end
 end

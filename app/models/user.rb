@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   bitmask :roles, as: ROLES
 
   has_many :orders, dependent: :destroy
+  has_many :user_groups, dependent: :destroy
+  has_many :groups, through: :user_groups
 
   validates :balance, presence: true, numericality: {
     only_integer: true,
@@ -41,6 +43,10 @@ class User < ActiveRecord::Base
       order.pending? &&
       order.user == self &&
       balance < Order::PRICE
+  end
+
+  def join_group(group)
+    user_groups.create group: group
   end
 
   def today_order

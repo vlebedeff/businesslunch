@@ -27,6 +27,9 @@ class Ability
       order.pending? && order.user_id == user.id
     end
     can :read, Group
+    can :join, Group do |group|
+      !UserGroup.where(group: group, user: user).exists?
+    end
   end
 
   def manager_abilities

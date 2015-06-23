@@ -7,3 +7,5 @@
     - @groups.each do |group|
       %div{id: dom_id(group)}
         = group.name
+        - if can? :join, group
+          = link_to 'Join', join_group_path(group), method: :post, class: 'btn btn-success'

@@ -5,6 +5,11 @@ RSpec.describe Group, type: :model do
     expect(create :group).to be_valid
   end
 
+  describe '.associations' do
+    it { is_expected.to have_many(:user_groups).dependent :destroy }
+    it { is_expected.to have_many(:users).through(:user_groups) }
+  end
+
   describe '.validations' do
     context 'when valid' do
       subject { create :group }
