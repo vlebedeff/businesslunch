@@ -4,7 +4,7 @@ class OrdersRelation
   end
 
   def from(params)
-    return @user.orders unless @user.manager?
+    return @user.orders unless @user.super_user?
 
     if params[:view] == 'all'
       Order
