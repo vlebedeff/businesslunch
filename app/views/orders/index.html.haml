@@ -30,20 +30,20 @@
             %li{id: dom_id(order)}
               .row
                 - if params[:view].blank?
-                  .col-md-6.col-xs-12
+                  .col-lg-6.col-md-12.col-sm-12.col-xs-12
                     = order.menu_set_name
                     = order.decorate.today
                     = order.decorate.state
                 - else
-                  .col-md-3.col-xs-12
+                  .col-lg-3.col-md-12.col-sm-12.col-xs-12
                     = order.menu_set_name
                     = order.decorate.today
                     = order.decorate.state
-                  .col-md-3.col-xs-12
+                  .col-lg-3.col-md-6.col-sm-12.col-xs-12
                     = order.user_email
-                .date-container.col-md-3.col-xs-12
+                .date-container.col-lg-3.col-md-3.col-sm-12.col-xs-12
                   = order.decorate.created_on
-                .col-md-3.col-xs-12
+                .col-lg-3.col-md-3.col-sm-12.col-xs-12
                   .pull-right.text-nowrap
                     - if current_user.can_pay_for? order
                       = link_to_pay_from_balance t('balance.helpers.pay'), order, 'btn-sm'
