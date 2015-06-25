@@ -2,13 +2,8 @@ require 'rails_helper'
 
 feature 'Pay from Balance' do
   context 'when there is enough funds to pay for lunch' do
-    given!(:group) { create :group }
-    given!(:user) { create :user_example_com, current_group: group }
+    given!(:user) { create :user_example_com, :groupped, balance: 100 }
     given!(:order) { create :order, user: user }
-
-    background do
-      create :user_group, user: user, group: group, balance: 100
-    end
 
     scenario 'user can pay from balance' do
       sign_in_as 'user@example.com'

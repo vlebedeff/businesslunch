@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Orders list' do
   context 'when user didnt make orders yet' do
     scenario 'can see make order button' do
-      create :user_example_com
+      create :user_example_com, :groupped
 
       sign_in_as 'user@example.com'
       visit orders_path
@@ -13,7 +13,7 @@ feature 'Orders list' do
   end
 
   scenario 'user be able to see his orders' do
-    user = create :user_example_com
+    user = create :user_example_com, :groupped
     order = create :order, user: user
 
     sign_in_as 'user@example.com'
@@ -27,7 +27,7 @@ feature 'Orders list' do
   end
 
   scenario 'user be able to see frozen message' do
-    create :user_example_com
+    create :user_example_com, :groupped
     create :freeze
 
     sign_in_as 'user@example.com'
@@ -40,7 +40,7 @@ feature 'Orders list' do
   context 'when has pending orders' do
     context 'when there is no enough funds to pay for it' do
       scenario 'can see "Fill your balance" hint' do
-        user = create :user_example_com
+        user = create :user_example_com, :groupped
         order = create :order, user: user
 
         sign_in_as 'user@example.com'

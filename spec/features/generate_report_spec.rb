@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "Generate Report" do
   scenario 'can generate report by date range' do
-    create :manager_example_com
+    create :manager_example_com, :groupped
     create :order, created_at: 1.day.ago
     create :order, created_at: 2.days.ago
     create :order, created_at: Date.today

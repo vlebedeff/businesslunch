@@ -2,8 +2,9 @@ require 'rails_helper'
 
 feature 'Activity Feed' do
   scenario 'manager can visit activity feed page' do
-    manager = create :manager_example_com, email: 'john.doe@example.com'
-    user = create :user, email: 'john.wayne@example.com'
+    group = create :group
+    manager = create :manager_example_com, :groupped, email: 'john.doe@example.com', group: group
+    user = create :user, :groupped, email: 'john.wayne@example.com', group: group
     create :activity, user: manager, subject: user,
                       action: 'balance_update',
                       data: '100'
@@ -22,7 +23,7 @@ feature 'Activity Feed' do
   end
 
   scenario 'regular user cannot see activity feed' do
-    create :user_example_com
+    create :user_example_com, :groupped
 
     sign_in_as 'user@example.com'
     visit activity_path

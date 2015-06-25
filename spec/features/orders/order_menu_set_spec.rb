@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Ordering Menu Set' do
   context 'when there is menu sets for today' do
     scenario 'can make an order' do
-      create :user_example_com
+      create :user_example_com, :groupped
       create :menu_set, name: '1st menu set'
 
       sign_in_as 'user@example.com'
@@ -20,7 +20,7 @@ feature 'Ordering Menu Set' do
 
   context 'when there is no menu sets' do
     scenario 'cannot make an order' do
-      create :user_example_com
+      create :user_example_com, :groupped
 
       sign_in_as 'user@example.com'
       visit new_order_path
@@ -31,7 +31,7 @@ feature 'Ordering Menu Set' do
 
   context 'when orders are frozen for today' do
     scenario 'cannot create at order' do
-      create :user_example_com
+      create :user_example_com, :groupped
       create :freeze
 
       sign_in_as 'user@example.com'

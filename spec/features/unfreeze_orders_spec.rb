@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Unfreeze orders' do
   context 'when orders are frozen' do
     scenario 'can unfroze them' do
-      create :manager_example_com
+      create :manager_example_com, :groupped
       create :freeze
 
       sign_in_as 'manager@example.com'

@@ -2,10 +2,10 @@ require 'rails_helper'
 
 feature 'Add funds' do
   scenario 'can add funds to user account' do
-    create :manager_example_com
     group = create :group
-    user = create :user, email: 'user-name@example.com', current_group: group
-    ug = create :user_group, user: user, group: group, balance: 35
+    create :manager_example_com, :groupped, group: group
+    user = create :user, :groupped, email: 'user-name@example.com',
+                                    group: group, balance: 35
 
     sign_in_as 'manager@example.com'
     visit users_path

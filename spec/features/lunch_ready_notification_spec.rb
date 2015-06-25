@@ -2,11 +2,12 @@ require 'rails_helper'
 
 feature 'Lunch is Ready notification' do
   scenario 'can send Lunch readyness notification' do
-    create :manager_example_com
-    user1 = create :user
-    user2 = create :user
+    group = create :group
+    create :manager_example_com, :groupped, group: group
+    user1 = create :user, :groupped, group: group
+    user2 = create :user, :groupped, group: group
     order = create :order, user: user1
-    user3 = create :user
+    user3 = create :user, :groupped, group: group
     order = create :order, user: user3
     reset_email
 

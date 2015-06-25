@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "Update menu set" do
   scenario 'can change menu set attributes' do
-    create :manager_example_com
+    create :manager_example_com, :groupped
     menu_set = create :menu_set, name: '1st menu set',
       available_on: 2.days.from_now
 

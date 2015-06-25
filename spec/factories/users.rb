@@ -14,6 +14,20 @@ FactoryGirl.define do
       roles [:admin]
     end
 
+    trait :groupped do
+      ignore do
+        balance 0
+        group nil
+      end
+
+      after(:create) do |user, evaluator|
+        group = evaluator.group || create(:group)
+        user.join_group group
+        user_group = user.user_groups.find_by(group: user.current_group)
+        user_group.update_column :balance, evaluator.balance
+      end
+    end
+
     factory :user_example_com do
       email 'user@example.com'
     end

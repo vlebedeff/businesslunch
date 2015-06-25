@@ -2,8 +2,9 @@ require 'rails_helper'
 
 feature 'Remove orders' do
   scenario 'can remove order from Dashboard' do
-    create :manager_example_com
-    user = create :user
+    group = create :group
+    create :manager_example_com, :groupped, group: group
+    user = create :user, :groupped, group: group
     order = create :order, user: user
 
     sign_in_as 'manager@example.com'
