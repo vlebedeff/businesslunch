@@ -1,0 +1,14 @@
+branches:
+  only:
+    - 'master'
+
+language: ruby
+
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rake
+
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - psql -c 'create database business_lunch_test;' -U postgres
