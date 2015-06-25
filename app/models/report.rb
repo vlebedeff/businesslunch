@@ -11,6 +11,6 @@ class Report
   end
 
   def orders
-    Order.where(created_on: @from..@to)
+    Order.where(created_on: @from..@to).order(:created_at)
   end
 end
