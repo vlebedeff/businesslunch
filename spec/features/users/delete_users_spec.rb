@@ -20,7 +20,9 @@ feature 'Delete users' do
     scenario 'no one can delete user' do
       create :admin_example_com
       sign_in_as 'admin@example.com'
-      user = create :user, email: 'user@example.com', balance: 1
+      group = create :group
+      user = create :user, email: 'user@example.com', current_group: group
+      create :user_group, group: group, user: user, balance: 1
       visit users_path
 
       expect(page).not_to have_selector "#delete_user_#{user.id}"

@@ -31,6 +31,7 @@ class Order < ActiveRecord::Base
   end
 
   private
+
   def set_created_on
     update_column :created_on, self.created_at.to_date
   end

@@ -4,4 +4,7 @@ class UserGroup < ActiveRecord::Base
 
   validates :user, :group, presence: true
   validates :group_id, uniqueness: { scope: :user_id }
+  validates :balance, presence: true, numericality: {
+    greater_than_or_equal_to: 0
+  }
 end

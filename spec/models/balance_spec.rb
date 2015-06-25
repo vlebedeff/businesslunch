@@ -5,7 +5,11 @@ RSpec.describe Balance, type: :model do
     context 'when valid' do
       subject { Balance.new user: user, manager: user }
 
-      let!(:user) { create :user, balance: 5 }
+      let!(:group) { create :group }
+      let!(:user) { create :user, current_group: group }
+      before do
+        create :user_group, user: user, group: group, balance: 5
+      end
 
       it { is_expected.to validate_presence_of :user }
       it { is_expected.to validate_presence_of :amount }
@@ -22,7 +26,11 @@ RSpec.describe Balance, type: :model do
   describe '#update' do
     subject { Balance.new(attributes).update }
 
-    let!(:user) { create :user, balance: 30 }
+    let!(:group) { create :group }
+    let!(:user) { create :user, current_group: group }
+    before do
+      create :user_group, user: user, group: group, balance: 30
+    end
     let!(:manager) { create :user }
 
     context 'when valid attributes' do

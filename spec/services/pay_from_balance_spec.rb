@@ -4,8 +4,13 @@ RSpec.describe PayFromBalance, type: :model do
   describe '.call' do
     subject { PayFromBalance.call order, user }
 
-    let!(:user) { create :user, balance: 100 }
+    let!(:group) { create :group }
+    let!(:user) { create :user, current_group: group }
     let!(:order) { create :order, user: user }
+
+    before do
+      create :user_group, user: user, group: group, balance: 100
+    end
 
     context 'when user can pay' do
       before do

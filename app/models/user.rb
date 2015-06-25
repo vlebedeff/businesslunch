@@ -7,14 +7,10 @@ class User < ActiveRecord::Base
   ROLES = [:manager, :admin]
   bitmask :roles, as: ROLES
 
+  belongs_to :current_group, class_name: 'Group'
   has_many :orders, dependent: :destroy
   has_many :user_groups, dependent: :destroy
   has_many :groups, through: :user_groups
-
-  validates :balance, presence: true, numericality: {
-    only_integer: true,
-    greater_than_or_equal_to: 0
-  }
 
   scope :has_order, -> { joins(:orders).merge(Order.today) }
   scope :search, -> term {
@@ -29,6 +25,10 @@ class User < ActiveRecord::Base
 
   def super_user?
     manager? || admin?
+  end
+
+  def balance
+    user_groups.find_by(group: current_group).try(:balance) || 0
   end
 
   def can_pay_for?(order)
@@ -46,9 +46,9 @@ class User < ActiveRecord::Base
   end
 
   def join_group(group)
-    group = user_groups.create group: group
+    user_group = user_groups.create group: group
     update_column :current_group_id, group.id
-    group
+    user_group
   end
 
   def leave_group(group)

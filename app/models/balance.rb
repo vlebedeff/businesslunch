@@ -19,8 +19,10 @@ class Balance
   private
 
   def deposit!
-    user.balance += amount
-    user.save!
+    if user_group = user.user_groups.find_by(group: user.current_group)
+      user_group.balance += amount
+      user_group.save!
+    end
     Activity.create user: manager, subject: user, action: 'balance_update',
                     data: amount
     BalanceUpdatedWorker.perform_async user.id, amount

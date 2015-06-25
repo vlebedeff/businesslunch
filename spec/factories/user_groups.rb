@@ -4,5 +4,6 @@ FactoryGirl.define do
   factory :user_group do
     user
     group
+    balance 0
   end
 end

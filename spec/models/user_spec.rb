@@ -6,21 +6,10 @@ RSpec.describe User, type: :model do
   end
 
   describe '.associations' do
+    it { is_expected.to belong_to :current_group }
     it { is_expected.to have_many(:orders).dependent :destroy }
     it { is_expected.to have_many(:user_groups).dependent :destroy }
     it { is_expected.to have_many(:groups).through :user_groups }
-  end
-
-  describe '.validations' do
-    context 'when valid' do
-      subject { create :user }
-      it { is_expected.to validate_presence_of :balance }
-      it do
-        is_expected.to validate_numericality_of(:balance)
-          .only_integer
-          .is_greater_than_or_equal_to(0)
-      end
-    end
   end
 
   describe '.has_order' do
@@ -51,12 +40,17 @@ RSpec.describe User, type: :model do
   describe '#can_pay_for?' do
     subject { user.can_pay_for? order }
 
-    let!(:user) { create :user }
+    let!(:group) { create :group }
+    let!(:user) { create :user, current_group: group }
     let!(:order) { create :order, user: user }
 
     context 'when order belongs to user' do
       context "when user's balance more than order price" do
-        let!(:user) { create :user, balance: 40 }
+        let!(:user) { create :user, current_group: group }
+
+        before do
+          create :user_group, user: user, group: group, balance: 40
+        end
 
         context 'when order is pending' do
           let!(:order) { create :order, user: user }
@@ -86,6 +80,32 @@ RSpec.describe User, type: :model do
       let!(:order) { create :order }
 
       it { is_expected.to be_falsey }
+    end
+  end
+
+  describe '#balance' do
+    subject { user.balance }
+
+    let!(:group) { create :group }
+
+    context 'when user in group' do
+      let!(:user) { create :user, current_group: group }
+
+      before do
+        create :user_group, user: user, group: group, balance: 503
+      end
+
+      it "display balance from current group" do
+        is_expected.to eq 503.00
+      end
+    end
+
+    context 'when user has no group' do
+      let!(:user) { create :user }
+
+      it "display empty balance" do
+        is_expected.to eq 0.0
+      end
     end
   end
 

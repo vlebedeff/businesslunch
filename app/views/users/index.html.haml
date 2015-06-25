@@ -20,7 +20,7 @@
           %th
             .pull-right
               .text.text-info
-                = t('balance.summary', balance: User.sum(:balance))
+                = t('balance.summary', balance: UserGroup.where(group: current_user.current_group).sum(:balance))
 
       %tbody
         - @users.each do |user|
