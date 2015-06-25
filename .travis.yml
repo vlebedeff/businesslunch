@@ -1,6 +1,7 @@
 branches:
   only:
     - 'master'
+    - 'group'
 
 language: ruby
 
