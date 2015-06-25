@@ -98,13 +98,20 @@ RSpec.describe User, type: :model do
     it 'creates new UserGroup record' do
       expect { subject }.to change(UserGroup, :count).by 1
     end
+
+    it "updates current group id" do
+      expect {
+        subject
+        user.reload
+      }.to change { user.current_group_id }.to group.id
+    end
   end
 
   describe '#leave_group' do
     subject { user.leave_group group }
 
-    let!(:user) { create :user }
     let!(:group) { create :group }
+    let!(:user) { create :user, current_group_id: group.id }
 
     before do
       create :user_group, user: user, group: group
@@ -112,6 +119,13 @@ RSpec.describe User, type: :model do
 
     it 'leaves group' do
       expect { subject }.to change(UserGroup, :count).by -1
+    end
+
+    it "resets current group id" do
+      expect {
+        subject
+        user.reload
+      }.to change { user.current_group_id }.to nil
     end
   end
 end

@@ -46,11 +46,14 @@ class User < ActiveRecord::Base
   end
 
   def join_group(group)
-    user_groups.create group: group
+    group = user_groups.create group: group
+    update_column :current_group_id, group.id
+    group
   end
 
   def leave_group(group)
     user_groups.where(group: group).first.try(:destroy)
+    update_column :current_group_id, nil
   end
 
   def today_order
