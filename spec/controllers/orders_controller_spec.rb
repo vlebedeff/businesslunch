@@ -2,12 +2,13 @@ require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
   let(:order) { mock_model Order, id: 1, menu_set_name: '1st menu set' }
+  let!(:user) { sign_in_manager }
   let(:attrs) do
     {
-      'menu_set_id' => '1'
+      'menu_set_id' => '1',
+      'group' => user.current_group
     }
   end
-  let!(:user) { sign_in_manager }
 
   before do
     request.env["HTTP_REFERER"] = dashboard_path

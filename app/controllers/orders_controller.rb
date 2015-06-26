@@ -52,8 +52,10 @@ class OrdersController < ApplicationController
   end
 
   private
+
   def order_params
     params.require(:order).permit(:menu_set_id)
+      .merge(group: current_user.current_group)
   end
 
   def find_order
