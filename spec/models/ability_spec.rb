@@ -107,7 +107,7 @@ RSpec.describe Ability, type: :model do
     it_behaves_like 'group abilities'
 
     context 'when orders are frozen' do
-      let!(:freeze) { create :freeze }
+      let!(:freeze) { create :freeze, user.current_group }
       let!(:future_menu_set) { create :menu_set, available_on: 1.day.from_now }
       it { is_expected.to be_able_to :edit, future_menu_set }
       it { is_expected.to be_able_to :update, future_menu_set }

@@ -1,4 +1,5 @@
 # TODO: Add valid group id to all orders
+# TODO: Add valid group id to all freezes
 # TODO: Add user's to same group
 # TODO: Move balance to user_group
 

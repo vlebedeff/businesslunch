@@ -27,8 +27,8 @@ feature 'Orders list' do
   end
 
   scenario 'user be able to see frozen message' do
-    create :user_example_com, :groupped
-    create :freeze
+    user = create :user_example_com, :groupped
+    create :freeze, group: user.current_group
 
     sign_in_as 'user@example.com'
     visit orders_path

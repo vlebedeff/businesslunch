@@ -5,6 +5,12 @@ RSpec.describe Freeze, type: :model do
     expect(create :freeze).to be_valid
   end
 
+  let!(:group) { create :group }
+
+  describe '.associations' do
+    it { is_expected.to belong_to :group }
+  end
+
   describe '.after_create' do
     let(:freeze) { build :freeze, frozen_on: nil }
     it "set frozen_on" do
@@ -16,10 +22,10 @@ RSpec.describe Freeze, type: :model do
   end
 
   describe '.frozen?' do
-    subject { Freeze.frozen? }
+    subject { Freeze.frozen?(group) }
 
     context 'when frozen_on for today exists' do
-      let!(:freeze) { create :freeze }
+      let!(:freeze) { create :freeze, group: group }
       it { is_expected.to be_truthy }
     end
 
@@ -29,17 +35,19 @@ RSpec.describe Freeze, type: :model do
   end
 
   describe '.unfreeze' do
+    subject { Freeze.unfreeze(group) }
+
     context 'when freeze exists' do
-      before { create :freeze }
+      before { create :freeze, group: group }
 
       it "removes today freeze" do
-        expect { Freeze.unfreeze }.to change(Freeze, :count).by -1
+        expect { subject }.to change(Freeze, :count).by -1
       end
     end
 
     context 'when freeze do not exists' do
       it "dont removes anything" do
-        expect { Freeze.unfreeze }.not_to change(Freeze, :count)
+        expect { subject }.not_to change(Freeze, :count)
       end
     end
   end

@@ -36,7 +36,8 @@ class Ability
     can [:read, :new, :create], MenuSet
     can [:edit, :update], MenuSet do |menu_set|
       menu_set.available_on > Date.today ||
-        (menu_set.available_on == Date.today && !Freeze.frozen?)
+        (menu_set.available_on == Date.today &&
+          !Freeze.frozen?(user.current_group))
     end
     can [:pay, :destroy], Order
     can :ready, :lunch

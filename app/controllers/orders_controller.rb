@@ -63,7 +63,7 @@ class OrdersController < ApplicationController
   end
 
   def check_if_not_frozen
-    if Freeze.frozen?
+    if Freeze.frozen?(current_user.current_group)
       redirect_to orders_path, alert: t('orders.frozen')
     end
   end

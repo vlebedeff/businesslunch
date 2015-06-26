@@ -27,6 +27,11 @@ class ApplicationController < ActionController::Base
     current_user.kind_of? User
   end
 
+  def current_group
+    current_user.current_group
+  end
+  helper_method :current_group
+
   protected
 
   def check_group_existence

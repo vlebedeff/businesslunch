@@ -41,7 +41,7 @@
         = link_to ready_lunch_path, class: 'btn btn-default btn-block', method: :post, data: { confirm: t(:send_notification_confirm)} do
           %i.glyphicon.glyphicon-envelope
           Send notification
-        - if Freeze.frozen?
+        - if Freeze.frozen?(current_user.current_group)
           = link_to 'Unfreeze Orders', freeze_path, method: :delete, class: 'btn btn-danger btn-block', data: { confirm: t(:are_you_sure) }
         - else
           = link_to 'Freeze Orders', freeze_path, method: :post, class: 'btn btn-primary btn-block', data: { confirm: t(:freeze_confim) }

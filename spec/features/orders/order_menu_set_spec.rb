@@ -32,8 +32,8 @@ feature 'Ordering Menu Set' do
 
   context 'when orders are frozen for today' do
     scenario 'cannot create at order' do
-      create :user_example_com, :groupped
-      create :freeze
+      user = create :user_example_com, :groupped
+      create :freeze, group: user.current_group
 
       sign_in_as 'user@example.com'
       visit new_order_path

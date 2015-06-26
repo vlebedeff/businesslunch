@@ -6,7 +6,7 @@
     %h2.subnav= title 'Orders'
     .btn-toolbar.subnav{role: 'toolbar'}
       .btn-group
-        - unless Freeze.frozen?
+        - unless Freeze.frozen?(current_user.current_group)
           %div{class: ('border-right' if current_user.super_user?)}
             - button_text = current_user.today_order ? 'Make another order' : 'Order Now!'
             = link_to button_text, new_order_path, class: 'btn btn-success'
@@ -18,7 +18,7 @@
           = link_to 'Pending', url_for(view: 'pending'), class: "btn btn-default #{"active" if params[:view] == 'pending'}"
           = link_to 'Paid', url_for(view: 'paid'), class: "btn btn-default #{"active" if params[:view] == 'paid'}"
 
-    - if Freeze.frozen?
+    - if Freeze.frozen?(current_user.current_group)
       .alert.alert-warning= t('orders.frozen')
 
 - if @orders.any?

@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.describe OrdersController, type: :controller do
   let(:order) { mock_model Order, id: 1, menu_set_name: '1st menu set' }
   let!(:user) { sign_in_manager }
+  let(:group) { user.current_group }
   let(:attrs) do
     {
       'menu_set_id' => '1',
-      'group' => user.current_group
+      'group' => group
     }
   end
 
@@ -35,7 +36,7 @@ RSpec.describe OrdersController, type: :controller do
 
     context 'when orders is frozen' do
       before do
-        allow(Freeze).to receive(:frozen?).and_return true
+        allow(Freeze).to receive(:frozen?).with(group).and_return true
         get :new
       end
 
@@ -47,7 +48,7 @@ RSpec.describe OrdersController, type: :controller do
 
     context 'when orders is not frozen' do
       before do
-        allow(Freeze).to receive(:frozen?).and_return false
+        allow(Freeze).to receive(:frozen?).with(group).and_return false
         get :new
       end
 
@@ -61,11 +62,11 @@ RSpec.describe OrdersController, type: :controller do
   describe 'POST #create' do
     before do
       allow(Order).to receive(:new).with(attrs).and_return order
+      allow(Freeze).to receive(:frozen?).with(group).and_return false
     end
 
     context 'with valid attributes' do
       before do
-        allow(Freeze).to receive(:frozen?).and_return false
         allow(order).to receive(:save).and_return true
         post :create, order: attrs
       end
