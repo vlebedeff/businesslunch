@@ -6,9 +6,12 @@ feature 'Lunch is Ready notification' do
     create :manager_example_com, :groupped, group: group
     user1 = create :user, :groupped, group: group
     user2 = create :user, :groupped, group: group
-    order = create :order, user: user1
+    order = create :order, user: user1, group: group
     user3 = create :user, :groupped, group: group
-    order = create :order, user: user3
+    order = create :order, user: user3, group: group
+    user_from_another_group = create :user, :groupped
+    order = create :order, user: user_from_another_group,
+                           group: user_from_another_group.current_group
     reset_email
 
     sign_in_as 'manager@example.com'
