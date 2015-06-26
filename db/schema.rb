@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626070455) do
+ActiveRecord::Schema.define(version: 20150626073236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,8 +24,10 @@ ActiveRecord::Schema.define(version: 20150626070455) do
     t.string   "data",         limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "group_id"
   end
 
+  add_index "activities", ["group_id"], name: "index_activities_on_group_id", using: :btree
   add_index "activities", ["subject_id", "subject_type"], name: "index_activities_on_subject_id_and_subject_type", using: :btree
   add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
 
@@ -117,6 +119,7 @@ ActiveRecord::Schema.define(version: 20150626070455) do
 
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
 
+  add_foreign_key "activities", "groups"
   add_foreign_key "freezes", "groups"
   add_foreign_key "orders", "groups"
   add_foreign_key "user_groups", "groups"

@@ -23,8 +23,8 @@ class Balance
       user_group.balance += amount
       user_group.save!
     end
-    Activity.create user: manager, subject: user, action: 'balance_update',
-                    data: amount
+    Activity.create group: user.current_group, user: manager, subject: user,
+                    action: 'balance_update', data: amount
     BalanceUpdatedWorker.perform_async user.id, amount
   end
 

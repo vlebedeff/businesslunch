@@ -7,10 +7,12 @@ feature 'Activity Feed' do
     user = create :user, :groupped, email: 'john.wayne@example.com', group: group
     create :activity, user: manager, subject: user,
                       action: 'balance_update',
-                      data: '100'
+                      data: '100',
+                      group: group
     create :activity, user: user, subject: create(:order, user: user),
                       action: 'payment',
-                      data: '35'
+                      data: '35',
+                      group: group
 
     sign_in_as 'john.doe@example.com'
     within '.navbar' do

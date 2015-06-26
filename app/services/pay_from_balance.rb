@@ -28,6 +28,7 @@ class PayFromBalance
 
   def track_activity
     Activity.create user: user,
+                    group: user.current_group,
                     subject: order,
                     action: 'payment',
                     data: Order::PRICE
