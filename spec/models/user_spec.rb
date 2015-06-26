@@ -53,7 +53,7 @@ RSpec.describe User, type: :model do
         end
 
         context 'when order is pending' do
-          let!(:order) { create :order, user: user }
+          let!(:order) { create :order, user: user, group: group }
 
           it { is_expected.to be_truthy }
         end

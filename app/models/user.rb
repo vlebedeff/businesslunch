@@ -35,14 +35,16 @@ class User < ActiveRecord::Base
     order &&
       order.pending? &&
       order.user == self &&
-      balance >= Order::PRICE
+      balance >= Order::PRICE &&
+      order.group == current_group
   end
 
   def cannot_pay_for_his_order?(order)
     order &&
       order.pending? &&
       order.user == self &&
-      balance < Order::PRICE
+      balance < Order::PRICE &&
+      order.group == current_group
   end
 
   def join_group(group)
