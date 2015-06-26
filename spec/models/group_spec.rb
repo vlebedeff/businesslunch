@@ -8,6 +8,7 @@ RSpec.describe Group, type: :model do
   describe '.associations' do
     it { is_expected.to have_many(:user_groups).dependent :destroy }
     it { is_expected.to have_many(:users).through(:user_groups) }
+    it { is_expected.to have_many(:orders).dependent :destroy }
   end
 
   describe '.validations' do

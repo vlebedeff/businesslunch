@@ -14,7 +14,7 @@ feature 'Orders list' do
 
   scenario 'user be able to see his orders' do
     user = create :user_example_com, :groupped
-    order = create :order, user: user
+    order = create :order, user: user, group: user.current_group
 
     sign_in_as 'user@example.com'
 
@@ -41,7 +41,7 @@ feature 'Orders list' do
     context 'when there is no enough funds to pay for it' do
       scenario 'can see "Fill your balance" hint' do
         user = create :user_example_com, :groupped
-        order = create :order, user: user
+        order = create :order, user: user, group: user.current_group
 
         sign_in_as 'user@example.com'
         visit orders_path

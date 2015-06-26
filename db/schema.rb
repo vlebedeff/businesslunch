@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150625072814) do
+ActiveRecord::Schema.define(version: 20150626062559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,9 +60,11 @@ ActiveRecord::Schema.define(version: 20150625072814) do
     t.datetime "updated_at"
     t.string   "state",       limit: 255, default: "pending"
     t.date     "created_on"
+    t.integer  "group_id"
   end
 
   add_index "orders", ["created_on"], name: "index_orders_on_created_on", using: :btree
+  add_index "orders", ["group_id"], name: "index_orders_on_group_id", using: :btree
   add_index "orders", ["menu_set_id"], name: "index_orders_on_menu_set_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
@@ -113,6 +115,7 @@ ActiveRecord::Schema.define(version: 20150625072814) do
 
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
 
+  add_foreign_key "orders", "groups"
   add_foreign_key "user_groups", "groups"
   add_foreign_key "user_groups", "users"
 end

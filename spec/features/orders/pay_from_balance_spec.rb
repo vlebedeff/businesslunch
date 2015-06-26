@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Pay from Balance' do
   context 'when there is enough funds to pay for lunch' do
     given!(:user) { create :user_example_com, :groupped, balance: 100 }
-    given!(:order) { create :order, user: user }
+    given!(:order) { create :order, user: user, group: user.current_group }
 
     scenario 'user can pay from balance' do
       sign_in_as 'user@example.com'

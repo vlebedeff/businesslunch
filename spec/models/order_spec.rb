@@ -8,6 +8,7 @@ RSpec.describe Order, type: :model do
   describe '.associations' do
     it { is_expected.to belong_to :user }
     it { is_expected.to belong_to :menu_set }
+    it { is_expected.to belong_to :group }
   end
 
   describe '.validations' do
