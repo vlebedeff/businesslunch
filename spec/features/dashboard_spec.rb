@@ -2,9 +2,9 @@ require 'rails_helper'
 
 feature 'Dashboard' do
   scenario "manager can see list of orders" do
-    create :manager_example_com, :groupped
-    order1 = create :order, :paid
-    order2 = create :order
+    manager = create :manager_example_com, :groupped
+    order1 = create :order, :paid, group: manager.current_group
+    order2 = create :order, group: manager.current_group
 
     sign_in_as 'manager@example.com'
     visit dashboard_path

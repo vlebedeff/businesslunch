@@ -5,7 +5,7 @@ feature 'Remove orders' do
     group = create :group
     create :manager_example_com, :groupped, group: group
     user = create :user, :groupped, group: group
-    order = create :order, user: user
+    order = create :order, user: user, group: group
 
     sign_in_as 'manager@example.com'
     visit dashboard_path
