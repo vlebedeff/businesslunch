@@ -56,6 +56,12 @@ class User < ActiveRecord::Base
     update_column :current_group_id, nil
   end
 
+  def change_current_group_to(group)
+    if groups.include?(group) && current_group != group
+      update_column :current_group_id, group.id
+    end
+  end
+
   def today_order
     orders.today.first
   end

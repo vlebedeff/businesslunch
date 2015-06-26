@@ -30,8 +30,11 @@ en:
     helpers:
       join: Join
       leave: Leave
+      make_current: Make current
     successfully_joined: "You have joined \"%{group}\" group"
     successfully_left: "You have left \"%{group}\" group"
+    successfully_changed: "Your current group now is \"%{group}\""
+    current: Current
 
   activity:
     feed: Activity feed

@@ -2,8 +2,9 @@ require 'rails_helper'
 require 'cancan/matchers'
 
 shared_examples 'group abilities' do
+  let!(:group) { create :group }
+
   context 'when user is not a member of the group' do
-    let!(:group) { create :group }
 
     it 'are able to join the group' do
       is_expected.to be_able_to :join, group
@@ -15,8 +16,6 @@ shared_examples 'group abilities' do
   end
 
   context 'when user is a member of the group' do
-    let!(:group) { create :group }
-
     before { create :user_group, user: user, group: group }
 
     it 'are not able to join group' do
@@ -25,6 +24,28 @@ shared_examples 'group abilities' do
 
     it 'are able to leave group' do
       is_expected.to be_able_to :leave, group
+    end
+  end
+
+  context 'when user is joined group' do
+    context 'when user current group is different group' do
+      let!(:user) { create :user, :groupped }
+
+      before do
+        create :user_group, user: user, group: group
+      end
+
+      it 'can make group as current' do
+        is_expected.to be_able_to :make_current, group
+      end
+    end
+
+    context 'when user current group is the same group' do
+      let!(:user) { create :user, :groupped, group: group }
+
+      it 'cannot make same group current' do
+        is_expected.not_to be_able_to :make_current, group
+      end
     end
   end
 end

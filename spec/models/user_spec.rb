@@ -148,4 +148,51 @@ RSpec.describe User, type: :model do
       }.to change { user.current_group_id }.to nil
     end
   end
+
+  describe '#change_current_group_to' do
+    subject { user.change_current_group_to group }
+
+    let!(:group) { create :group }
+
+    context 'when user in that group' do
+      let!(:user) { create :user, :groupped, group: group }
+
+      it { is_expected.to be_falsey }
+
+      it do
+        expect {
+          subject
+          user.reload
+        }.not_to change { user.current_group }
+      end
+    end
+
+    context 'when user is not joined that group' do
+      let!(:user) { create :user }
+
+      it { is_expected.to be_falsey }
+
+      it do
+        expect {
+          subject
+          user.reload
+        }.not_to change { user.current_group }
+      end
+    end
+
+    context 'when user is joined that group' do
+      let!(:user) { create :user }
+
+      before { create :user_group, user: user, group: group }
+
+      it { is_expected.to be_truthy }
+
+      it do
+        expect {
+          subject
+          user.reload
+        }.to change { user.current_group }.to group
+      end
+    end
+  end
 end

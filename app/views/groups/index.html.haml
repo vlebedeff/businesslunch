@@ -7,6 +7,8 @@
     - @groups.each do |group|
       %div{id: dom_id(group)}
         = group.name
+        - if current_user.current_group == group
+          %span.badge.bg-purple= t('groups.current')
         - if can? :join, group
           = link_to t('groups.helpers.join'),
             join_group_path(group),
@@ -18,3 +20,8 @@
             method: :delete,
             data: { confirm: t(:are_you_sure) },
             class: 'btn btn-danger'
+        - if can? :make_current, group
+          = link_to t('groups.helpers.make_current'),
+            make_current_group_path(group),
+            method: :patch,
+            class: 'btn btn-info'

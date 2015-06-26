@@ -53,12 +53,15 @@ class Ability
 
   def group_abilities
     can :read, Group
-    cannot [:join, :leave], Group
+    cannot [:join, :leave, :make_current], Group
     can :join, Group do |group|
       !UserGroup.where(group_id: group.id, user_id: user.id).exists?
     end
     can :leave, Group do |group|
       UserGroup.where(group_id: group.id, user_id: user.id).exists?
+    end
+    can :make_current, Group do |group|
+      user.groups.include?(group) && user.current_group != group
     end
   end
 end
