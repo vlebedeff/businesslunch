@@ -16,6 +16,6 @@ feature 'Users List' do
 
     expect(page).to have_selector 'tr', text: 'manager@example.com 20'
     expect(page).to have_selector 'tr', text: 'user@example.com 100'
-    expect(page).to have_selector 'th', text: 'Balance summary: 120.0 Lei'
+    expect(page).to have_selector 'th', text: 'Balance summary: 120.0 MDL'
   end
 end

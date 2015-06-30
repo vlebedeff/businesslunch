@@ -35,9 +35,9 @@ feature 'Activity Feed' do
 end
 
 def activity_balance_record
-  'John Doe has updated balance of John Wayne for 100 Lei'
+  'John Doe has updated balance of John Wayne for 100 MDL'
 end
 
 def payment_activity_record
-  'John Wayne has paid for the lunch 35 Lei'
+  'John Wayne has paid for the lunch 35 MDL'
 end

@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :order do
     user
     menu_set
+    group
 
     trait :paid do
       state 'paid'

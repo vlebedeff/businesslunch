@@ -22,8 +22,12 @@ class BalancesController < ApplicationController
   end
 
   def notice
-    user_name = @user.email.split('@').first
-    "#{user_name}'s balance has been credited with #{@balance.amount} lei"
+    [
+      "#{@user.email.split('@').first}'s",
+      "balance has been credited with",
+      @balance.amount,
+      @user.current_group.currency_unit
+    ].join ' '
   end
 
   def safe_params

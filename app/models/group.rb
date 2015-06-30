@@ -9,4 +9,5 @@ class Group < ActiveRecord::Base
   has_many :orders, dependent: :destroy
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :currency_unit, presence: true
 end

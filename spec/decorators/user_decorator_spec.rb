@@ -5,18 +5,20 @@ RSpec.describe UserDecorator, type: :decorator do
     subject { UserDecorator.new(user).balance('Balance: ') }
 
     context 'when balance is more than lunch price' do
-      let(:user) { double balance: 100 }
+      let(:group) { double currency_unit: 'MDL' }
+      let(:user) { double balance: 100, current_group: group }
 
       it do
-        is_expected.to eq '<span class="text-success">Balance: 100 Lei</span>'
+        is_expected.to eq '<span class="text-success">Balance: 100 MDL</span>'
       end
     end
 
     context 'when balance is less than lunch price' do
-      let(:user) { double balance: 30 }
+      let(:group) { double currency_unit: 'MDL' }
+      let(:user) { double balance: 30, current_group: group }
 
       it do
-        is_expected.to eq '<span class="text-danger">Balance: 30 Lei</span>'
+        is_expected.to eq '<span class="text-danger">Balance: 30 MDL</span>'
       end
     end
   end

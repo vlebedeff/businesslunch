@@ -24,5 +24,5 @@ feature 'Add funds' do
 end
 
 def successful_message
-  "user-name's balance has been credited with 100 lei"
+  "user-name's balance has been credited with 100 MDL"
 end
