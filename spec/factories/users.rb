@@ -6,8 +6,13 @@ FactoryGirl.define do
     password 'password'
     confirmed_at { 1.minute.ago }
 
-    trait :manager do
-      roles [:manager]
+    trait :manager do |user|
+      groupped
+      after(:create) do |user|
+        ug = user.current_user_group
+        ug.roles << :manager
+        ug.save
+      end
     end
 
     trait :admin do

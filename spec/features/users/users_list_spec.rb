@@ -2,10 +2,9 @@ require 'rails_helper'
 
 feature 'Users List' do
   scenario 'manager can view list of all users' do
-    group = create :group
-
-    manager = create :manager_example_com, current_group: group
-    create :user_group, group: group, user: manager, balance: 20
+    manager = create :manager_example_com
+    group = manager.current_group
+    manager.current_user_group.update_attributes balance: 20
 
     user = create :user, email: 'user@example.com', current_group: group
     create :user_group, group: group, user: user, balance: 100

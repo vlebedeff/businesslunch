@@ -4,8 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  ROLES = [:manager, :admin]
-  bitmask :roles, as: ROLES
+  bitmask :roles, as: [:admin]
 
   belongs_to :current_group, class_name: 'Group'
   has_many :orders, dependent: :destroy
@@ -17,10 +16,16 @@ class User < ActiveRecord::Base
     where('email ILIKE ?', "%#{term}%") if term.present?
   }
 
-  ROLES.each do |role|
-    define_method "#{role}?" do
-      roles? role
-    end
+  def admin?
+    roles? :admin
+  end
+
+  def manager?
+    current_user_group && current_user_group.manager?
+  end
+
+  def current_user_group
+    user_groups.find_by(group: current_group)
   end
 
   def super_user?

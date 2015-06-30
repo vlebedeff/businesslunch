@@ -1,4 +1,6 @@
 class UserGroup < ActiveRecord::Base
+  bitmask :roles, as: [:manager]
+
   belongs_to :user
   belongs_to :group
 
@@ -7,4 +9,8 @@ class UserGroup < ActiveRecord::Base
   validates :balance, presence: true, numericality: {
     greater_than_or_equal_to: 0
   }
+
+  def manager?
+    roles? :manager
+  end
 end

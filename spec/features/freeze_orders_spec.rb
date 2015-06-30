@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Freeze orders' do
   scenario 'can freeze orders for today' do
-    create :manager_example_com, :groupped
+    create :manager_example_com
 
     sign_in_as 'manager@example.com'
     visit dashboard_path
