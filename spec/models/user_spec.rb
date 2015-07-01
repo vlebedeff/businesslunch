@@ -133,19 +133,31 @@ RSpec.describe User, type: :model do
     let!(:group) { create :group }
     let!(:user) { create :user, current_group_id: group.id }
 
-    before do
-      create :user_group, user: user, group: group
+    context 'when user group balance is 0' do
+      before do
+        create :user_group, user: user, group: group
+      end
+
+      it 'leaves group' do
+        expect { subject }.to change(UserGroup, :count).by -1
+      end
+
+      it "resets current group id" do
+        expect {
+          subject
+          user.reload
+        }.to change { user.current_group_id }.to nil
+      end
     end
 
-    it 'leaves group' do
-      expect { subject }.to change(UserGroup, :count).by -1
-    end
+    context 'when user group balance is positive' do
+      before do
+        create :user_group, user: user, group: group, balance: 1
+      end
 
-    it "resets current group id" do
-      expect {
-        subject
-        user.reload
-      }.to change { user.current_group_id }.to nil
+      it 'cannot leave the group' do
+        expect { subject }.not_to change(UserGroup, :count)
+      end
     end
   end
 

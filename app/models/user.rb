@@ -59,8 +59,11 @@ class User < ActiveRecord::Base
   end
 
   def leave_group(group)
-    user_groups.where(group: group).first.try(:destroy)
-    update_column :current_group_id, nil
+    ug = user_groups.where(group: group).first
+    if ug.balance.zero?
+      ug.try(:destroy)
+      update_column :current_group_id, nil
+    end
   end
 
   def change_current_group_to(group)

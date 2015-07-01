@@ -16,14 +16,26 @@ shared_examples 'group abilities' do
   end
 
   context 'when user is a member of the group' do
-    before { create :user_group, user: user, group: group }
 
     it 'are not able to join group' do
+      create :user_group, user: user, group: group
       is_expected.not_to be_able_to :join, group
     end
 
-    it 'are able to leave group' do
-      is_expected.to be_able_to :leave, group
+    context 'when user group balance is zero' do
+      before { create :user_group, user: user, group: group }
+
+      it 'are able to leave group' do
+        is_expected.to be_able_to :leave, group
+      end
+    end
+
+    context 'when user group balance is not empty' do
+      before { create :user_group, user: user, group: group, balance: 1 }
+
+      it 'are not able to leave group' do
+        is_expected.not_to be_able_to :leave, group
+      end
     end
   end
 
