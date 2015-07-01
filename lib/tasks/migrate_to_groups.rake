@@ -10,8 +10,8 @@ task :migrate_to_groups => :environment do
   group.save!
 
   Order.update_all(group_id: group.id)
-
   Freeze.update_all(group_id: group.id)
+  Activity.update_all(group_id: group.id)
 
   User.find_each do |user|
     user.join_group group
