@@ -9,11 +9,7 @@ class DictionaryPresenter
 
     @collection.each do |item|
       key = @policy.key_for(item)
-      if dictionary.has_key? key
-        dictionary[key] << item
-      else
-        dictionary[key] = [item]
-      end
+      (dictionary[key] ||= []) << item
     end
 
     dictionary.sort.reverse.to_h
