@@ -10,6 +10,9 @@ en:
     frozen: Orders are frozen for today.
     unfrozen: Orders are available again.
 
+  send_notification_confirm: "You're about to send notifications to users about food arrival. Do you want to proceed?"
+  freeze_confim: "You're about to freezing ordering for today. Users won't be able to make orders for today. Do you want to proceed?"
+
   created_successfully: '%{entity} has been created successfully.'
   updated_successfully: '%{entity} has been updated successfully.'
 
