@@ -6,16 +6,16 @@
   %section.orders
     %ul
       %li.header
-        .col-md-4 Date
-        .col-md-4 Count
+        .col-md-6.col-xs-10 Date
+        .col-md-6.col-xs-2 Count
       - if @report.orders.any?
         - DictionaryPresenter.new(OrderPolicy.new, @report.orders).as_dictionary.each do |date, orders|
           %li
-            .col-md-4= formatted_date date
-            .col-md-4= orders.count
+            .col-md-6.col-xs-10= formatted_date date
+            .col-md-6.col-xs-2= orders.count
       - else
         %li
-          .col-md-12 There is no orders for selected period
+          .col-md-12.col-xs-12 There is no orders for selected period
       %li.total
-        .col-md-4 Total
-        .col-md-4= @report.total
+        .col-md-6.col-xs-10 Total
+        .col-md-6.col-xs-2= @report.total
