@@ -37,6 +37,17 @@ shared_examples 'group abilities' do
         is_expected.not_to be_able_to :leave, group
       end
     end
+
+    context 'when user has pending orders' do
+      before do
+        create :user_group, user: user, group: group
+        create :order, user: user, group: group
+      end
+
+      it 'are not able to leave group' do
+        is_expected.not_to be_able_to :leave, group
+      end
+    end
   end
 
   context 'when user is joined group' do

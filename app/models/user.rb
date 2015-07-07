@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
 
   def leave_group(group)
     ug = user_groups.where(group: group).first
-    if ug.balance.zero?
+    if ug.balance.zero? && !has_pending_orders?(group)
       ug.try(:destroy)
       update_column :current_group_id, nil
     end
@@ -74,5 +74,9 @@ class User < ActiveRecord::Base
 
   def today_order
     orders.today.first
+  end
+
+  def has_pending_orders?(group)
+    orders.pending.where(group: group).exists?
   end
 end

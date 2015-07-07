@@ -159,6 +159,17 @@ RSpec.describe User, type: :model do
         expect { subject }.not_to change(UserGroup, :count)
       end
     end
+
+    context 'when user has pending orders' do
+      before do
+        create :user_group, user: user, group: group
+        create :order, user: user, group: group
+      end
+
+      it 'cannot leave the group' do
+        expect { subject }.not_to change(UserGroup, :count)
+      end
+    end
   end
 
   describe '#change_current_group_to' do

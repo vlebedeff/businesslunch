@@ -60,7 +60,7 @@ class Ability
     end
     can :leave, Group do |group|
       ug = UserGroup.where(group_id: group.id, user_id: user.id)
-      ug.exists? && ug.first.balance.zero?
+      ug.exists? && ug.first.balance.zero? && !user.has_pending_orders?(group)
     end
     can :make_current, Group do |group|
       user.groups.include?(group) && user.current_group != group
