@@ -12,6 +12,7 @@ RSpec.describe Balance, type: :model do
       end
 
       it { is_expected.to validate_presence_of :user }
+      it { is_expected.to validate_presence_of :group }
       it { is_expected.to validate_presence_of :amount }
       it { is_expected.to validate_numericality_of(:amount) }
       it { is_expected.to validate_presence_of :manager }
@@ -27,22 +28,28 @@ RSpec.describe Balance, type: :model do
     subject { Balance.new(attributes).update }
 
     let!(:group) { create :group }
-    let!(:user) { create :user, current_group: group }
-    before do
+    let!(:group2) { create :group }
+    let!(:user) { create :user, current_group: group2 }
+    let!(:user_group1) do
       create :user_group, user: user, group: group, balance: 30
+    end
+    let!(:user_group2) do
+      create :user_group, user: user, group: group2, balance: 25
     end
     let!(:manager) { create :user }
 
     context 'when valid attributes' do
-      let(:attributes) { { user: user, amount: 100, manager: manager } }
+      let(:attributes) do
+        { user: user, group: group, amount: 100, manager: manager }
+      end
 
       it { is_expected.to be_truthy }
 
       it "updates user's balance" do
         expect {
           subject
-          user.reload
-        }.to change { user.balance }.to 130
+          user_group1.reload
+        }.to change { user_group1.balance }.to 130
       end
 
       it 'creates new activity record' do
@@ -57,15 +64,15 @@ RSpec.describe Balance, type: :model do
     end
 
     context 'when invalid attributes' do
-      let(:attributes) { { user: user, amount: '' } }
+      let(:attributes) { { user: user, group: group, amount: '' } }
 
       it { is_expected.to be_falsey }
 
       it "do not change user's balance" do
         expect {
           subject
-          user.reload
-        }.not_to change { user.balance }
+          user_group1.reload
+        }.not_to change { user_group1.balance }
       end
     end
   end

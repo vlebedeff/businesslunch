@@ -33,6 +33,7 @@ class BalancesController < ApplicationController
   def safe_params
     {
       user: @user,
+      group: current_group,
       manager: current_user,
       amount: params[:balance][:amount]
     }
