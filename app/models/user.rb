@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
   scope :search, -> term {
     where('email ILIKE ?', "%#{term}%") if term.present?
   }
+  scope :in_group, -> group {
+    joins(:groups).where(:'groups.id' => group.id) if group.present?
+  }
 
   def admin?
     roles? :admin

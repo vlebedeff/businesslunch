@@ -23,6 +23,25 @@ RSpec.describe User, type: :model do
     it { is_expected.to eq [user2.email] }
   end
 
+  describe '.in_group' do
+    let!(:group1) { create :group }
+    let!(:group2) { create :group }
+    let!(:user1) { create :user }
+    let!(:user2) { create :user }
+    let!(:user3) { create :user }
+
+    before do
+      user1.join_group group1
+      user1.join_group group2
+      user2.join_group group1
+      user3.join_group group2
+    end
+
+    it 'filters users from specified group' do
+      expect(User.in_group(group1)).to eq [user1, user2]
+    end
+  end
+
   describe '#today_order' do
     let!(:user) { create :user }
     subject { user.today_order }

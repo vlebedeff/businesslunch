@@ -2,7 +2,10 @@ class UsersController < ApplicationController
   authorize_resource
 
   def index
-    @users = User.search(params[:query]).order(:email).page(params[:page])
+    @users = User
+      .in_group(current_group)
+      .search(params[:query])
+      .order(:email).page(params[:page])
   end
 
   def destroy
