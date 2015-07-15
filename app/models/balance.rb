@@ -19,13 +19,15 @@ class Balance
   private
 
   def deposit!
-    if user_group = user.user_groups.find_by(group: user.current_group)
-      user_group.balance += amount
-      user_group.save!
+    ActiveRecord::Base.transaction do
+      if user_group = user.user_groups.find_by(group: user.current_group)
+        user_group.balance += amount
+        user_group.save!
+      end
+      Activity.create group: user.current_group, user: manager, subject: user,
+                      action: 'balance_update', data: amount
+      BalanceUpdatedWorker.perform_async user.id, amount
     end
-    Activity.create group: user.current_group, user: manager, subject: user,
-                    action: 'balance_update', data: amount
-    BalanceUpdatedWorker.perform_async user.id, amount
   end
 
   def ensure_user_balance_positive

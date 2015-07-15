@@ -18,7 +18,7 @@ class BalancesController < ApplicationController
   private
 
   def find_user
-    @user = User.find params[:user_id]
+    @user = User.in_group(current_group).find params[:user_id]
   end
 
   def notice

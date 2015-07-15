@@ -21,6 +21,18 @@ feature 'Add funds' do
     user.reload
     expect(user.balance).to eq 135
   end
+
+  scenario 'cannot see update balance page for user from different group' do
+    group = create :group
+    create :manager_example_com, :groupped, group: group
+    user = create :user, :groupped
+
+    sign_in_as 'manager@example.com'
+
+    expect {
+      visit edit_user_balance_path(user)
+    }.to raise_error ActiveRecord::RecordNotFound
+  end
 end
 
 def successful_message
