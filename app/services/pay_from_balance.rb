@@ -15,7 +15,9 @@ class PayFromBalance
 
     ActiveRecord::Base.transaction do
       order.pay!
-      user.decrement! :balance, Order::PRICE
+      if user_group = user.user_groups.find_by(group: user.current_group)
+        user_group.decrement! :balance, Order::PRICE
+      end
       track_activity
     end
 
@@ -26,6 +28,7 @@ class PayFromBalance
 
   def track_activity
     Activity.create user: user,
+                    group: user.current_group,
                     subject: order,
                     action: 'payment',
                     data: Order::PRICE

@@ -7,9 +7,10 @@ class NotificationMailer < ActionMailer::Base
     mail to: @user.email, subject: 'Neam-neam is here'
   end
 
-  def balance_updated(user, amount)
+  def balance_updated(user, amount, currency_unit)
     @user = user
     @amount = amount
+    @currency_unit = currency_unit
     mail to: @user.email, subject: 'Your balance has been updated'
   end
 end

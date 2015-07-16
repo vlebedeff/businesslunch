@@ -6,6 +6,7 @@ RSpec.describe Activity, type: :model do
   end
 
   describe '.associations' do
+    it { is_expected.to belong_to :group }
     it { is_expected.to belong_to :user }
     it { is_expected.to belong_to :subject }
   end
@@ -13,6 +14,7 @@ RSpec.describe Activity, type: :model do
   describe '.validations' do
     context 'when valid' do
       subject { create :activity }
+      it { is_expected.to validate_presence_of :group }
       it { is_expected.to validate_presence_of :user }
       it { is_expected.to validate_presence_of :subject }
       it { is_expected.to validate_presence_of :action }

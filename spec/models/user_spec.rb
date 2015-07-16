@@ -6,19 +6,10 @@ RSpec.describe User, type: :model do
   end
 
   describe '.associations' do
+    it { is_expected.to belong_to :current_group }
     it { is_expected.to have_many(:orders).dependent :destroy }
-  end
-
-  describe '.validations' do
-    context 'when valid' do
-      subject { create :user }
-      it { is_expected.to validate_presence_of :balance }
-      it do
-        is_expected.to validate_numericality_of(:balance)
-          .only_integer
-          .is_greater_than_or_equal_to(0)
-      end
-    end
+    it { is_expected.to have_many(:user_groups).dependent :destroy }
+    it { is_expected.to have_many(:groups).through :user_groups }
   end
 
   describe '.has_order' do
@@ -30,6 +21,25 @@ RSpec.describe User, type: :model do
 
     subject { User.has_order.pluck(:email) }
     it { is_expected.to eq [user2.email] }
+  end
+
+  describe '.in_group' do
+    let!(:group1) { create :group }
+    let!(:group2) { create :group }
+    let!(:user1) { create :user }
+    let!(:user2) { create :user }
+    let!(:user3) { create :user }
+
+    before do
+      user1.join_group group1
+      user1.join_group group2
+      user2.join_group group1
+      user3.join_group group2
+    end
+
+    it 'filters users from specified group' do
+      expect(User.in_group(group1)).to eq [user1, user2]
+    end
   end
 
   describe '#today_order' do
@@ -49,15 +59,20 @@ RSpec.describe User, type: :model do
   describe '#can_pay_for?' do
     subject { user.can_pay_for? order }
 
-    let!(:user) { create :user }
+    let!(:group) { create :group }
+    let!(:user) { create :user, current_group: group }
     let!(:order) { create :order, user: user }
 
     context 'when order belongs to user' do
       context "when user's balance more than order price" do
-        let!(:user) { create :user, balance: 40 }
+        let!(:user) { create :user, current_group: group }
+
+        before do
+          create :user_group, user: user, group: group, balance: 40
+        end
 
         context 'when order is pending' do
-          let!(:order) { create :order, user: user }
+          let!(:order) { create :order, user: user, group: group }
 
           it { is_expected.to be_truthy }
         end
@@ -84,6 +99,142 @@ RSpec.describe User, type: :model do
       let!(:order) { create :order }
 
       it { is_expected.to be_falsey }
+    end
+  end
+
+  describe '#balance' do
+    subject { user.balance }
+
+    let!(:group) { create :group }
+
+    context 'when user in group' do
+      let!(:user) { create :user, current_group: group }
+
+      before do
+        create :user_group, user: user, group: group, balance: 503
+      end
+
+      it "display balance from current group" do
+        is_expected.to eq 503.00
+      end
+    end
+
+    context 'when user has no group' do
+      let!(:user) { create :user }
+
+      it "display empty balance" do
+        is_expected.to eq 0.0
+      end
+    end
+  end
+
+  describe '#join_group' do
+    subject { user.join_group group }
+
+    let!(:user) { create :user }
+    let!(:group) { create :group }
+
+    it 'creates new UserGroup record' do
+      expect { subject }.to change(UserGroup, :count).by 1
+    end
+
+    it "updates current group id" do
+      expect {
+        subject
+        user.reload
+      }.to change { user.current_group_id }.to group.id
+    end
+  end
+
+  describe '#leave_group' do
+    subject { user.leave_group group }
+
+    let!(:group) { create :group }
+    let!(:user) { create :user, current_group_id: group.id }
+
+    context 'when user group balance is 0' do
+      before do
+        create :user_group, user: user, group: group
+      end
+
+      it 'leaves group' do
+        expect { subject }.to change(UserGroup, :count).by -1
+      end
+
+      it "resets current group id" do
+        expect {
+          subject
+          user.reload
+        }.to change { user.current_group_id }.to nil
+      end
+    end
+
+    context 'when user group balance is positive' do
+      before do
+        create :user_group, user: user, group: group, balance: 1
+      end
+
+      it 'cannot leave the group' do
+        expect { subject }.not_to change(UserGroup, :count)
+      end
+    end
+
+    context 'when user has pending orders' do
+      before do
+        create :user_group, user: user, group: group
+        create :order, user: user, group: group
+      end
+
+      it 'cannot leave the group' do
+        expect { subject }.not_to change(UserGroup, :count)
+      end
+    end
+  end
+
+  describe '#change_current_group_to' do
+    subject { user.change_current_group_to group }
+
+    let!(:group) { create :group }
+
+    context 'when user in that group' do
+      let!(:user) { create :user, :groupped, group: group }
+
+      it { is_expected.to be_falsey }
+
+      it do
+        expect {
+          subject
+          user.reload
+        }.not_to change { user.current_group }
+      end
+    end
+
+    context 'when user is not joined that group' do
+      let!(:user) { create :user }
+
+      it { is_expected.to be_falsey }
+
+      it do
+        expect {
+          subject
+          user.reload
+        }.not_to change { user.current_group }
+      end
+    end
+
+    context 'when user is joined that group' do
+      let!(:user) { create :user }
+
+      before { create :user_group, user: user, group: group }
+
+      it { is_expected.to be_truthy }
+
+      it do
+        expect {
+          subject
+          user.reload
+        }.to change { user.current_group }.to group
+      end
     end
   end
 end

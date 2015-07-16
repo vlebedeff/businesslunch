@@ -2,8 +2,10 @@ require 'rails_helper'
 
 feature 'Add funds' do
   scenario 'can add funds to user account' do
-    create :manager_example_com
-    user = create :user, email: 'user-name@example.com', balance: 35
+    group = create :group
+    create :manager_example_com, :groupped, group: group
+    user = create :user, :groupped, email: 'user-name@example.com',
+                                    group: group, balance: 35
 
     sign_in_as 'manager@example.com'
     visit users_path
@@ -19,8 +21,20 @@ feature 'Add funds' do
     user.reload
     expect(user.balance).to eq 135
   end
+
+  scenario 'cannot see update balance page for user from different group' do
+    group = create :group
+    create :manager_example_com, :groupped, group: group
+    user = create :user, :groupped
+
+    sign_in_as 'manager@example.com'
+
+    expect {
+      visit edit_user_balance_path(user)
+    }.to raise_error ActiveRecord::RecordNotFound
+  end
 end
 
 def successful_message
-  "user-name's balance has been credited with 100 lei"
+  "user-name's balance has been credited with 100 MDL"
 end

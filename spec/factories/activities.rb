@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :activity do
+    group
     user
     action "MyString"
     subject factory: :user

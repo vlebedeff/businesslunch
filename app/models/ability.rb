@@ -26,6 +26,7 @@ class Ability
     can :manage, Order do |order|
       order.pending? && order.user_id == user.id
     end
+    group_abilities
   end
 
   def manager_abilities
@@ -35,16 +36,34 @@ class Ability
     can [:read, :new, :create], MenuSet
     can [:edit, :update], MenuSet do |menu_set|
       menu_set.available_on > Date.today ||
-        (menu_set.available_on == Date.today && !Freeze.frozen?)
+        (menu_set.available_on == Date.today &&
+          !Freeze.frozen?(user.current_group))
     end
     can [:pay, :destroy], Order
     can :ready, :lunch
     can :manage, [:freeze, :report]
     can :index, User
     can :read, Activity
+    group_abilities
   end
 
   def admin_abilities
     can :manage, :all
+    group_abilities
+  end
+
+  def group_abilities
+    can :read, Group
+    cannot [:join, :leave, :make_current], Group
+    can :join, Group do |group|
+      !UserGroup.where(group_id: group.id, user_id: user.id).exists?
+    end
+    can :leave, Group do |group|
+      ug = UserGroup.where(group_id: group.id, user_id: user.id)
+      ug.exists? && ug.first.balance.zero? && !user.has_pending_orders?(group)
+    end
+    can :make_current, Group do |group|
+      user.groups.include?(group) && user.current_group != group
+    end
   end
 end

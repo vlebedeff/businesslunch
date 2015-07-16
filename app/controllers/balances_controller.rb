@@ -18,17 +18,22 @@ class BalancesController < ApplicationController
   private
 
   def find_user
-    @user = User.find params[:user_id]
+    @user = User.in_group(current_group).find params[:user_id]
   end
 
   def notice
-    user_name = @user.email.split('@').first
-    "#{user_name}'s balance has been credited with #{@balance.amount} lei"
+    [
+      "#{@user.email.split('@').first}'s",
+      "balance has been credited with",
+      @balance.amount,
+      @user.current_group.currency_unit
+    ].join ' '
   end
 
   def safe_params
     {
       user: @user,
+      group: current_group,
       manager: current_user,
       amount: params[:balance][:amount]
     }

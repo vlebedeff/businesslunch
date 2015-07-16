@@ -1,19 +1,31 @@
 class OrdersRelation
+  attr_reader :user
+
   def initialize(user)
     @user = user
   end
 
   def from(params)
-    return @user.orders unless @user.super_user?
+    return user_orders unless user.super_user?
 
     if params[:view] == 'all'
-      Order
+      relation
     elsif params[:view] == 'pending'
-      Order.pending
+      relation.pending
     elsif params[:view] == 'paid'
-      Order.paid
+      relation.paid
     else
-      @user.orders
+      user_orders
     end
+  end
+
+  private
+
+  def user_orders
+    user.orders.where(group: user.current_group)
+  end
+
+  def relation
+    Order.where(group: user.current_group)
   end
 end

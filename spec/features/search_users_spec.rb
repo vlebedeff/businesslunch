@@ -2,9 +2,10 @@ require 'rails_helper'
 
 feature 'Search users' do
   scenario 'manager can search through users' do
-    create :manager_example_com
-    create :user, email: 'john.doe@example.com'
-    create :user, email: 'bruce.wayne@example.com'
+    group = create :group
+    create :manager_example_com, :groupped, group: group
+    create :user, :groupped, email: 'john.doe@example.com', group: group
+    create :user, :groupped, email: 'bruce.wayne@example.com', group: group
 
     sign_in_as 'manager@example.com'
     visit users_path

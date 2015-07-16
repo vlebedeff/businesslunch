@@ -5,6 +5,7 @@ class Order < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :menu_set
+  belongs_to :group
 
   validates :user, :menu_set, presence: true
   validates :state, presence: true, inclusion: { in: %w[pending paid] }
@@ -31,6 +32,7 @@ class Order < ActiveRecord::Base
   end
 
   private
+
   def set_created_on
     update_column :created_on, self.created_at.to_date
   end

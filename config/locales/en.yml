@@ -24,7 +24,17 @@ en:
       edit: Update Balance
       pay: Pay from Balance
     pay_confirm: "You're about to pay for lunch from your balance.\n\rThat action cannot be undone.\n\rDo you want to proceed?"
-    summary: "Balance summary: %{balance} Lei"
+    summary: "Balance summary: %{balance} %{unit}"
+
+  groups:
+    helpers:
+      join: Join
+      leave: Leave
+      make_current: Make current
+    successfully_joined: "You have joined \"%{group}\" group"
+    successfully_left: "You have left \"%{group}\" group"
+    successfully_changed: "Your current group now is \"%{group}\""
+    current: Current
 
   activity:
     feed: Activity feed
