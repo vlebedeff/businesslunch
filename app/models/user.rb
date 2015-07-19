@@ -56,6 +56,8 @@ class User < ActiveRecord::Base
   end
 
   def join_group(group)
+    return unless JoinGroupPolicy.new(group, self).valid?
+
     user_group = user_groups.create group: group
     update_column :current_group_id, group.id
     user_group

@@ -12,7 +12,7 @@
         .info
           %h4.text-center= group.name
           %p
-          - if can? :join, group
+          - if can?(:join, group) && JoinGroupPolicy.new(group, current_user).valid?
             = link_to t('groups.helpers.join'),
               join_group_path(group),
               method: :post,
