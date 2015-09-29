@@ -191,6 +191,27 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '#has_positive_balance?' do
+    subject { user.has_positive_balance? group }
+
+    let!(:group) { create :group }
+    let!(:user) { create :user, current_group_id: group.id }
+
+    context "when user's balance is more than order's price" do
+      before do
+        create :user_group, user: user, group: group, balance: Order::PRICE
+      end
+      it { is_expected.to be_truthy }
+    end
+
+    context "when user's balance is less than order's price" do
+      before do
+        create :user_group, user: user, group: group, balance: Order::PRICE - 1
+      end
+      it { is_expected.to be_falsey }
+    end
+  end
+
   describe '#change_current_group_to' do
     subject { user.change_current_group_to group }
 

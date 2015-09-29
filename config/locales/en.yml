@@ -6,6 +6,7 @@ en:
   order_created: "You have ordered \"%{menu_set}\""
   orders:
     frozen: 'Orders are frozen for today. You are not be able to manage them.'
+    negative_balance: You have insufficient funds to place an order!
   freeze:
     frozen: Orders are frozen for today.
     unfrozen: Orders are available again.

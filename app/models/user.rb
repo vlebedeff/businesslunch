@@ -55,6 +55,11 @@ class User < ActiveRecord::Base
       order.group == current_group
   end
 
+  def has_positive_balance?(group)
+    ug = find_user_group group
+    ug && ug.balance >= Order::PRICE
+  end
+
   def join_group(group)
     return unless JoinGroupPolicy.new(group, self).valid?
 
@@ -64,7 +69,7 @@ class User < ActiveRecord::Base
   end
 
   def leave_group(group)
-    ug = user_groups.where(group: group).first
+    ug = find_user_group group
     if ug.balance.zero? && !has_pending_orders?(group)
       ug.try(:destroy)
       update_column :current_group_id, nil
@@ -83,5 +88,11 @@ class User < ActiveRecord::Base
 
   def has_pending_orders?(group)
     orders.pending.where(group: group).exists?
+  end
+
+  private
+
+  def find_user_group(group)
+    user_groups.where(group: group).first
   end
 end

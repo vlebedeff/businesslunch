@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   authorize_resource
+  before_action :check_balance, only: [:create]
   before_action :check_if_not_frozen, only: [:new, :create]
   before_action :find_order, only: [:pay, :cancel_payment, :destroy, :pay_from_balance]
 
@@ -65,6 +66,12 @@ class OrdersController < ApplicationController
   def check_if_not_frozen
     if Freeze.frozen?(current_user.current_group)
       redirect_to orders_path, alert: t('orders.frozen')
+    end
+  end
+
+  def check_balance
+    unless current_user.has_positive_balance? current_group
+      redirect_to new_order_path, alert: t('orders.negative_balance')
     end
   end
 end

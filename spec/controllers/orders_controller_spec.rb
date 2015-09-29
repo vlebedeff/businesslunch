@@ -65,8 +65,19 @@ RSpec.describe OrdersController, type: :controller do
       allow(Freeze).to receive(:frozen?).with(group).and_return false
     end
 
+    context 'with invalid balance' do
+      before do
+        allow(user).to receive(:has_positive_balance?).and_return false
+        post :create, order: attrs
+      end
+      it { expect(user).to have_received(:has_positive_balance?).with group }
+      it { is_expected.to redirect_to new_order_path }
+      it { is_expected.to set_the_flash[:alert] }
+    end
+
     context 'with valid attributes' do
       before do
+        allow(user).to receive(:has_positive_balance?).and_return true
         allow(order).to receive(:save).and_return true
         post :create, order: attrs
       end
@@ -81,6 +92,7 @@ RSpec.describe OrdersController, type: :controller do
 
     context 'with invalid attributes' do
       before do
+        allow(user).to receive(:has_positive_balance?).and_return true
         allow(order).to receive(:save).and_return false
         post :create, order: attrs
       end

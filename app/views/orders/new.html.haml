@@ -17,8 +17,12 @@
   .has-error
     = f.error :menu_set
 
-  - if MenuSet.available.exists?
-    = f.button :submit, class: 'btn btn-primary'
+  - if current_user.has_positive_balance?(current_group)
+    - if MenuSet.available.exists?
+      = f.button :submit, class: 'btn btn-primary'
+    - else
+      = f.button :submit, class: 'btn btn-primary disabled', disable: true
   - else
     = f.button :submit, class: 'btn btn-primary disabled', disable: true
+    %span.alert.alert-danger= t('orders.negative_balance')
 
