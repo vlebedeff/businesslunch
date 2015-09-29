@@ -16,6 +16,7 @@ feature 'Ordering Menu Set' do
 
       expect(page).to have_content "You have ordered \"1st menu set\""
       expect(Order.last.group).to eq user.current_group
+      expect(Order.last).to be_paid
     end
   end
 

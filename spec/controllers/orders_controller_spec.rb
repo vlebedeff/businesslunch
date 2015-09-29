@@ -79,6 +79,7 @@ RSpec.describe OrdersController, type: :controller do
       before do
         allow(user).to receive(:has_positive_balance?).and_return true
         allow(order).to receive(:save).and_return true
+        allow(PayFromBalance).to receive(:call)
         post :create, order: attrs
       end
 
@@ -86,6 +87,7 @@ RSpec.describe OrdersController, type: :controller do
       it { expect(user).to have_received :orders }
       it { expect(Order).to have_received :new }
       it { expect(order).to have_received :save }
+      it { expect(PayFromBalance).to have_received(:call).with(order, user) }
       it { is_expected.to redirect_to orders_path }
       it { is_expected.to set_the_flash[:notice] }
     end

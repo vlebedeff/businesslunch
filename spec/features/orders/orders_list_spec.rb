@@ -36,20 +36,4 @@ feature 'Orders list' do
     expect(page).to have_content I18n.t('orders.frozen')
     expect(page).not_to have_selector 'a', text: 'Order Now!'
   end
-
-  context 'when has pending orders' do
-    context 'when there is no enough funds to pay for it' do
-      scenario 'can see "Fill your balance" hint' do
-        user = create :user_example_com, :groupped
-        order = create :order, user: user, group: user.current_group
-
-        sign_in_as 'user@example.com'
-        visit orders_path
-
-        within '.hints' do
-          expect(page).to have_content "You're able to add funds to your balance and pay for lunch every day."
-        end
-      end
-    end
-  end
 end

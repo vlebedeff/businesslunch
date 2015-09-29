@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
   def create
     @order = current_user.orders.new order_params
     if @order.save
+      PayFromBalance.call @order, current_user
       redirect_to orders_path,
         notice: t(:order_created, menu_set: @order.menu_set_name)
     else
