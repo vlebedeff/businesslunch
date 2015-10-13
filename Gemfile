@@ -35,7 +35,7 @@ gem 'sinatra', '~> 1.4.5', require: nil
 
 gem 'doorkeeper', '~> 1.4.1'
 gem 'rabl'
-gem 'oj'
+# gem 'oj'
 gem 'swagger-docs'
 gem 'rack-cors', require: 'rack/cors'
 
