@@ -3,13 +3,11 @@ lock '3.4.0'
 
 set :application, 'businesslunch'
 set :repo_url, 'git@github.com:vlebedeff/businesslunch.git'
-
 set :user, 'lunch'
+set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 
 set :puma_threads, [4, 16]
 set :puma_workers, 0
-
-set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
@@ -18,6 +16,8 @@ set :puma_error_log,  "#{release_path}/log/puma.access.log"
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
+
+set :sidekiq_concurrency, 5
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
@@ -37,6 +37,7 @@ namespace :deploy do
   task :stop do
     on roles(:app), in: :sequence, wait: 5 do
       invoke 'puma:stop'
+      invoke 'sidekiq:stop'
     end
   end
 
@@ -44,6 +45,7 @@ namespace :deploy do
   task :start do
     on roles(:app), in: :sequence, wait: 5 do
       invoke 'puma:start'
+      invoke 'sidekiq:start'
     end
   end
 
@@ -51,6 +53,7 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       invoke 'puma:restart'
+      invoke 'sidekiq:restart'
     end
   end
   
@@ -93,5 +96,5 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 1
 
