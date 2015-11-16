@@ -5,7 +5,6 @@ gem 'rails', '4.2.2'
 
 gem 'pg'
 gem 'puma'
-gem 'foreman'
 
 gem 'quiet_assets'
 gem 'sass-rails', '~> 4.0.3'
