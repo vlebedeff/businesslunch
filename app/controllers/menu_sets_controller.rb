@@ -25,6 +25,6 @@ class MenuSetsController < ApplicationController
   end
 
   def safe_params
-    params.require(:menu_set).permit(:name, :details)
+    params.require(:menu_set).permit(:name, :details, :price)
   end
 end
