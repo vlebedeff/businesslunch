@@ -13,6 +13,7 @@
               .row
                 .col-md-10
                   = menu_set.name
+                  %small= menu_set.price
                 .col-md-2
                   .pull-right
                     - if can? :edit, menu_set

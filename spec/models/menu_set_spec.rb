@@ -11,6 +11,7 @@ RSpec.describe MenuSet, type: :model do
       it { should validate_presence_of :name }
       it { should validate_uniqueness_of(:name).scoped_to :available_on }
       it { should validate_presence_of :available_on }
+      it { should validate_presence_of :price }
     end
   end
 

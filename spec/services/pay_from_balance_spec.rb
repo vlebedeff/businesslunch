@@ -6,7 +6,8 @@ RSpec.describe PayFromBalance, type: :model do
 
     let!(:group) { create :group }
     let!(:user) { create :user, current_group: group }
-    let!(:order) { create :order, user: user }
+    let(:menu_set) { create(:menu_set, price: 42) }
+    let(:order) { create(:order, user: user, menu_set: menu_set) }
 
     before do
       create :user_group, user: user, group: group, balance: 100
@@ -22,7 +23,7 @@ RSpec.describe PayFromBalance, type: :model do
       end
 
       it "changes user's balance" do
-        expect { subject }.to change { user.balance }.to 65
+        expect { subject }.to change { user.balance }.to 58
       end
 
       it "creates payment activity" do

@@ -9,4 +9,5 @@
             = formatted_date f.object.available_on.to_s
       = f.input :name
       = f.input :details, as: :text, input_html: { rows: 6 }
+      = f.input :price
       = f.button :submit, class: 'btn btn-primary', data: { :'disable-with' => '...' }

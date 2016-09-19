@@ -4,14 +4,15 @@
       Order for
       = Date.current
   .menu-sets
-    - ListPresenter.new(MenuSet.available).as_collection.each do |list|
+    - MenuSet.available.each do |menu_set|
       %label.menu-set
         %span.item-wrapper
-          = radio_button_tag "order[menu_set_id]", list.last, id: "order_menu_set_#{list.last}"
+          = radio_button_tag "order[menu_set_id]", menu_set.id, id: "order_menu_set_#{menu_set.id}"
         %span.title-wrapper
-          = list.first
+          = menu_set.name
+          %span.text-danger= menu_set.price
         .description-wrapper
-          = simple_format list[1]
+          = simple_format menu_set.details
     - unless MenuSet.available.exists?
       %p There is no menu sets for today
   .has-error
