@@ -31,6 +31,6 @@ class PayFromBalance
                     group: user.current_group,
                     subject: order,
                     action: 'payment',
-                    data: Order::PRICE
+                    data: order.menu_set.price
   end
 end
