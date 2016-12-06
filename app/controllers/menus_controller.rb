@@ -7,7 +7,8 @@ class MenusController < ApplicationController
         MenuSet.new(name: '1st menu set'),
         MenuSet.new(name: '2nd menu set'),
         MenuSet.new(name: 'Diet menu set'),
-        MenuSet.new(name: 'Post menu set')
+        MenuSet.new(name: 'Post menu set'),
+        MenuSet.new(name: 'Draft')
       ]
     )
   end
